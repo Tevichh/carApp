@@ -3,7 +3,7 @@ export const PickUp = {
     scale: 1,
     modelCar: {
         group: "modelCar",
-        rute: ""
+        rute: "./model/Modelo00/prueba.gltf"
     },
     damageTop: [
         { name: 'P1', group: 'top', rute: '', value: 0 },

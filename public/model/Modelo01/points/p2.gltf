@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.0.44",
+		"generator":"Khronos glTF Blender I/O v3.6.27",
 		"version":"2.0"
 	},
 	"scene":0,
@@ -17,13 +17,13 @@
 			"mesh":0,
 			"name":"Cylinder.001",
 			"rotation":[
-				0.11329798400402069,
-				-0.013533205725252628,
-				0.6993303894996643,
-				0.7056326866149902
+				0.014405324123799801,
+				0.008735079318284988,
+				0.6702050566673279,
+				0.7419848442077637
 			],
 			"translation":[
-				9.739673614501953,
+				9.49537467956543,
 				9.161605834960938,
 				-9.206857681274414
 			]
@@ -32,12 +32,12 @@
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"Material.002",
+			"name":"Material.003",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
-					0.8004899024963379,
-					0.025093981996178627,
-					0.015893153846263885,
+					0.06300994753837585,
+					0.06480321288108826,
+					0.056128501892089844,
 					1
 				],
 				"metallicFactor":0,
@@ -47,7 +47,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Cylinder.001",
+			"name":"Cylinder.002",
 			"primitives":[
 				{
 					"attributes":{

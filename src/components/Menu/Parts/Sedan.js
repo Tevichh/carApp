@@ -35,8 +35,8 @@ export const Sedan = {
         { name: 'P5', group: 'back', rute: '', value: 0 }
     ],
     damageLeft: [
-        { name: 'P1', group: 'left', rute: './model/Modelo01/points/p1.gltf', value: 0 },
-        { name: 'P2', group: 'left', rute: './model/Modelo01/points/p2.gltf', value: 0 },
+        { name: 'P1', group: 'left', rute: './model/Modelo01/points/p1.gltf', value: 10 },
+        { name: 'P2', group: 'left', rute: './model/Modelo01/points/p2.gltf', value: 20 },
         { name: 'P3', group: 'left', rute: '', value: 0 },
         { name: 'P4', group: 'left', rute: '', value: 0 },
         { name: 'P5', group: 'left', rute: '', value: 0 },

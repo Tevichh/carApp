@@ -3,10 +3,11 @@
   position: absolute;
   bottom: 1rem;
   margin: 0;
+  color:  #123123;
 }
   
 .MenuWrapper {
-  background-color: #666666;
+  background-color: #192028;
   margin: auto;
   width: 100%;
   height: 100%;
@@ -22,7 +23,7 @@
 }
 .MenuOptions h1 {
   text-align: center;
-  color: #eee;
+  color:#50727A;;
   font-size: 2em;
   font-family: sans-serif;
 }
@@ -63,7 +64,7 @@
 
 .Calculator h2{
   text-align: center;
-  color: #000;
+  color: #123123;
   font-size: 2em;
   font-family: sans-serif;
 }
@@ -82,6 +83,8 @@
   width: 100px;
   border-radius: 5px;
   cursor: pointer;
+  background-color: #000000;
+  color: #98eff9;
 }
 
 .MenuOptions button{
@@ -89,4 +92,13 @@
   width: 150px;
   border-radius: 5px;
   cursor: pointer;
+  background-color: #000000;
+  color: #98eff9;
+}
+
+#fullAdd{
+  margin-top: 10px;
+  margin-left: 50px;
+  display: block;
+  font-size: 25px;
 }

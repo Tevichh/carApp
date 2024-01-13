@@ -11,7 +11,7 @@ const Scene = () => {
     loadGroups()
     loadModels('./model/Modelo01/sedan.gltf', 'modelCar', 0.08)
     for (var i = 0; i < models[0].damageLeft.length; i++) {
-      loadModels(models[0].damageLeft[i].rute, models[0].damageLeft[i].group, models[0].scale)
+      loadModels(models[0].damageLeft[i].rute, models[0].damageLeft[i].group, models[0].scale, models[0].damageLeft[i].name, models[0].damageLeft[i].value)
     }
 
 

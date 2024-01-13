@@ -4,14 +4,13 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as dat from 'dat.gui'
 import { gsap } from "gsap";
 
+
 //Global variables
 let currentRef = null;
 //Controls GUI
 const gui = new dat.GUI()
 //Animation GSAP
 const timeline = new gsap.timeline({ defaults: { duration: 1 } })
-
-const stateMov = false;
 
 //CAR PARTS
 const carParts = {
@@ -23,9 +22,10 @@ const carParts = {
   right: new THREE.Group()
 }
 
+
 //Scene, camera, renderer
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x393939)
+scene.background = new THREE.Color(0x000505)
 const camera = new THREE.PerspectiveCamera(25, 100 / 100, 0.1, 100);
 scene.add(camera);
 camera.position.set(7.3, 2.1, 4.7);
@@ -65,7 +65,8 @@ function onPointerMove(event) {
 }
 window.addEventListener('click', onPointerMove);
 
-
+var addition = 0
+var parent;
 //Animate the scene
 const animate = () => {
   raycaster.setFromCamera(pointer, camera)
@@ -73,15 +74,30 @@ const animate = () => {
     scene.children,
     true
   )
+
   // console.log(intersects)
 
   //INTERSECTS
 
   if (intersects.length) {
 
-    console.log(intersects[0].object.name)
-    
-    //console.log(intersects[0].point)
+    parent = intersects[0].object;
+ 
+
+    if (intersects[0].object.material.color.equals(new THREE.Color(0x2B2D27)) && parent.parent.type === 'Group') {
+      intersects[0].object.material.color.set(0x11110F)
+      addition -= intersects[0].object.value
+      document.getElementById('fullAdd').innerHTML = addition;
+
+    } else if (parent.parent.type === 'Group') {
+      intersects[0].object.material.color.set(0x2B2D27)
+      addition += intersects[0].object.value
+      document.getElementById('fullAdd').innerHTML = addition;
+      //console.log(intersects[0].object.parent)
+    }
+
+    if (addition < 0) { addition = 0 }
+
     pointer.x = -1000;
     pointer.y = -1000;
   }
@@ -97,11 +113,18 @@ animate();
 
 //LIGHTS
 
-const light1 = new THREE.DirectionalLight(0xffffff, 1)
+const light1 = new THREE.DirectionalLight(0xffffff, 1.2)
 light1.position.set(6, 6, 6)
 scene.add(light1)
 
+const light2 = new THREE.DirectionalLight(0xffffff, 1.2)
+light2.position.set(-6, 6, 6)
+scene.add(light2)
 
+const light = new THREE.AmbientLight(0xFFFFFF, 1.2)
+scene.add(light)
+
+/*
 const envMap = new THREE.CubeTextureLoader().load(
   [
     './envmap/px.png',
@@ -112,7 +135,7 @@ const envMap = new THREE.CubeTextureLoader().load(
     './envmap/nz.png',
   ]
 )
-scene.environment = envMap
+scene.environment = envMap*/
 
 
 //Init and mount the scene
@@ -143,19 +166,23 @@ export const loadGroups = () => {
 
 //Load Models
 
-export const loadModels = (rute, group, scale) => {
+export const loadModels = (rute, group, scale, name, value) => {
   gltfLoaders.load(rute, (gltf) => {
     while (gltf.scene.children.length) {
-      carParts[group].add(gltf.scene.children[0])
+      const model = gltf.scene.children[0]
+      model.name = name;
+      model.value = value;
+      carParts[group].add(model)
       carParts[group].scale.set(scale, scale, scale)
-      carParts[group]['precio'] = 20
-      //console.log(gltf)
+      //console.log(name)
     }
   })
 }
+
+
 //Remove Models
 
-export const removeModels = (rute, group, scale) => {
+export const removeModels = (rute, group, scale, name, value) => {
 
   const oldModels = new THREE.Group();
 
@@ -170,7 +197,7 @@ export const removeModels = (rute, group, scale) => {
   }
 
   //console.log(renderer.info)
-  loadModels(rute, group, scale)
+  loadModels(rute, group, scale, name, value)
 
   //LIBERAR MEMORIA
   oldModels.traverse((child) => {
@@ -183,65 +210,6 @@ export const removeModels = (rute, group, scale) => {
   })
 }
 
-/*DEBUGG CONTROlS
-
-const cubeForDebugging = new THREE.Mesh(
-  new THREE.BoxBufferGeometry(0.1, 0.1, 0.1),
-  new THREE.MeshBasicMaterial({
-    color: 0xff0000,
-    transparent: true,
-    opacity: 0
-  })
-)
-
-scene.add(cubeForDebugging)
-gui
-  .add(cubeForDebugging.position, "x")
-  .min(-20)
-  .max(10)
-  .step(0.00001)
-  .name("target x")
-  .onChange(() => {
-    orbitControls.target.x = cubeForDebugging.position.x
-  })
-gui
-  .add(cubeForDebugging.position, "y")
-  .min(-30)
-  .max(10)
-  .step(0.00001)
-  .name("target y")
-  .onChange(() => {
-    orbitControls.target.y = cubeForDebugging.position.y
-  })
-gui
-  .add(cubeForDebugging.position, "z")
-  .min(-10)
-  .max(10)
-  .step(0.00001)
-  .name("target z")
-  .onChange(() => {
-    orbitControls.target.z = cubeForDebugging.position.z
-  })
-
-gui
-  .add(camera.position, "x")
-  .min(-10)
-  .max(10)
-  .step(0.00001)
-  .name("Cam x")
-gui
-  .add(camera.position, "y")
-  .min(-10)
-  .max(10)
-  .step(0.00001)
-  .name("Cam y")
-gui
-  .add(camera.position, "z")
-  .min(-10)
-  .max(10)
-  .step(0.00001)
-  .name("Cam z")
-*/
 //ANIMATION MOVE
 
 export const gsapAnimation = (camPos, targetPost) => {

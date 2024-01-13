@@ -3,7 +3,6 @@ import "./Styles.css"
 import { models } from "./carParts.js"
 import { removeModels, gsapAnimation, orbitControls } from '../Scene/Script.js'
 
-
 const animations = {
 
     original: {
@@ -45,7 +44,6 @@ const allowControls = () => {
 }
 
 
-
 const Menu = () => {
     return (
         <div className='MenuContainer'>
@@ -53,6 +51,7 @@ const Menu = () => {
                 <div className='Calculator'>
                     <h2>COTIZACIÓN</h2>
                     <label>TOTAL: </label>
+                    <label id='fullAdd'>0</label>
                 </div>
 
                 <div className='MenuOptions'>
@@ -66,9 +65,9 @@ const Menu = () => {
                                         (model) => model.name === e.target.value
                                     )
                                     //console.log(model);
-                                    removeModels(model.modelCar.rute, model.modelCar.group, model.scale)
+                                    removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR')
                                     for (var i = 0; i < model.damageLeft.length; i++) {
-                                        removeModels(model.damageLeft[i].rute, model.damageLeft[i].group, model.scale)
+                                        removeModels(model.damageLeft[i].rute, model.damageLeft[i].group, model.scale, model.damageLeft[i].name, model.damageLeft[i].value)
                                     }
 
                                 }}>
