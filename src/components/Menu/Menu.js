@@ -80,7 +80,7 @@ const Menu = () => {
                         </li>
                     </ul>
 
-                    <button name='movimiento' onClick={() => {
+                    <button className='movimiento' onClick={() => {
                         allowControls()
                         gsapAnimation(animations.original.cam, animations.original.pos)
                     }}

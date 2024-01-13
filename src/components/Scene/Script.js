@@ -1,14 +1,12 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import * as dat from 'dat.gui'
 import { gsap } from "gsap";
 
 
 //Global variables
 let currentRef = null;
-//Controls GUI
-const gui = new dat.GUI()
+
 //Animation GSAP
 const timeline = new gsap.timeline({ defaults: { duration: 1 } })
 
@@ -147,7 +145,6 @@ export const initScene = (mountRef) => {
 
 //Dismount and clena up the buffer from the scene
 export const cleanUpScene = () => {
-  gui.destroy();
   scene.dispose();
   currentRef.removeChild(renderer.domElement);
 };

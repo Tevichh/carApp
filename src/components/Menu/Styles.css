@@ -13,31 +13,26 @@
   height: 100%;
   max-width: 1350px;
   margin: auto;
-  display: flex;
-  justify-content:flex-start;
   padding: 1.5em;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 40px;
+
 }
 
-.MenuOptions{
-  margin-left: 3em;
-}
 .MenuOptions h1 {
-  text-align: center;
-  color:#50727A;;
+  color:#50727A;
   font-size: 2em;
   font-family: sans-serif;
 }
   
 .MenuOptionsList {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
   list-style: none;
 }
   
 .MenuOptionsList li {
-  padding: 0.5rem;
   color: #eee;
   font-family: sans-serif;
   font-size: 1.2em;
@@ -49,6 +44,7 @@
 .MenuOptionsList select {
   width: 230px;
   margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
   outline: none;
   border-radius: 10px;
@@ -59,6 +55,7 @@
   background-color: #ffffff;
   height: 7em;
   width: 300px;
+  margin: auto;
 
 }
 
@@ -70,30 +67,11 @@
 }
 
 .VistasCamara{
-  height: 7em;
-  margin-left: 3em;
-  width: 700px;
-  display: flex;
-  flex-direction: row;
-  
-}
-
-.VistasCamara button{
-  margin: 2px;
-  width: 100px;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #000000;
-  color: #98eff9;
-}
-
-.MenuOptions button{
-  margin: auto;
-  width: 150px;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #000000;
-  color: #98eff9;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  text-align: center;
+  min-height: 5vh;
 }
 
 #fullAdd{
@@ -101,4 +79,23 @@
   margin-left: 50px;
   display: block;
   font-size: 25px;
+}
+button {
+  display: block;
+  background: none;
+  border: 2px solid;
+  font: inherit;
+  line-height: 0.5;
+  margin: 0.5em;
+  padding: 1em 2em;
+  background-color: #000000;
+  color: #98eff9;
+  cursor: pointer;
+  
+}
+
+button:hover,
+button:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
 }
