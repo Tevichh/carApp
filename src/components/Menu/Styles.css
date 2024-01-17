@@ -1,8 +1,9 @@
 .MenuContainer {
   width: 100%;
+  height: 200px;
   position: absolute;
   bottom: 1rem;
-  margin: 0;
+  margin: auto;
   color:  #123123;
 }
   
@@ -73,7 +74,6 @@
   text-align: center;
   min-height: 5vh;
 }
-
 #fullAdd{
   margin-top: 10px;
   margin-left: 50px;
@@ -85,8 +85,8 @@ button {
   background: none;
   border: 2px solid;
   font: inherit;
-  line-height: 0.5;
-  margin: 0.5em;
+  line-height: 0.4;
+  margin-right: 10px;
   padding: 1em 2em;
   background-color: #000000;
   color: #98eff9;
