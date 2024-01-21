@@ -79,5 +79,31 @@ export const PickUp = {
         { name: 'P20', group: 'right', rute: '', value: 0 },
         { name: 'P21', group: 'right', rute: '', value: 0 },
         { name: 'P22', group: 'right', rute: '', value: 0 }
-    ]
+    ],
+    light: {
+        frontRightValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 0
+        },
+        frontLeftValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 0
+        },
+        backRightValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 0
+        },
+        backleftValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 0
+        }
+    }
 }

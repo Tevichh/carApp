@@ -23,7 +23,8 @@ const carParts = {
 
 //Scene, camera, renderer
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x000505)
+//scene.background = new THREE.Color(0x000505)192028
+scene.background = new THREE.Color(0x021013)
 const camera = new THREE.PerspectiveCamera(25, 100 / 100, 0.1, 100);
 scene.add(camera);
 camera.position.set(7.3, 2.1, 4.7);
@@ -62,8 +63,7 @@ function onPointerMove(event) {
 
 }
 window.addEventListener('click', onPointerMove);
-
-var addition = 0
+var num = 0;
 var parent;
 //Animate the scene
 const animate = () => {
@@ -80,21 +80,21 @@ const animate = () => {
   if (intersects.length) {
 
     parent = intersects[0].object;
- 
+
 
     if (intersects[0].object.material.color.equals(new THREE.Color(0x2B2D27)) && parent.parent.type === 'Group') {
       intersects[0].object.material.color.set(0x11110F)
-      addition -= intersects[0].object.value
-      document.getElementById('fullAdd').innerHTML = addition;
+
+      num = parseInt(document.getElementById('fullAdd').textContent)
+      document.getElementById('fullAdd').innerHTML = num - intersects[0].object.value;
 
     } else if (parent.parent.type === 'Group') {
       intersects[0].object.material.color.set(0x2B2D27)
-      addition += intersects[0].object.value
-      document.getElementById('fullAdd').innerHTML = addition;
-      //console.log(intersects[0].object.parent)
+      num = parseInt(document.getElementById('fullAdd').textContent)
+      document.getElementById('fullAdd').innerHTML = num + intersects[0].object.value;
     }
 
-    if (addition < 0) { addition = 0 }
+    if (num < 0) {  document.getElementById('fullAdd').innerHTML = 0 }
 
     pointer.x = -1000;
     pointer.y = -1000;
@@ -121,6 +121,13 @@ scene.add(light2)
 
 const light = new THREE.AmbientLight(0xFFFFFF, 1.2)
 scene.add(light)
+
+export const lightp1 = new THREE.PointLight(0xff8000, 3);
+lightp1.position.set( 0.7, 1.5, 2);
+scene.add(lightp1);
+
+
+
 
 /*
 const envMap = new THREE.CubeTextureLoader().load(

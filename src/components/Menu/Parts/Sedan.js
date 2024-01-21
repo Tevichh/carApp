@@ -60,7 +60,7 @@ export const Sedan = {
         { name: 'P23', group: 'left', rute: '', value: 0 },
         { name: 'P24', group: 'left', rute: '', value: 0 }
     ],
-    damageRight:[
+    damageRight: [
         { name: 'P1', group: 'right', rute: '', value: 0 },
         { name: 'P2', group: 'right', rute: '', value: 0 },
         { name: 'P3', group: 'right', rute: '', value: 0 },
@@ -85,5 +85,31 @@ export const Sedan = {
         { name: 'P22', group: 'right', rute: '', value: 0 },
         { name: 'P23', group: 'right', rute: '', value: 0 },
         { name: 'P24', group: 'right', rute: '', value: 0 }
-    ]
+    ],
+    light: {
+        frontRightValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 10
+        },
+        frontLeftValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 20
+        },
+        backRightValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 30
+        },
+        backleftValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 40
+        }
+    }
 }

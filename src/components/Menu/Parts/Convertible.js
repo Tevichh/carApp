@@ -68,5 +68,31 @@ export const Convertible = {
         { name: 'P16', group: 'right', rute: '', value: 0 },
         { name: 'P17', group: 'right', rute: '', value: 0 },
         { name: 'P18', group: 'right', rute: '', value: 0 }
-    ]
+    ],
+    light: {
+        frontRightValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 0
+        },
+        frontLeftValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 0
+        },
+        backRightValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 0
+        },
+        backleftValue: {
+            x: 0,
+            y: 0,
+            z: 0,
+            value: 0
+        }
+    }
 }

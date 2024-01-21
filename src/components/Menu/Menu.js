@@ -2,6 +2,8 @@ import React from 'react'
 import "./Styles.css"
 import { models } from "./carParts.js"
 import { removeModels, gsapAnimation, orbitControls } from '../Scene/Script.js'
+import { lightp1 } from '../Scene/Script.js'
+
 
 const animations = {
 
@@ -59,7 +61,7 @@ const Menu = () => {
                     <ul className='MenuOptionsList'>
                         <li>
                             <label htmlFor='models'>Model</label>
-                            <select className='models'
+                            <select className='models' id='model'
                                 onChange={(e) => {
                                     const model = models.find(
                                         (model) => model.name === e.target.value
@@ -69,6 +71,7 @@ const Menu = () => {
                                     for (var i = 0; i < model.damageLeft.length; i++) {
                                         removeModels(model.damageLeft[i].rute, model.damageLeft[i].group, model.scale, model.damageLeft[i].name, model.damageLeft[i].value)
                                     }
+                                    document.getElementById('fullAdd').innerHTML = 0;
 
                                 }}>
                                 {models.map((model, id) => (
@@ -142,6 +145,52 @@ const Menu = () => {
                         stopControls()
                     }}
                     >V.L.DERECHA</button>
+                </div>
+
+                <div className='Lights'>
+
+                    <form action="">
+                        <label class="form-control">
+                            <input type="checkbox" name="frontR" defaultChecked
+                                onChange={(e) => {
+                                    var num = 0;
+                                    const model = models.find(
+                                        (model) => model.name === document.getElementById('model').value
+                                    )
+                                    if (e.target.checked === false) {
+                                       
+                                        num = parseInt(document.getElementById('fullAdd').textContent)
+                                        document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value; 
+                                        
+                                        lightp1.isLight = false
+                                    }
+
+                                    if (e.target.checked === true) {
+                                        num = parseInt(document.getElementById('fullAdd').textContent)
+                                        document.getElementById('fullAdd').innerHTML = num - model.light.backRightValue.value; 
+                                        lightp1.isLight = true
+                                    }
+                                }
+                                } />
+                            Luz Frontal Derecha
+                        </label>
+
+                        <label class="form-control">
+                            <input type="checkbox" name="frontL" id='frontL' efaultChecked />
+                            Luz Frontal Izquierda
+                        </label>
+
+                        <label class="form-control">
+                            <input type="checkbox" name="backR" id='backR' efaultChecked />
+                            Luz Trasera Derecha
+                        </label>
+
+                        <label class="form-control">
+                            <input type="checkbox" name="backL" id='backL' efaultChecked />
+                            Luz Trasera Izquierda
+                        </label>
+                    </form>
+
                 </div>
             </div>
         </div >
