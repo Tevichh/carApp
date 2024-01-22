@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { ContainerScene } from "./Scene.elements";
-import { cleanUpScene, initScene, loadGroups, loadModels, removeModels } from "./Script";
+import { cleanUpScene, initScene, loadGroups, loadModels} from "./Script";
 import { models } from "../Menu/carParts";
 
 const Scene = () => {
