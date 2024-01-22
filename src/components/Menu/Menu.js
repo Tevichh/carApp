@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./Styles.css"
 import { models } from "./carParts.js"
-import { removeModels, gsapAnimation, orbitControls } from '../Scene/Script.js'
+import { removeModels, loadModels, gsapAnimation, orbitControls } from '../Scene/Script.js'
 import { lightp1, carParts } from '../Scene/Script.js'
 
 const animations = {
@@ -58,6 +58,7 @@ const allowControls = () => {
 
 const Menu = () => {
     const [rotar, setRotar] = useState('stop')
+    removeModels("", "modelCar")
     return (
         <div className='MenuContainer'>
             <label id='state'>{rotar}</label>
@@ -75,17 +76,22 @@ const Menu = () => {
                             <label htmlFor='models'>Model</label>
                             <select className='models' id='model'
                                 onChange={(e) => {
-                                    const model = models.find(
-                                        (model) => model.name === e.target.value
-                                    )
-                                    //console.log(model);
-                                    removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR')
-                                    for (var i = 0; i < model.damageLeft.length; i++) {
-                                        removeModels(model.damageLeft[i].rute, model.damageLeft[i].group, model.scale, model.damageLeft[i].name, model.damageLeft[i].value)
+                                    if (e.target.value !== "SELECCIONA") {
+                                        e.target.options[0].disabled = true
+                                        const model = models.find(
+                                            (model) => model.name === e.target.value
+                                        )
+                                        //console.log(model);
+                                        removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR')
+                                        loadModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR')
+                                        for (var i = 0; i < model.damageLeft.length; i++) {
+                                            removeModels(model.damageLeft[i].rute, model.damageLeft[i].group, model.scale, model.damageLeft[i].name, model.damageLeft[i].value)
+                                        }
+                                        document.getElementById('fullAdd').innerHTML = 0;
                                     }
-                                    document.getElementById('fullAdd').innerHTML = 0;
 
                                 }}>
+                                <option id="selctNull">SELECCIONA</option>
                                 {models.map((model, id) => (
                                     <option key={id} value={model.name}>
                                         {model.name}

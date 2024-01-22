@@ -215,7 +215,7 @@ export const removeModels = (rute, group, scale, name, value) => {
   }
 
   //console.log(renderer.info)
-  loadModels(rute, group, scale, name, value)
+
 
   //LIBERAR MEMORIA
   oldModels.traverse((child) => {

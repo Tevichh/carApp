@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { ContainerScene } from "./Scene.elements";
-import { cleanUpScene, initScene, loadGroups, loadModels} from "./Script";
+import { cleanUpScene, initScene, loadGroups, removeModels, loadModels } from "./Script";
 import { models } from "../Menu/carParts";
 
 const Scene = () => {
@@ -9,14 +9,17 @@ const Scene = () => {
   useEffect(() => {
     initScene(mountRef);
     loadGroups()
-    loadModels('./model/Modelo01/sedan.gltf', 'modelCar', 0.08)
-    for (var i = 0; i < models[0].damageLeft.length; i++) {
-      loadModels(models[0].damageLeft[i].rute, models[0].damageLeft[i].group, models[0].scale, models[0].damageLeft[i].name, models[0].damageLeft[i].value)
-    }
 
+    for (var i = 0; i < models.length; i++) {
+      loadModels(models[i].modelCar.rute, models[i].modelCar.group, models[i].scale)
+    }
+    setTimeout(()=>{for (i = 0; i < models.length; i++) {
+      removeModels(models[i].modelCar.rute, models[i].modelCar.group, models[i].scale)
+    }}, 5000)
     return () => {
       cleanUpScene();
     };
+
   }, []);
 
   return (
