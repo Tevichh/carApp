@@ -5,7 +5,9 @@
   bottom: 1rem;
   
 }
-
+#state{
+  display: none;
+}
 .MenuWrapper {
   background-color: #192028;
   width: 100%;

@@ -11,7 +11,7 @@ let currentRef = null;
 const timeline = new gsap.timeline({ defaults: { duration: 1 } })
 
 //CAR PARTS
-const carParts = {
+export const carParts = {
   modelCar: new THREE.Group(),
   top: new THREE.Group(),
   front: new THREE.Group(),
@@ -63,8 +63,11 @@ function onPointerMove(event) {
 
 }
 window.addEventListener('click', onPointerMove);
+
 var num = 0;
 var parent;
+
+
 //Animate the scene
 const animate = () => {
   raycaster.setFromCamera(pointer, camera)
@@ -94,16 +97,27 @@ const animate = () => {
       document.getElementById('fullAdd').innerHTML = num + intersects[0].object.value;
     }
 
-    if (num < 0) {  document.getElementById('fullAdd').innerHTML = 0 }
+    if (num < 0) { document.getElementById('fullAdd').innerHTML = 0 }
 
     pointer.x = -1000;
     pointer.y = -1000;
   }
+  var stateElement = document.getElementById('state')
+  var state = stateElement ? stateElement.textContent : 'stop'
 
-
+  if (state === 'rotando') {
+    carParts.modelCar.rotation.y -= 0.01
+    carParts.back.rotation.y -= 0.01
+    carParts.front.rotation.y -= 0.01
+    carParts.left.rotation.y -= 0.01
+    carParts.right.rotation.y -= 0.01
+    carParts.top.rotation.y -= 0.01
+  }
   orbitControls.update();
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
+
+
 
 };
 animate();
@@ -123,7 +137,7 @@ const light = new THREE.AmbientLight(0xFFFFFF, 1.2)
 scene.add(light)
 
 export const lightp1 = new THREE.PointLight(0xff8000, 3);
-lightp1.position.set( 0.7, 1.5, 2);
+lightp1.position.set(0.7, 1.5, 2);
 scene.add(lightp1);
 
 

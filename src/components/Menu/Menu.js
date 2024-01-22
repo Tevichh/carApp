@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Styles.css"
 import { models } from "./carParts.js"
 import { removeModels, gsapAnimation, orbitControls } from '../Scene/Script.js'
-import { lightp1 } from '../Scene/Script.js'
-
+import { lightp1, carParts } from '../Scene/Script.js'
 
 const animations = {
 
@@ -37,18 +36,31 @@ const stopControls = () => {
     orbitControls.enableZoom = false;
     orbitControls.enablePan = false;
     orbitControls.enableRotate = false;
+    carParts.modelCar.rotation.y = 0
+    carParts.back.rotation.y = 0
+    carParts.front.rotation.y = 0
+    carParts.left.rotation.y = 0
+    carParts.right.rotation.y = 0
+    carParts.top.rotation.y = 0
 }
 
 const allowControls = () => {
     orbitControls.enableZoom = false;
     orbitControls.enablePan = false;
     orbitControls.enableRotate = true;
+    carParts.modelCar.rotation.y = 0
+    carParts.back.rotation.y = 0
+    carParts.front.rotation.y = 0
+    carParts.left.rotation.y = 0
+    carParts.right.rotation.y = 0
+    carParts.top.rotation.y = 0
 }
 
-
 const Menu = () => {
+    const [rotar, setRotar] = useState('stop')
     return (
         <div className='MenuContainer'>
+            <label id='state'>{rotar}</label>
             <div className='MenuWrapper'>
                 <div className='Calculator'>
                     <h2>COTIZACIÓN</h2>
@@ -84,6 +96,7 @@ const Menu = () => {
                     </ul>
 
                     <button className='movimiento' onClick={() => {
+                        setRotar('stop')
                         allowControls()
                         gsapAnimation(animations.original.cam, animations.original.pos)
                     }}
@@ -91,12 +104,14 @@ const Menu = () => {
                 </div>
 
                 <div className='VistasCamara'>
-                    <button name='rotar' onClick={() => {
-                        console.log("Rotar")
-                    }}
-                    > ROTAR</button>
+                    <button name='rotar' id='rotateButton' onClick={() => {
+                        setRotar('rotando')
+                        stopControls()
+                        gsapAnimation(animations.original.cam, animations.original.pos)
+                    }}>ROTAR</button>
 
                     <button name='superior' onClick={() => {
+                        setRotar('stop')
                         gsapAnimation(
                             animations.top.cam,
                             animations.top.pos
@@ -107,6 +122,7 @@ const Menu = () => {
                     >V.SUPERIOR</button>
 
                     <button name='frontal' onClick={() => {
+                        setRotar('stop')
                         gsapAnimation(
                             animations.front.cam,
                             animations.front.pos
@@ -117,6 +133,7 @@ const Menu = () => {
                     >V.FRONTAL</button>
 
                     <button name='trasera' onClick={() => {
+                        setRotar('stop')
                         gsapAnimation(
                             animations.back.cam,
                             animations.back.pos
@@ -127,6 +144,7 @@ const Menu = () => {
                     >V.TRASERA</button>
 
                     <button name='izquierda' onClick={() => {
+                        setRotar('stop')
                         gsapAnimation(
                             animations.left.cam,
                             animations.left.pos
@@ -137,6 +155,7 @@ const Menu = () => {
                     >V.L.IZQUIERDA</button>
 
                     <button name='derecha' onClick={() => {
+                        setRotar('stop')
                         gsapAnimation(
                             animations.right.cam,
                             animations.right.pos
@@ -158,16 +177,16 @@ const Menu = () => {
                                         (model) => model.name === document.getElementById('model').value
                                     )
                                     if (e.target.checked === false) {
-                                       
+
                                         num = parseInt(document.getElementById('fullAdd').textContent)
-                                        document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value; 
-                                        
+                                        document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value;
+
                                         lightp1.isLight = false
                                     }
 
                                     if (e.target.checked === true) {
                                         num = parseInt(document.getElementById('fullAdd').textContent)
-                                        document.getElementById('fullAdd').innerHTML = num - model.light.backRightValue.value; 
+                                        document.getElementById('fullAdd').innerHTML = num - model.light.backRightValue.value;
                                         lightp1.isLight = true
                                     }
                                 }
