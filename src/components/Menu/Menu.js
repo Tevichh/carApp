@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./Styles.css"
 import { models } from "./carParts.js"
-import { removeModels, loadModels, gsapAnimation, orbitControls } from '../Scene/Script.js'
+import { removeModels, gsapAnimation, orbitControls } from '../Scene/Script.js'
 import { lightp1, carParts } from '../Scene/Script.js'
 
 const animations = {
@@ -58,7 +58,6 @@ const allowControls = () => {
 
 const Menu = () => {
     const [rotar, setRotar] = useState('stop')
-    removeModels("", "modelCar")
     return (
         <div className='MenuContainer'>
             <label id='state'>{rotar}</label>
@@ -83,7 +82,6 @@ const Menu = () => {
                                         )
                                         //console.log(model);
                                         removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR')
-                                        loadModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR')
                                         for (var i = 0; i < model.damageLeft.length; i++) {
                                             removeModels(model.damageLeft[i].rute, model.damageLeft[i].group, model.scale, model.damageLeft[i].name, model.damageLeft[i].value)
                                         }
