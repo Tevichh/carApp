@@ -197,7 +197,6 @@ export const loadModels = (rute, group, scale, name, value) => {
   })
 }
 
-
 //Remove Models
 
 export const removeModels = (rute, group, scale, name, value) => {
