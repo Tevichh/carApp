@@ -1,19 +1,13 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+//import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { gsap } from "gsap";
-import { useState } from "react";
 
 
 
 //Global variables
 let currentRef = null;
-/*const varibles = ()=>{
-  const [active, setActive] = useState(true);
-}*/
-
-var active = true;
 
 //Animation GSAP
 const timeline = new gsap.timeline({ defaults: { duration: 1 } })
@@ -58,10 +52,9 @@ const resize = () => {
 window.addEventListener("resize", resize);
 
 //LOADER
-const gltfLoaders = new GLTFLoader()
-const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath('/examples/jsm/libs/draco/');
-gltfLoaders.setDRACOLoader(dracoLoader);
+const loadingManager = new THREE.LoadingManager()
+const gltfLoaders = new GLTFLoader(loadingManager)
+
 //RAYCASTER
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2(-100, -100);
@@ -210,38 +203,32 @@ export const loadModels = (rute, group, scale, name, value) => {
 
 //Remove Models
 
-export const removeModels = async (rute, group, scale, name, value) => {
+export const removeModels = (rute, group, scale, name, value) => {
 
-  if (active) {
-    active = false;
-    const oldModels = new THREE.Group();
+  const oldModels = new THREE.Group();
 
-    while (carParts[group].children.length) {
-      oldModels.add(carParts[group].children[0])
-    }
-
-    //ELMINAR
-
-    while (carParts[group].children.length) {
-      carParts[group].remove(carParts[group].children[0])
-    }
-
-    //console.log(renderer.info)
-  
-    await loadModels(rute, group, scale, name, value);
-
-    //LIBERAR MEMORIA
-    oldModels.traverse((child) => {
-
-      if (child instanceof THREE.Mesh) {
-        child.material.dispose()
-        child.geometry.dispose()
-      }
-
-    })
-    active = true;
+  while (carParts[group].children.length) {
+    oldModels.add(carParts[group].children[0])
   }
 
+  //ELMINAR
+
+  while (carParts[group].children.length) {
+    carParts[group].remove(carParts[group].children[0])
+  }
+
+  //console.log(renderer.info)
+  loadModels(rute, group, scale, name, value)
+
+  //LIBERAR MEMORIA
+  oldModels.traverse((child) => {
+
+    if (child instanceof THREE.Mesh) {
+      child.material.dispose()
+      child.geometry.dispose()
+    }
+
+  })
 }
 
 //ANIMATION MOVE
