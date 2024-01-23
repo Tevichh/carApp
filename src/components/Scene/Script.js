@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { gsap } from "gsap";
 
 
@@ -51,7 +52,9 @@ window.addEventListener("resize", resize);
 
 //LOADER
 const gltfLoaders = new GLTFLoader()
-
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath( '/examples/jsm/libs/draco/' );
+gltfLoaders.setDRACOLoader( dracoLoader );
 //RAYCASTER
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2(-100, -100);

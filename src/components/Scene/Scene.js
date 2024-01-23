@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { ContainerScene } from "./Scene.elements";
-import { cleanUpScene, initScene, loadGroups, loadModels, removeModels } from "./Script";
-import { models } from "../Menu/carParts";
+import { cleanUpScene, initScene, loadGroups} from "./Script";
+//import { models } from "../Menu/carParts";
 
 const Scene = () => {
   const mountRef = useRef(null);
