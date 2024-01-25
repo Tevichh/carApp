@@ -1,6 +1,6 @@
 export const PickUp = {
     name: "PICKUP",
-    scale: 0.02,
+    scale: 0.023,
     modelCar: {
         group: "modelCar",
         rute: "./model/Modelo03/scene.gltf"

@@ -52,7 +52,21 @@ const resize = () => {
 window.addEventListener("resize", resize);
 
 //LOADER
-const loadingManager = new THREE.LoadingManager()
+var progressBarContainer = document.querySelector('.progress-bar-container');
+const loadingManager = new THREE.LoadingManager(
+  () => {
+    progressBarContainer = document.querySelector('.progress-bar-container');
+    progressBarContainer.style.display = 'none';
+  },
+  (_, itemsToLoad, itemsLoaded) => {
+    progressBarContainer = document.querySelector('.progress-bar-container');
+    progressBarContainer.style.display = 'flex';
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.value = (itemsToLoad / itemsLoaded) * 100;
+  },
+  () => { }
+
+)
 const gltfLoaders = new GLTFLoader(loadingManager)
 
 //RAYCASTER

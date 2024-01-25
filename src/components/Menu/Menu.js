@@ -62,20 +62,31 @@ const Menu = () => {
         <div className='MenuContainer'>
             <label id='state'>{rotar}</label>
             <div className='MenuWrapper'>
-                <div className='Calculator'>
-                    <h2>COTIZACIÓN</h2>
-                    <label>TOTAL: </label>
-                    <label id='fullAdd'>0</label>
+                <div className='MenuOptions'>
+
+                    <div className='colors'>
+                        <input type='color' id='changeColor' onChange={(e) => {
+                            console.log("CAMBIO")
+                        }}></input>
+                        <label>PAINT</label>
+                    </div>
+                    
+                    <div className='Calculator'>
+                        <h2>COTIZACIÓN</h2>
+                        <label>TOTAL: </label>
+                        <label id='fullAdd'>0</label>
+                    </div>
                 </div>
 
+
                 <div className='MenuOptions'>
-                    <h1>CAR OPTIONS</h1>
+                    <h1>CAR MODEL</h1>
                     <ul className='MenuOptionsList'>
                         <li>
-                            <label htmlFor='models'>Model</label>
                             <select className='models' id='model'
                                 onChange={(e) => {
                                     if (e.target.value !== "SELECCIONA") {
+
                                         e.target.options[0].disabled = true
                                         const model = models.find(
                                             (model) => model.name === e.target.value
@@ -85,7 +96,12 @@ const Menu = () => {
                                         for (var i = 0; i < model.damageLeft.length; i++) {
                                             removeModels(model.damageLeft[i].rute, model.damageLeft[i].group, model.scale, model.damageLeft[i].name, model.damageLeft[i].value)
                                         }
+
                                         document.getElementById('fullAdd').innerHTML = 0;
+                                        document.getElementById('frontR').disabled = false;
+                                        document.getElementById('frontL').disabled = false;
+                                        document.getElementById('backR').disabled = false;
+                                        document.getElementById('backL').disabled = false;
                                     }
 
                                 }}>
@@ -174,7 +190,7 @@ const Menu = () => {
 
                     <form action="">
                         <label class="form-control">
-                            <input type="checkbox" name="frontR" defaultChecked
+                            <input type="checkbox" name="frontR" id="frontR" defaultChecked disabled
                                 onChange={(e) => {
                                     var num = 0;
                                     const model = models.find(
@@ -190,7 +206,7 @@ const Menu = () => {
 
                                     if (e.target.checked === true) {
                                         num = parseInt(document.getElementById('fullAdd').textContent)
-                                        document.getElementById('fullAdd').innerHTML = num - model.light.backRightValue.value;
+                                        document.getElementById('fullAdd').innerHTML = (num - model.light.backRightValue.value) > 0 ? num - model.light.backRightValue.value : 0;
                                         lightp1.isLight = true
                                     }
                                 }
@@ -199,17 +215,17 @@ const Menu = () => {
                         </label>
 
                         <label class="form-control">
-                            <input type="checkbox" name="frontL" id='frontL' efaultChecked />
+                            <input type="checkbox" name="frontL" id='frontL' defaultChecked disabled />
                             Luz Frontal Izquierda
                         </label>
 
                         <label class="form-control">
-                            <input type="checkbox" name="backR" id='backR' efaultChecked />
+                            <input type="checkbox" name="backR" id='backR' defaultChecked disabled />
                             Luz Trasera Derecha
                         </label>
 
                         <label class="form-control">
-                            <input type="checkbox" name="backL" id='backL' efaultChecked />
+                            <input type="checkbox" name="backL" id='backL' defaultChecked disabled />
                             Luz Trasera Izquierda
                         </label>
                     </form>
