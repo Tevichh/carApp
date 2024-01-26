@@ -27,6 +27,7 @@ export const carParts = {
 const scene = new THREE.Scene();
 //scene.background = new THREE.Color(0x000505)192028
 scene.background = new THREE.Color(0x021013)
+
 const camera = new THREE.PerspectiveCamera(25, 100 / 100, 0.1, 100);
 scene.add(camera);
 camera.position.set(7.3, 2.1, 4.7);
@@ -34,6 +35,11 @@ camera.lookAt(new THREE.Vector3());
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(100, 100);
+
+//TEXTURELOADER
+
+//const textureLoader = new THREE.TextureLoader();
+
 
 
 //OrbitControls
@@ -100,7 +106,6 @@ const animate = () => {
   if (intersects.length) {
 
     parent = intersects[0].object;
-
 
     if (intersects[0].object.material.color.equals(new THREE.Color(0x2B2D27)) && parent.parent.type === 'Group') {
       intersects[0].object.material.color.set(0x11110F)

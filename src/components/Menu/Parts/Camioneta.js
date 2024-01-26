@@ -3,7 +3,7 @@ export const Camioneta = {
     scale: 1.8,
     modelCar: {
         group: "modelCar",
-        rute: "./model/Modelo02/scene.gltf"
+        rute: "./model/Modelo04/scene.gltf"
     },
     damageTop: [
         { name: 'P1', group: 'top', rute: '', value: 0 },
