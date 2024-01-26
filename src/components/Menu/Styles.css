@@ -1,4 +1,4 @@
-.MenuContainer {
+.menu {
   width: 100%;
   height: 200px;
   position: absolute;
@@ -8,6 +8,7 @@
 #state{
   display: none;
 }
+
 .MenuWrapper {
   background-color: #192028;
   width: 100%;
@@ -57,7 +58,7 @@
 
 .Calculator {
   background-color: #ffffff;
-  height: 5em;
+  height: 7em;
   width: 300px;
   margin-top: 1em;
 }

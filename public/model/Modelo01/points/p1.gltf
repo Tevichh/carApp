@@ -15,24 +15,24 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Cylinder",
+			"name":"Cube",
 			"rotation":[
-				0.11329798400402069,
-				-0.013533205725252628,
-				0.6993303894996643,
-				0.7056326866149902
+				0,
+				-0.72996586561203,
+				0,
+				0.6834836602210999
 			],
 			"translation":[
-				9.739673614501953,
-				9.161605834960938,
-				6.236751556396484
+				9.739669799804688,
+				9.161609649658203,
+				6.23675012588501
 			]
 		}
 	],
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"Material.002",
+			"name":"CHECK",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
 					0.06300994753837585,
@@ -47,7 +47,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Cylinder.001",
+			"name":"Cube.003",
 			"primitives":[
 				{
 					"attributes":{
@@ -65,67 +65,67 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":192,
+			"count":46,
 			"max":[
-				1,
-				1,
-				1
+				1.000590205192566,
+				0.5599315166473389,
+				-0.23298883438110352
 			],
 			"min":[
 				-1,
 				-1,
-				-1
+				-0.6561229228973389
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":192,
+			"count":46,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":192,
+			"count":46,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":372,
+			"count":84,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":2304,
+			"byteLength":552,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":2304,
-			"byteOffset":2304,
+			"byteLength":552,
+			"byteOffset":552,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1536,
-			"byteOffset":4608,
+			"byteLength":368,
+			"byteOffset":1104,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":744,
-			"byteOffset":6144,
+			"byteLength":168,
+			"byteOffset":1472,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":6888,
+			"byteLength":1640,
 			"uri":"p1.bin"
 		}
 	]

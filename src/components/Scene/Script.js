@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+//import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { gsap } from "gsap";
 
 
@@ -44,6 +44,7 @@ const grid = new THREE.GridHelper(20, 40, 0xffffff, 0xffffff);
 grid.material.opacity = 0.2;
 grid.material.depthWrite = false;
 grid.material.transparent = true;
+grid.userData.intangible = true;
 scene.add(grid);
 
 
@@ -81,22 +82,21 @@ const loadingManager = new THREE.LoadingManager(
 
 
 const gltfLoaders = new GLTFLoader(loadingManager)
-const dracoLoader = new DRACOLoader()
+/*const dracoLoader = new DRACOLoader()
 dracoLoader.setDecoderPath('./draco/')
-gltfLoaders.setDRACOLoader(dracoLoader)
-
+gltfLoaders.setDRACOLoader(dracoLoader)*/
 
 //RAYCASTER
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2(-100, -100);
 
-function onPointerMove(event) {
+function onPointerClick(event) {
   pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
   pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
-  //console.log(pointer)
-
 }
-window.addEventListener('click', onPointerMove);
+window.addEventListener('click', onPointerClick);
+
+//var color = new THREE.Color()
 
 var num = 0;
 var parent;
@@ -106,34 +106,46 @@ var parent;
 const animate = () => {
   raycaster.setFromCamera(pointer, camera)
   const intersects = raycaster.intersectObjects(
-    scene.children,
-    true
+    scene.children.filter(obj => !obj.userData.intangible)
   )
 
   // console.log(intersects)
 
   //INTERSECTS
-
+  console.log(document.getElementById("stateColor"))
   if (intersects.length) {
 
     parent = intersects[0].object;
 
-    if (intersects[0].object.material.color.equals(new THREE.Color(0x2B2D27)) && parent.parent.type === 'Group') {
+    /*
+    if (intersects[0].object.material.color.equals(new THREE.Color(0x00ff00)) && parent.material.name === 'CHECK') {
       intersects[0].object.material.color.set(0x11110F)
 
       num = parseInt(document.getElementById('fullAdd').textContent)
       document.getElementById('fullAdd').innerHTML = num - intersects[0].object.value;
 
-    } else if (parent.parent.type === 'Group') {
-      intersects[0].object.material.color.set(0x2B2D27)
+    } else if (parent.material.name === 'CHECK' && !intersects[0].object.material.color.equals(new THREE.Color(0x00ff00))) {
+      intersects[0].object.material.color.set(0x00ff00)
       num = parseInt(document.getElementById('fullAdd').textContent)
       document.getElementById('fullAdd').innerHTML = num + intersects[0].object.value;
-    }
+    }*/
 
+    if (parent.material.name === 'CHECK') {
+
+      if (parent.material.color.equals(new THREE.Color(0x11110F))) {
+        intersects[0].object.material.color.set(0x00ff00)
+      } else if (parent.material.color.equals(new THREE.Color(0x00ff00))) {
+        intersects[0].object.material.color.set(0xff0000)
+      } else if (parent.material.color.equals(new THREE.Color(0xff0000))) {
+        intersects[0].object.material.color.set(0x11110F)
+      }else{
+        intersects[0].object.material.color.set(0x11110F)
+      }
+    }
     if (num < 0) { document.getElementById('fullAdd').innerHTML = 0 }
 
-    pointer.x = -1000;
-    pointer.y = -1000;
+    pointer.x = 0.9;
+    pointer.y = -0.6;
   }
   var stateElement = document.getElementById('state')
   var state = stateElement ? stateElement.textContent : 'stop'
@@ -172,7 +184,7 @@ scene.add(light)
 
 export const lightp1 = new THREE.PointLight(0xff8000, 3);
 lightp1.position.set(0.7, 1.5, 2);
-scene.add(lightp1);
+//scene.add(lightp1);
 
 
 

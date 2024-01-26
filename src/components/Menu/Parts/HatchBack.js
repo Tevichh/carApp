@@ -3,7 +3,7 @@ export const HacthBack = {
     scale: 1,
     modelCar: {
         group: "modelCar",
-        rute: "./model/Modelo02/hatchback.gltf"
+        rute: "./model/Modelo02/scene.gltf"
     },
     damageTop: [
         { name: 'P1', group: 'top', rute: '', value: 0 },
