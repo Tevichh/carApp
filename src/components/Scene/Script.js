@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-//import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { gsap } from "gsap";
 
 
@@ -40,6 +40,11 @@ renderer.setSize(100, 100);
 
 //const textureLoader = new THREE.TextureLoader();
 
+const grid = new THREE.GridHelper(20, 40, 0xffffff, 0xffffff);
+grid.material.opacity = 0.2;
+grid.material.depthWrite = false;
+grid.material.transparent = true;
+scene.add(grid);
 
 
 //OrbitControls
@@ -47,6 +52,7 @@ export const orbitControls = new OrbitControls(camera, renderer.domElement);
 orbitControls.enableDamping = true;
 orbitControls.enableZoom = false;
 orbitControls.enablePan = false;
+orbitControls.maxPolarAngle = THREE.MathUtils.degToRad(80);
 
 
 //Resize canvas
@@ -71,9 +77,14 @@ const loadingManager = new THREE.LoadingManager(
     progressBar.value = (itemsToLoad / itemsLoaded) * 100;
   },
   () => { }
-
 )
+
+
 const gltfLoaders = new GLTFLoader(loadingManager)
+const dracoLoader = new DRACOLoader()
+dracoLoader.setDecoderPath('./draco/')
+gltfLoaders.setDRACOLoader(dracoLoader)
+
 
 //RAYCASTER
 const raycaster = new THREE.Raycaster();
