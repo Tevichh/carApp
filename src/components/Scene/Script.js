@@ -112,7 +112,7 @@ const animate = () => {
   // console.log(intersects)
 
   //INTERSECTS
-  console.log(document.getElementById("stateColor"))
+
   if (intersects.length) {
 
     parent = intersects[0].object;
