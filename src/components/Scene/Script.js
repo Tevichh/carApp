@@ -182,9 +182,13 @@ scene.add(light2)
 const light = new THREE.AmbientLight(0xFFFFFF, 1.2)
 scene.add(light)
 
-export const lightp1 = new THREE.PointLight(0xff8000, 3);
-lightp1.position.set(0.7, 1.5, 2);
-//scene.add(lightp1);
+
+const frontRL = new THREE.SpotLight(0xff8000, 450, 10 , Math.PI/12)
+frontRL.position.set(0.7, 1.5, 3);
+scene.add(frontRL)
+
+const spotLightHelper = new THREE.SpotLightHelper( frontRL );
+scene.add( spotLightHelper);
 
 
 
