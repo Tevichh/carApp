@@ -1,21 +1,19 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-//import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { gsap } from "gsap";
-import * as dat from "dat.gui"
+
 
 
 
 //Global variables
 let currentRef = null;
-const gui = new dat.GUI()
 
 //Animation GSAP
 const timeline = new gsap.timeline({ defaults: { duration: 1 } })
 
 //CAR PARTS
-export const carParts = {
+const carParts = {
   modelCar: new THREE.Group(),
   top: new THREE.Group(),
   front: new THREE.Group(),
@@ -30,7 +28,7 @@ const scene = new THREE.Scene();
 //scene.background = new THREE.Color(0x000505)192028
 scene.background = new THREE.Color(0x021013)
 
-export const camera = new THREE.PerspectiveCamera(25, 100 / 100, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(25, 100 / 100, 0.1, 100);
 scene.add(camera);
 camera.position.set(7.3, 2.1, 4.7);
 camera.lookAt(new THREE.Vector3());
@@ -84,9 +82,7 @@ const loadingManager = new THREE.LoadingManager(
 
 
 const gltfLoaders = new GLTFLoader(loadingManager)
-/*const dracoLoader = new DRACOLoader()
-dracoLoader.setDecoderPath('./draco/')
-gltfLoaders.setDRACOLoader(dracoLoader)*/
+
 
 //RAYCASTER
 const raycaster = new THREE.Raycaster();
@@ -98,7 +94,6 @@ function onPointerClick(event) {
 }
 window.addEventListener('click', onPointerClick);
 
-//var color = new THREE.Color()
 
 var num = 0;
 var parent;
@@ -153,14 +148,6 @@ const animate = () => {
   var state = stateElement ? stateElement.textContent : 'stop'
 
   if (state === 'rotando') {
-    /*
-    carParts.modelCar.rotation.y -= 0.01
-    carParts.back.rotation.y -= 0.01
-    carParts.front.rotation.y -= 0.01
-    carParts.left.rotation.y -= 0.01
-    carParts.right.rotation.y -= 0.01
-    carParts.top.rotation.y -= 0.01
-    */
    orbitControls.autoRotate = true
   }
 
@@ -174,7 +161,7 @@ const animate = () => {
 animate();
 
 
-//LIGHTS
+//SCENELIGHTS
 
 const light1 = new THREE.DirectionalLight(0xffffff, 1.2)
 light1.position.set(6, 6, 6)
@@ -187,7 +174,7 @@ scene.add(light2)
 const light = new THREE.AmbientLight(0xFFFFFF, 1.2)
 scene.add(light)
 
-
+//CARLIGHTS
 export const frontRL = new THREE.SpotLight(0xff8000, 30, 3.3, 0.29)
 frontRL.position.set(0.9, 1.2, 4.5);
 scene.add(frontRL)
@@ -203,9 +190,6 @@ scene.add(backRL)
 export const backLL = new THREE.SpotLight(0xff8000, 30, 3.3, 0.29)
 backLL.position.set(-0.9, 1.2, -4.5);
 scene.add(backLL)
-//const spotLightHelper = new THREE.SpotLightHelper(frontRL);
-//scene.add(spotLightHelper);
-
 
 
 
@@ -233,7 +217,6 @@ export const initScene = (mountRef) => {
 //Dismount and clena up the buffer from the scene
 export const cleanUpScene = () => {
   scene.dispose();
-  gui.destroy()
   currentRef.removeChild(renderer.domElement);
 };
 
@@ -259,7 +242,6 @@ export const loadModels = (rute, group, scale, name, value) => {
       model.value = value;
       carParts[group].add(model)
       carParts[group].scale.set(scale, scale, scale)
-      //console.log(name)
     }
   })
 }
@@ -315,34 +297,3 @@ export const gsapAnimation = (camPos, targetPost) => {
     )
 }
 
-//DAT.GUI
-
-gui.add(frontRL.position, 'x')
-  .min(-10)
-  .max(10)
-  .step(0.1)
-
-gui.add(frontRL.position, 'y')
-  .min(-10)
-  .max(10)
-  .step(0.1)
-
-gui.add(frontRL.position, 'z')
-  .min(-10)
-  .max(10)
-  .step(0.1)
-
-gui.add(frontRL, 'distance')
-  .min(0)
-  .max(10)
-  .step(0.1)
-
-gui.add(frontRL, 'intensity')
-  .min(0)
-  .max(500)
-  .step(10)
-
-gui.add(frontRL, 'angle')
-  .min(0)
-  .max(3)
-  .step(0.01)

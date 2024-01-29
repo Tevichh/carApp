@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./Styles.css"
 import { models } from "./carParts.js"
 import { removeModels, gsapAnimation, orbitControls } from '../Scene/Script.js'
-import { carParts, frontLL, frontRL, backLL, backRL, camera } from '../Scene/Script.js'
+import { frontLL, frontRL, backLL, backRL } from '../Scene/Script.js'
 
 const animations = {
 
@@ -46,8 +46,28 @@ const allowControls = () => {
     orbitControls.autoRotate = false;
 }
 
+const defaulLight = () => {
+
+    document.getElementById('frontR').disabled = false;
+    document.getElementById('frontL').disabled = false;
+    document.getElementById('backR').disabled = false;
+    document.getElementById('backL').disabled = false;
+
+    document.getElementById('frontR').checked = true;
+    document.getElementById('frontL').checked = true;
+    document.getElementById('backR').checked = true;
+    document.getElementById('backL').checked = true;
+
+    frontLL.isLight = true;
+    frontRL.isLight = true;
+    backLL.isLight = true;
+    backRL.isLight = true;
+
+}
+
 const Menu = () => {
     const [rotar, setRotar] = useState('stop')
+    const [currentModel, setCurrentModel] = useState()
     return (
         <div className='MenuContainer'>
             <label id='state'>{rotar}</label>
@@ -74,6 +94,7 @@ const Menu = () => {
                                             const model = models.find(
                                                 (model) => model.name === e.target.value
                                             )
+                                            setCurrentModel(model)
                                             //console.log(model);
                                             removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR')
                                             for (var i = 0; i < model.damageLeft.length; i++) {
@@ -81,10 +102,7 @@ const Menu = () => {
                                             }
 
                                             document.getElementById('fullAdd').innerHTML = 0;
-                                            document.getElementById('frontR').disabled = false;
-                                            document.getElementById('frontL').disabled = false;
-                                            document.getElementById('backR').disabled = false;
-                                            document.getElementById('backL').disabled = false;
+                                            defaulLight()
                                         }
 
                                     }}>
@@ -175,21 +193,17 @@ const Menu = () => {
                             <label class="form-control">
                                 <input type="checkbox" name="frontR" id="frontR" defaultChecked disabled
                                     onChange={(e) => {
-                                        var num = 0;
-                                        const model = models.find(
-                                            (model) => model.name === document.getElementById('model').value
-                                        )
+                                        var num = parseInt(document.getElementById('fullAdd').textContent);
+
                                         if (e.target.checked === false) {
 
-                                            //num = parseInt(document.getElementById('fullAdd').textContent)
-                                            //document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value;
-
+                                            document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
                                             frontRL.isLight = false
                                         }
 
                                         if (e.target.checked === true) {
-                                            //num = parseInt(document.getElementById('fullAdd').textContent)
-                                            //document.getElementById('fullAdd').innerHTML = (num - model.light.backRightValue.value) > 0 ? num - model.light.backRightValue.value : 0;
+
+                                            document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
                                             frontRL.isLight = true
                                         }
                                     }
@@ -200,21 +214,17 @@ const Menu = () => {
                             <label class="form-control">
                                 <input type="checkbox" name="frontL" id='frontL' defaultChecked disabled
                                     onChange={(e) => {
-                                        var num = 0;
-                                        const model = models.find(
-                                            (model) => model.name === document.getElementById('model').value
-                                        )
+                                        var num = parseInt(document.getElementById('fullAdd').textContent);
+
                                         if (e.target.checked === false) {
 
-                                            //num = parseInt(document.getElementById('fullAdd').textContent)
-                                            //document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value;
-
+                                            document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
                                             frontLL.isLight = false
                                         }
 
                                         if (e.target.checked === true) {
-                                            //num = parseInt(document.getElementById('fullAdd').textContent)
-                                            //document.getElementById('fullAdd').innerHTML = (num - model.light.backRightValue.value) > 0 ? num - model.light.backRightValue.value : 0;
+
+                                            document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
                                             frontLL.isLight = true
                                         }
                                     }
@@ -225,21 +235,17 @@ const Menu = () => {
                             <label class="form-control">
                                 <input type="checkbox" name="backR" id='backR' defaultChecked disabled
                                     onChange={(e) => {
-                                        var num = 0;
-                                        const model = models.find(
-                                            (model) => model.name === document.getElementById('model').value
-                                        )
+                                        var num = parseInt(document.getElementById('fullAdd').textContent);
+
                                         if (e.target.checked === false) {
 
-                                            //num = parseInt(document.getElementById('fullAdd').textContent)
-                                            //document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value;
-
+                                            document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
                                             backRL.isLight = false
                                         }
 
                                         if (e.target.checked === true) {
-                                            //num = parseInt(document.getElementById('fullAdd').textContent)
-                                            //document.getElementById('fullAdd').innerHTML = (num - model.light.backRightValue.value) > 0 ? num - model.light.backRightValue.value : 0;
+
+                                            document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
                                             backRL.isLight = true
                                         }
                                     }
@@ -250,21 +256,18 @@ const Menu = () => {
                             <label class="form-control">
                                 <input type="checkbox" name="backL" id='backL' defaultChecked disabled
                                     onChange={(e) => {
-                                        var num = 0;
-                                        const model = models.find(
-                                            (model) => model.name === document.getElementById('model').value
-                                        )
+                                        var num = parseInt(document.getElementById('fullAdd').textContent);
+
                                         if (e.target.checked === false) {
 
-                                            //num = parseInt(document.getElementById('fullAdd').textContent)
-                                            //document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value;
+                                            document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
 
                                             backLL.isLight = false
                                         }
 
                                         if (e.target.checked === true) {
-                                            //num = parseInt(document.getElementById('fullAdd').textContent)
-                                            //document.getElementById('fullAdd').innerHTML = (num - model.light.backRightValue.value) > 0 ? num - model.light.backRightValue.value : 0;
+
+                                            document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
                                             backLL.isLight = true
                                         }
                                     }
