@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./Styles.css"
 import { models } from "./carParts.js"
 import { removeModels, gsapAnimation, orbitControls } from '../Scene/Script.js'
-import { lightp1, carParts } from '../Scene/Script.js'
+import { carParts, frontLL, frontRL, backLL, backRL, camera } from '../Scene/Script.js'
 
 const animations = {
 
@@ -36,24 +36,14 @@ const stopControls = () => {
     orbitControls.enableZoom = false;
     orbitControls.enablePan = false;
     orbitControls.enableRotate = false;
-    carParts.modelCar.rotation.y = 0
-    carParts.back.rotation.y = 0
-    carParts.front.rotation.y = 0
-    carParts.left.rotation.y = 0
-    carParts.right.rotation.y = 0
-    carParts.top.rotation.y = 0
+    orbitControls.autoRotate = false;
 }
 
 const allowControls = () => {
     orbitControls.enableZoom = false;
     orbitControls.enablePan = false;
     orbitControls.enableRotate = true;
-    carParts.modelCar.rotation.y = 0
-    carParts.back.rotation.y = 0
-    carParts.front.rotation.y = 0
-    carParts.left.rotation.y = 0
-    carParts.right.rotation.y = 0
-    carParts.top.rotation.y = 0
+    orbitControls.autoRotate = false;
 }
 
 const Menu = () => {
@@ -191,16 +181,16 @@ const Menu = () => {
                                         )
                                         if (e.target.checked === false) {
 
-                                            num = parseInt(document.getElementById('fullAdd').textContent)
-                                            document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value;
+                                            //num = parseInt(document.getElementById('fullAdd').textContent)
+                                            //document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value;
 
-                                            //lightp1.isLight = false
+                                            frontRL.isLight = false
                                         }
 
                                         if (e.target.checked === true) {
-                                            num = parseInt(document.getElementById('fullAdd').textContent)
-                                            document.getElementById('fullAdd').innerHTML = (num - model.light.backRightValue.value) > 0 ? num - model.light.backRightValue.value : 0;
-                                            //lightp1.isLight = true
+                                            //num = parseInt(document.getElementById('fullAdd').textContent)
+                                            //document.getElementById('fullAdd').innerHTML = (num - model.light.backRightValue.value) > 0 ? num - model.light.backRightValue.value : 0;
+                                            frontRL.isLight = true
                                         }
                                     }
                                     } />
@@ -208,17 +198,77 @@ const Menu = () => {
                             </label>
 
                             <label class="form-control">
-                                <input type="checkbox" name="frontL" id='frontL' defaultChecked disabled />
+                                <input type="checkbox" name="frontL" id='frontL' defaultChecked disabled
+                                    onChange={(e) => {
+                                        var num = 0;
+                                        const model = models.find(
+                                            (model) => model.name === document.getElementById('model').value
+                                        )
+                                        if (e.target.checked === false) {
+
+                                            //num = parseInt(document.getElementById('fullAdd').textContent)
+                                            //document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value;
+
+                                            frontLL.isLight = false
+                                        }
+
+                                        if (e.target.checked === true) {
+                                            //num = parseInt(document.getElementById('fullAdd').textContent)
+                                            //document.getElementById('fullAdd').innerHTML = (num - model.light.backRightValue.value) > 0 ? num - model.light.backRightValue.value : 0;
+                                            frontLL.isLight = true
+                                        }
+                                    }
+                                    } />
                                 Luz Frontal Izquierda
                             </label>
 
                             <label class="form-control">
-                                <input type="checkbox" name="backR" id='backR' defaultChecked disabled />
+                                <input type="checkbox" name="backR" id='backR' defaultChecked disabled
+                                    onChange={(e) => {
+                                        var num = 0;
+                                        const model = models.find(
+                                            (model) => model.name === document.getElementById('model').value
+                                        )
+                                        if (e.target.checked === false) {
+
+                                            //num = parseInt(document.getElementById('fullAdd').textContent)
+                                            //document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value;
+
+                                            backRL.isLight = false
+                                        }
+
+                                        if (e.target.checked === true) {
+                                            //num = parseInt(document.getElementById('fullAdd').textContent)
+                                            //document.getElementById('fullAdd').innerHTML = (num - model.light.backRightValue.value) > 0 ? num - model.light.backRightValue.value : 0;
+                                            backRL.isLight = true
+                                        }
+                                    }
+                                    } />
                                 Luz Trasera Derecha
                             </label>
 
                             <label class="form-control">
-                                <input type="checkbox" name="backL" id='backL' defaultChecked disabled />
+                                <input type="checkbox" name="backL" id='backL' defaultChecked disabled
+                                    onChange={(e) => {
+                                        var num = 0;
+                                        const model = models.find(
+                                            (model) => model.name === document.getElementById('model').value
+                                        )
+                                        if (e.target.checked === false) {
+
+                                            //num = parseInt(document.getElementById('fullAdd').textContent)
+                                            //document.getElementById('fullAdd').innerHTML = num + model.light.backRightValue.value;
+
+                                            backLL.isLight = false
+                                        }
+
+                                        if (e.target.checked === true) {
+                                            //num = parseInt(document.getElementById('fullAdd').textContent)
+                                            //document.getElementById('fullAdd').innerHTML = (num - model.light.backRightValue.value) > 0 ? num - model.light.backRightValue.value : 0;
+                                            backLL.isLight = true
+                                        }
+                                    }
+                                    } />
                                 Luz Trasera Izquierda
                             </label>
                         </form>
