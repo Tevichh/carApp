@@ -7,8 +7,6 @@ export const ContainerScene = styled.div`
   
 
   @media (max-width: 900px) {
-    height: 50vh;
-    top: -20px;
-    left: -20px;
+    height: 99vh;
   }
 `;

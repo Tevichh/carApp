@@ -89,7 +89,7 @@ const gltfLoaders = new GLTFLoader(loadingManager)
 
 //INTERACCION modelos
 
-
+/*
 function onPointerClick(event) {
   const mouseX = event.clientX;
   const mouseY = event.clientY;
@@ -98,52 +98,125 @@ function onPointerClick(event) {
   const mouseNormalizedY = -(mouseY / window.innerHeight) * 2 + 1;
 
   const raycaster = new THREE.Raycaster();
-  raycaster.setFromCamera(new THREE.Vector2(mouseNormalizedX, mouseNormalizedY), camera)
+  raycaster.setFromCamera(new THREE.Vector2(mouseNormalizedX, mouseNormalizedY), camera);
   const intersects = raycaster.intersectObjects(
     scene.children.filter(obj => !obj.userData.intangible)
-  )
-
-  // console.log(intersects)
-
-  //INTERSECTS
+  );
 
   if (intersects.length) {
-
-    parent = intersects[0].object;
-    var lista = parent.name.split("_")
-    var grupo = lista[0]
-    var nombre = lista[1]
+    const parent = intersects[0].object;
+    const lista = parent.name.split("_");
+    const grupo = lista[0];
+    const nombre = lista[1];
 
     if (grupo === 'LEFT') {
-      console.log(nombre)
       scene.traverse((child) => {
         if (child instanceof THREE.Mesh) {
           if (child.material.name === "CHECKBOX" || child.material.name === nombre) {
-            
-            //DEFAULT
-            if (child.userData.colorState === "Default") {
-              child.material.color.set(0x10100F);
-              child.userData.colorState = "Paint_1";
-
-              //PAINT_1
-            } else if (child.userData.colorState === undefined || child.userData.colorState === "Paint_1") {
-              child.material.color.set(0xFF0000);
-              child.userData.colorState = "Paint_2";
-
-              //PAINT_2
-            } else if (child.userData.colorState === "Paint_2") {
-              child.material.color.set(0x00FF00);
-              child.userData.colorState = "Default";
+            if(!child.userData.colorState){ child.userData.colorState = "Paint_1"}
+            switch (child.userData.colorState) {
+              case "Default":
+                child.material.color.set(0x10100F);
+                child.userData.colorState = "Paint_1";
+                break;
+              case "Paint_1":
+                child.material.color.set(0xFF0000);
+                child.userData.colorState = "Paint_2";
+                break;
+              case "Paint_2":
+                child.material.color.set(0x00FF00);
+                child.userData.colorState = "Default";
+                break;
+              default:
+                break;
             }
           }
         }
       });
     }
 
-    if (num < 0) { document.getElementById('fullAdd').innerHTML = 0 }
+    if (num < 0) {
+      document.getElementById('fullAdd').innerHTML = '0';
+    }
   }
 }
+
 window.addEventListener('click', onPointerClick);
+*/
+function onTouch(event) {
+  // Obtén el evento táctil si está presente, de lo contrario, usa el evento de clic
+  const touch = event.touches ? event.touches[0] : null;
+
+  // Obtén las coordenadas del evento (táctil o clic)
+  const clientX = touch ? touch.clientX : event.clientX;
+  const clientY = touch ? touch.clientY : event.clientY;
+
+  // Normaliza las coordenadas para el raycaster
+  const normalizedX = (clientX / window.innerWidth) * 2 - 1;
+  const normalizedY = -(clientY / window.innerHeight) * 2 + 1;
+
+  // Crea y configura el raycaster
+  const raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(new THREE.Vector2(normalizedX, normalizedY), camera);
+
+  // Intersecta objetos en la escena
+  const intersects = raycaster.intersectObjects(
+    scene.children.filter(obj => !obj.userData.intangible)
+  );
+
+  // Maneja la intersección si la hay
+  if (intersects.length) {
+    const parent = intersects[0].object;
+    const lista = parent.name.split("_");
+    const grupo = lista[0];
+    const nombre = lista[1];
+
+    if (grupo === 'LEFT') {
+      scene.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          if (child.material.name === "CHECKBOX" || child.material.name === nombre) {
+            if (!child.userData.colorState) { child.userData.colorState = "Paint_1" }
+            switch (child.userData.colorState) {
+              case "Default":
+                child.material.color.set(0x10100F);
+                child.userData.colorState = "Paint_1";
+                break;
+              case "Paint_1":
+                child.material.color.set(0xFF0000);
+                child.userData.colorState = "Paint_2";
+                break;
+              case "Paint_2":
+                child.material.color.set(0x00FF00);
+                child.userData.colorState = "Default";
+                break;
+              default:
+                break;
+            }
+          }
+        }
+      });
+    }
+
+    // Agrega aquí cualquier otra lógica específica para dispositivos móviles
+    // ...
+
+    // Ejemplo: Actualiza el contenido de 'fullAdd' si 'num' es menor que 0
+    if (num < 0) {
+      document.getElementById('fullAdd').innerHTML = '0';
+    }
+  }
+}
+
+// Agrega el evento de clic para PC
+window.addEventListener('click', onTouch);
+
+// Agrega eventos táctiles para dispositivos móviles
+window.addEventListener('touchstart', onTouch);
+window.addEventListener('touchmove', onTouch);
+window.addEventListener('touchend', onTouch);
+
+
+
 
 
 
@@ -178,6 +251,7 @@ function cursorPointer(event) {
 }
 
 window.addEventListener('mousemove', cursorPointer);
+
 
 
 
