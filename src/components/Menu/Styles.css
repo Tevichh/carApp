@@ -1,9 +1,8 @@
 .menu {
   width: 100%;
-  height: 200px;
   position: absolute;
   bottom: 1rem;
-  
+  background-color: #192028;
 }
 #state{
   display: none;
@@ -19,12 +18,10 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1.2em;
 } 
 
-.MenuOptions{
-  margin-left: 40px;
-  margin-right: 40px;
-}
 .MenuOptions h1 {
   color: #50727A;
   font-size: 2em;
@@ -46,7 +43,7 @@
 }
 
 .MenuOptionsList select {
-  width: auto;
+  width: 8.5em;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
@@ -59,7 +56,7 @@
 .Calculator {
   background-color: #ffffff;
   height: 7em;
-  width: 300px;
+  width: 18em;
   margin-top: 1em;
 }
 .Calculator label{
@@ -79,23 +76,23 @@
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   text-align: center;
-  margin-right: 40px;
 }
 
 #fullAdd {
   margin-top: 10px;
   margin-left: 0.3em;
-  font-size: 25px;
+  font-size: 2em;
 }
 
 button {
+  width: 9.5em;
+  height: 3em;
   display: block;
   background: none;
   border: 2px solid;
   font: inherit;
   line-height: 0.4;
-  margin-right: 10px;
-  padding: 1em 2em;
+  margin-right: 1em;
   background-color: #000000;
   color: #98eff9;
   cursor: pointer;
@@ -119,7 +116,7 @@ form {
   font-family: system-ui, sans-serif;
   font-weight: bold;
   line-height: 1.1;
-  font-size: 17px;
+  font-size: 1em;
   display: grid;
   grid-template-columns: 1em auto;
   gap: 0.8em;
@@ -137,7 +134,7 @@ input[type="checkbox"] {
 
   -webkit-appearance: none;
   font: inherit;
-  font-size: 20px;
+  font-size: 1.2em;
   color: currentColor;
   width: 1.15em;
   height: 1.15em;
@@ -170,18 +167,16 @@ input[type="checkbox"]:focus {
   outline-offset: max(2px, 0.15em);
 }
 
-.colors label{
-  color:#50727A;
-  font-size: 1.8em;
-  font-family: sans-serif;
-  margin-left: 0.2em;
+@media (min-width: 1250px) {
+  button{
+    width: 12em;
+  }
 }
-#changeColor {
-  margin-top: 1em;
-  width: 2em;
-  height: 2em;
-  border: none;
-  border-radius: 15%;
-  outline: none;
-  cursor: pointer;
+
+@media (max-width: 1076px) {
+  .menu {
+    position: relative;
+  }
 }
+
+
