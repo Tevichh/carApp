@@ -89,7 +89,6 @@ const Menu = () => {
                                 <select className='models' id='model'
                                     onChange={(e) => {
                                         if (e.target.value !== "SELECCIONA") {
-
                                             e.target.options[0].disabled = true
                                             const model = models.find(
                                                 (model) => model.name === e.target.value
@@ -97,9 +96,9 @@ const Menu = () => {
                                             setCurrentModel(model)
                                             //console.log(model);
                                             removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR')
-                                            for (var i = 0; i < model.damageLeft.length; i++) {
-                                                removeModels(model.damageLeft[i].rute, model.damageLeft[i].group, model.scale, model.damageLeft[i].name, model.damageLeft[i].value)
-                                            }
+
+                                            removeModels(model.rutes.ruteL, "left", model.scale, "CHECK")
+
 
                                             document.getElementById('fullAdd').innerHTML = 0;
                                             defaulLight()

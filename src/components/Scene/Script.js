@@ -76,6 +76,8 @@ const loadingManager = new THREE.LoadingManager(
     progressBarContainer.style.display = 'flex';
     const progressBar = document.getElementById('progress-bar');
     progressBar.value = (itemsToLoad / itemsLoaded) * 100;
+    document.body.style.cursor = 'not-allowed';
+
   },
   () => { }
 )
@@ -84,24 +86,19 @@ const loadingManager = new THREE.LoadingManager(
 const gltfLoaders = new GLTFLoader(loadingManager)
 
 
-//RAYCASTER
-const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2(-100, -100);
+
+//INTERACCION modelos
+
 
 function onPointerClick(event) {
-  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-  pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
-}
-window.addEventListener('click', onPointerClick);
+  const mouseX = event.clientX;
+  const mouseY = event.clientY;
 
+  const mouseNormalizedX = (mouseX / window.innerWidth) * 2 - 1;
+  const mouseNormalizedY = -(mouseY / window.innerHeight) * 2 + 1;
 
-var num = 0;
-var parent;
-
-
-//Animate the scene
-const animate = () => {
-  raycaster.setFromCamera(pointer, camera)
+  const raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(new THREE.Vector2(mouseNormalizedX, mouseNormalizedY), camera)
   const intersects = raycaster.intersectObjects(
     scene.children.filter(obj => !obj.userData.intangible)
   )
@@ -113,42 +110,90 @@ const animate = () => {
   if (intersects.length) {
 
     parent = intersects[0].object;
+    var lista = parent.name.split("_")
+    var grupo = lista[0]
+    var nombre = lista[1]
 
-    /*
-    if (intersects[0].object.material.color.equals(new THREE.Color(0x00ff00)) && parent.material.name === 'CHECK') {
-      intersects[0].object.material.color.set(0x11110F)
+    if (grupo === 'LEFT') {
+      console.log(nombre)
+      scene.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          if (child.material.name === "CHECKBOX" || child.material.name === nombre) {
+            
+            //DEFAULT
+            if (child.userData.colorState === "Default") {
+              child.material.color.set(0x10100F);
+              child.userData.colorState = "Paint_1";
 
-      num = parseInt(document.getElementById('fullAdd').textContent)
-      document.getElementById('fullAdd').innerHTML = num - intersects[0].object.value;
+              //PAINT_1
+            } else if (child.userData.colorState === undefined || child.userData.colorState === "Paint_1") {
+              child.material.color.set(0xFF0000);
+              child.userData.colorState = "Paint_2";
 
-    } else if (parent.material.name === 'CHECK' && !intersects[0].object.material.color.equals(new THREE.Color(0x00ff00))) {
-      intersects[0].object.material.color.set(0x00ff00)
-      num = parseInt(document.getElementById('fullAdd').textContent)
-      document.getElementById('fullAdd').innerHTML = num + intersects[0].object.value;
-    }*/
-
-    if (parent.material.name === 'CHECK') {
-
-      if (parent.material.color.equals(new THREE.Color(0x11110F))) {
-        intersects[0].object.material.color.set(0x00ff00)
-      } else if (parent.material.color.equals(new THREE.Color(0x00ff00))) {
-        intersects[0].object.material.color.set(0xff0000)
-      } else if (parent.material.color.equals(new THREE.Color(0xff0000))) {
-        intersects[0].object.material.color.set(0x11110F)
-      } else {
-        intersects[0].object.material.color.set(0x11110F)
-      }
+              //PAINT_2
+            } else if (child.userData.colorState === "Paint_2") {
+              child.material.color.set(0x00FF00);
+              child.userData.colorState = "Default";
+            }
+          }
+        }
+      });
     }
-    if (num < 0) { document.getElementById('fullAdd').innerHTML = 0 }
 
-    pointer.x = 0.9;
-    pointer.y = -0.6;
+    if (num < 0) { document.getElementById('fullAdd').innerHTML = 0 }
   }
+}
+window.addEventListener('click', onPointerClick);
+
+
+
+
+//POINTER
+function cursorPointer(event) {
+  const mouseX = event.clientX;
+  const mouseY = event.clientY;
+
+  const mouseNormalizedX = (mouseX / window.innerWidth) * 2 - 1;
+  const mouseNormalizedY = -(mouseY / window.innerHeight) * 2 + 1;
+
+  const raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(new THREE.Vector2(mouseNormalizedX, mouseNormalizedY), camera);
+
+  const intersects = raycaster.intersectObjects(scene.children, true);
+
+  document.body.style.cursor = 'auto';
+
+  for (const intersect of intersects) {
+    if (intersect.object.material.name === "BOXCHECKMARK" ||
+      intersect.object.material.name === "CHECKMARK" ||
+      intersect.object.material.name === "Rin_FR" ||
+      intersect.object.material.name === "Rin_FL" ||
+      intersect.object.material.name === "Rin_BL" ||
+      intersect.object.material.name === "Rin_BR") {
+
+      document.body.style.cursor = 'pointer';
+      return;
+    }
+  }
+}
+
+window.addEventListener('mousemove', cursorPointer);
+
+
+
+
+
+var num = 0;
+var parent;
+
+
+//Animate the scene
+const animate = () => {
   var stateElement = document.getElementById('state')
   var state = stateElement ? stateElement.textContent : 'stop'
 
   if (state === 'rotando') {
-   orbitControls.autoRotate = true
+    orbitControls.autoRotate = true
   }
 
   orbitControls.update();

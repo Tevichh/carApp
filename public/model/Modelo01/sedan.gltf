@@ -17,9 +17,9 @@
 			"mesh":0,
 			"name":"body_solar_body_0",
 			"translation":[
-				4.678025106841233e-06,
+				4.6854756874381565e-06,
 				-2.6618799893185496e-06,
-				8.084346518444363e-06
+				1.1899043784069363e-05
 			]
 		},
 		{
@@ -48,9 +48,9 @@
 			"mesh":1,
 			"name":"glass_solar_glass_0",
 			"translation":[
-				4.6780255615885835e-06,
+				4.692926722782431e-06,
 				0,
-				8.09924767963821e-06
+				1.000659631245071e-05
 			]
 		},
 		{
@@ -61,7 +61,7 @@
 			"translation":[
 				-43.39546585083008,
 				-2.6123263835906982,
-				3.2356667518615723
+				3.235668659210205
 			]
 		},
 		{
@@ -72,113 +72,82 @@
 			"translation":[
 				-14.635751724243164,
 				31.411697387695312,
-				34.06041717529297
+				34.060420989990234
 			]
 		},
 		{
 			"mesh":2,
-			"name":"glass_trim_colour_solar_glass_rim_0",
+			"name":"headlight_left_07 - Default_0",
 			"translation":[
-				4.663123945647385e-06,
 				0,
-				8.084346518444363e-06
-			]
-		},
-		{
-			"children":[
-				6
-			],
-			"name":"Object_32",
-			"translation":[
-				-60.23849105834961,
-				-3.1607463359832764,
-				29.594173431396484
-			]
-		},
-		{
-			"children":[
-				7
-			],
-			"name":"glass_trim_colour",
-			"translation":[
-				2.2072792053222656,
-				31.960111618041992,
-				7.701904773712158
+				0,
+				8.143951163219754e-06
 			]
 		},
 		{
 			"mesh":3,
-			"name":"headlight_left_07 - Default_0",
+			"name":"headlight_left_solar_bottom_0",
 			"translation":[
-				8.485271791869309e-06,
 				0,
-				6.221701823960757e-06
+				0,
+				8.143951163219754e-06
 			]
 		},
 		{
 			"mesh":4,
-			"name":"headlight_left_solar_bottom_0",
+			"name":"headlight_left_solar_glass_0",
 			"translation":[
-				8.485271791869309e-06,
 				0,
-				6.221701823960757e-06
+				0,
+				8.143951163219754e-06
 			]
 		},
 		{
 			"mesh":5,
-			"name":"headlight_left_solar_glass_0",
-			"translation":[
-				8.485271791869309e-06,
-				0,
-				6.221701823960757e-06
-			]
-		},
-		{
-			"mesh":6,
 			"name":"headlight_left_solar_headlights_0",
 			"translation":[
-				8.485271791869309e-06,
 				0,
-				6.221701823960757e-06
+				0,
+				8.143951163219754e-06
 			]
 		},
 		{
 			"children":[
-				9,
-				10,
-				11,
-				12
+				6,
+				7,
+				8,
+				9
 			],
 			"name":"Object_7",
 			"translation":[
-				15.625203132629395,
+				15.625199317932129,
 				4.442261695861816,
-				29.59418296813965
+				29.594188690185547
 			]
 		},
 		{
 			"children":[
-				13
+				10
 			],
 			"name":"headlight_left",
 			"translation":[
 				-73.65643310546875,
 				24.35711097717285,
-				7.701900959014893
+				7.701900482177734
 			]
 		},
 		{
-			"mesh":7,
+			"mesh":6,
 			"name":"interior_solar_void_0",
 			"translation":[
-				4.663123945647385e-06,
+				4.670574526244309e-06,
 				0,
-				8.084346518444363e-06
+				1.1899043784069363e-05
 			]
 		},
 		{
 			"children":[
-				15
+				12
 			],
 			"name":"Object_22",
 			"translation":[
@@ -189,7 +158,7 @@
 		},
 		{
 			"children":[
-				16
+				13
 			],
 			"name":"interior",
 			"translation":[
@@ -199,78 +168,78 @@
 			]
 		},
 		{
-			"mesh":8,
+			"mesh":7,
 			"name":"plastic_trim_solar_bottom_0",
 			"translation":[
-				4.6780255615885835e-06,
+				4.692926722782431e-06,
 				0,
-				8.09924767963821e-06
+				1.000659631245071e-05
 			]
 		},
 		{
-			"mesh":9,
+			"mesh":8,
 			"name":"plastic_trim_solar_headlights_0",
 			"translation":[
-				4.6780255615885835e-06,
+				4.692926722782431e-06,
 				0,
-				8.09924767963821e-06
+				1.000659631245071e-05
 			]
 		},
 		{
 			"children":[
-				18,
-				19
+				15,
+				16
 			],
 			"name":"Object_25",
 			"translation":[
 				-43.39546585083008,
 				-2.6123263835906982,
-				3.2356667518615723
+				3.235668659210205
 			]
 		},
 		{
 			"children":[
-				20
+				17
 			],
 			"name":"plastic_trim",
 			"translation":[
 				-14.635751724243164,
 				31.411697387695312,
-				34.06041717529297
+				34.060420989990234
+			]
+		},
+		{
+			"mesh":9,
+			"name":"stoplights_solar_bottom_0",
+			"translation":[
+				4.67057498099166e-06,
+				8.78221180755645e-06,
+				1.1899044693564065e-05
 			]
 		},
 		{
 			"mesh":10,
-			"name":"stoplights_solar_bottom_0",
+			"name":"stoplights_solar_glass_0",
 			"translation":[
-				4.663124400394736e-06,
-				4.96751454193145e-06,
-				8.084347427939065e-06
+				4.67057498099166e-06,
+				8.78221180755645e-06,
+				1.1899044693564065e-05
 			]
 		},
 		{
 			"mesh":11,
-			"name":"stoplights_solar_glass_0",
-			"translation":[
-				4.663124400394736e-06,
-				4.96751454193145e-06,
-				8.084347427939065e-06
-			]
-		},
-		{
-			"mesh":12,
 			"name":"stoplights_solar_headlights_0",
 			"translation":[
-				4.663124400394736e-06,
-				4.96751454193145e-06,
-				8.084347427939065e-06
+				4.67057498099166e-06,
+				8.78221180755645e-06,
+				1.1899044693564065e-05
 			]
 		},
 		{
 			"children":[
-				22,
-				23,
-				24
+				19,
+				20,
+				21
 			],
 			"name":"Object_17",
 			"translation":[
@@ -281,7 +250,7 @@
 		},
 		{
 			"children":[
-				25
+				22
 			],
 			"name":"stoplights",
 			"translation":[
@@ -291,33 +260,63 @@
 			]
 		},
 		{
-			"mesh":13,
-			"name":"wheels_solar_bottom_0",
+			"mesh":12,
+			"name":"wheels_solar_bottom_0.002",
 			"translation":[
-				4.239109784975881e-06,
-				-6.732768815709278e-05,
+				4.268912107363576e-06,
+				-8.258647721959278e-05,
+				0
+			]
+		},
+		{
+			"mesh":13,
+			"name":"wheels_solar_bottom_0.003",
+			"translation":[
+				4.268912107363576e-06,
+				-8.258647721959278e-05,
 				0
 			]
 		},
 		{
 			"mesh":14,
+			"name":"wheels_solar_bottom_0.004",
+			"translation":[
+				4.268912107363576e-06,
+				-8.258647721959278e-05,
+				0
+			]
+		},
+		{
+			"mesh":15,
+			"name":"wheels_solar_bottom_0.005",
+			"translation":[
+				4.268912107363576e-06,
+				-8.258647721959278e-05,
+				0
+			]
+		},
+		{
+			"mesh":16,
 			"name":"wheels_solar_tier_0",
 			"translation":[
-				4.239109784975881e-06,
-				-6.732768815709278e-05,
+				4.060295850649709e-06,
+				-6.292530088103376e-06,
 				0
 			]
 		},
 		{
 			"children":[
+				24,
+				25,
+				26,
 				27,
 				28
 			],
 			"name":"Object_13",
 			"translation":[
-				1.0793040990829468,
-				-19.080427169799805,
-				9.313043594360352
+				1.0793039798736572,
+				-19.080411911010742,
+				9.313039779663086
 			]
 		},
 		{
@@ -346,11 +345,10 @@
 			"children":[
 				2,
 				5,
-				8,
+				11,
 				14,
-				17,
-				21,
-				26,
+				18,
+				23,
 				30
 			],
 			"name":"RootNode"
@@ -422,20 +420,6 @@
 		},
 		{
 			"doubleSided":true,
-			"name":"solar_glass_rim",
-			"pbrMetallicRoughness":{
-				"baseColorFactor":[
-					0,
-					0,
-					0,
-					1
-				],
-				"metallicFactor":0,
-				"roughnessFactor":0.08792681992053986
-			}
-		},
-		{
-			"doubleSided":true,
 			"name":"07_-_Default",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
@@ -450,12 +434,16 @@
 		},
 		{
 			"doubleSided":true,
-			"name":"solar_bottom",
+			"name":"Material.003",
 			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":0
-				},
-				"roughnessFactor":0.3185625374317169
+				"baseColorFactor":[
+					0,
+					0,
+					0,
+					1
+				],
+				"metallicFactor":0,
+				"roughnessFactor":0.5
 			}
 		},
 		{
@@ -463,7 +451,7 @@
 			"name":"solar_headlights",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":1
+					"index":0
 				},
 				"metallicFactor":0.8877957463264465,
 				"roughnessFactor":0.08792681992053986
@@ -485,10 +473,70 @@
 		},
 		{
 			"doubleSided":true,
+			"name":"Material.001",
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0,
+					0,
+					0,
+					1
+				],
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Rin_FL",
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.800000011920929,
+					0.800000011920929,
+					0.800000011920929,
+					1
+				],
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Rin_BL",
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.800000011920929,
+					0.800000011920929,
+					0.800000011920929,
+					1
+				],
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Rin_BR",
+			"pbrMetallicRoughness":{
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Rin_FR",
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.800000011920929,
+					0.800000011920929,
+					0.800000011920929,
+					1
+				],
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"doubleSided":true,
 			"name":"solar_tier",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":2
+					"index":1
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.8929713368415833
@@ -525,7 +573,7 @@
 			]
 		},
 		{
-			"name":"glass_trim_colour_solar_glass_rim_0",
+			"name":"headlight_left_07 - Default_0",
 			"primitives":[
 				{
 					"attributes":{
@@ -539,7 +587,7 @@
 			]
 		},
 		{
-			"name":"headlight_left_07 - Default_0",
+			"name":"headlight_left_solar_bottom_0",
 			"primitives":[
 				{
 					"attributes":{
@@ -553,7 +601,7 @@
 			]
 		},
 		{
-			"name":"headlight_left_solar_bottom_0",
+			"name":"headlight_left_solar_glass_0",
 			"primitives":[
 				{
 					"attributes":{
@@ -562,12 +610,12 @@
 						"TEXCOORD_0":18
 					},
 					"indices":19,
-					"material":4
+					"material":1
 				}
 			]
 		},
 		{
-			"name":"headlight_left_solar_glass_0",
+			"name":"headlight_left_solar_headlights_0",
 			"primitives":[
 				{
 					"attributes":{
@@ -576,12 +624,12 @@
 						"TEXCOORD_0":22
 					},
 					"indices":23,
-					"material":1
+					"material":4
 				}
 			]
 		},
 		{
-			"name":"headlight_left_solar_headlights_0",
+			"name":"interior_solar_void_0",
 			"primitives":[
 				{
 					"attributes":{
@@ -595,7 +643,7 @@
 			]
 		},
 		{
-			"name":"interior_solar_void_0",
+			"name":"plastic_trim_solar_bottom_0",
 			"primitives":[
 				{
 					"attributes":{
@@ -609,7 +657,7 @@
 			]
 		},
 		{
-			"name":"plastic_trim_solar_bottom_0",
+			"name":"plastic_trim_solar_headlights_0",
 			"primitives":[
 				{
 					"attributes":{
@@ -623,7 +671,7 @@
 			]
 		},
 		{
-			"name":"plastic_trim_solar_headlights_0",
+			"name":"stoplights_solar_bottom_0",
 			"primitives":[
 				{
 					"attributes":{
@@ -631,22 +679,7 @@
 						"NORMAL":37,
 						"TEXCOORD_0":38
 					},
-					"indices":39,
-					"material":5
-				}
-			]
-		},
-		{
-			"name":"stoplights_solar_bottom_0",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":40,
-						"NORMAL":41,
-						"TEXCOORD_0":42
-					},
-					"indices":43,
-					"material":4
+					"indices":39
 				}
 			]
 		},
@@ -655,11 +688,11 @@
 			"primitives":[
 				{
 					"attributes":{
-						"POSITION":44,
-						"NORMAL":45,
-						"TEXCOORD_0":46
+						"POSITION":40,
+						"NORMAL":41,
+						"TEXCOORD_0":42
 					},
-					"indices":47,
+					"indices":43,
 					"material":1
 				}
 			]
@@ -669,17 +702,31 @@
 			"primitives":[
 				{
 					"attributes":{
+						"POSITION":44,
+						"NORMAL":45,
+						"TEXCOORD_0":46
+					},
+					"indices":47,
+					"material":4
+				}
+			]
+		},
+		{
+			"name":"wheels_solar_bottom_0.002",
+			"primitives":[
+				{
+					"attributes":{
 						"POSITION":48,
 						"NORMAL":49,
 						"TEXCOORD_0":50
 					},
 					"indices":51,
-					"material":5
+					"material":7
 				}
 			]
 		},
 		{
-			"name":"wheels_solar_bottom_0",
+			"name":"wheels_solar_bottom_0.003",
 			"primitives":[
 				{
 					"attributes":{
@@ -688,12 +735,12 @@
 						"TEXCOORD_0":54
 					},
 					"indices":55,
-					"material":4
+					"material":8
 				}
 			]
 		},
 		{
-			"name":"wheels_solar_tier_0",
+			"name":"wheels_solar_bottom_0.004",
 			"primitives":[
 				{
 					"attributes":{
@@ -702,7 +749,35 @@
 						"TEXCOORD_0":58
 					},
 					"indices":59,
-					"material":7
+					"material":9
+				}
+			]
+		},
+		{
+			"name":"wheels_solar_bottom_0.005",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":60,
+						"NORMAL":61,
+						"TEXCOORD_0":62
+					},
+					"indices":63,
+					"material":10
+				}
+			]
+		},
+		{
+			"name":"wheels_solar_tier_0",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":64,
+						"NORMAL":65,
+						"TEXCOORD_0":66
+					},
+					"indices":67,
+					"material":11
 				}
 			]
 		}
@@ -715,18 +790,9 @@
 		{
 			"sampler":0,
 			"source":1
-		},
-		{
-			"sampler":0,
-			"source":2
 		}
 	],
 	"images":[
-		{
-			"mimeType":"image/png",
-			"name":"solar_bottom_baseColor",
-			"uri":"solar_bottom_baseColor.png"
-		},
 		{
 			"mimeType":"image/png",
 			"name":"solar_headlights_baseColor",
@@ -810,40 +876,6 @@
 		{
 			"bufferView":8,
 			"componentType":5126,
-			"count":122,
-			"max":[
-				123.0379638671875,
-				26.219482421875,
-				-5.189361095428467
-			],
-			"min":[
-				9.632401466369629,
-				9.882379531860352,
-				-53.998985290527344
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":9,
-			"componentType":5126,
-			"count":122,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":10,
-			"componentType":5126,
-			"count":122,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":11,
-			"componentType":5123,
-			"count":360,
-			"type":"SCALAR"
-		},
-		{
-			"bufferView":12,
-			"componentType":5126,
 			"count":92,
 			"max":[
 				-12.562236785888672,
@@ -858,25 +890,25 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":13,
+			"bufferView":9,
 			"componentType":5126,
 			"count":92,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":14,
+			"bufferView":10,
 			"componentType":5126,
 			"count":92,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":15,
+			"bufferView":11,
 			"componentType":5123,
 			"count":288,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":16,
+			"bufferView":12,
 			"componentType":5126,
 			"count":291,
 			"max":[
@@ -892,25 +924,25 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":17,
+			"bufferView":13,
 			"componentType":5126,
 			"count":291,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":18,
+			"bufferView":14,
 			"componentType":5126,
 			"count":291,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":19,
+			"bufferView":15,
 			"componentType":5123,
 			"count":900,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":20,
+			"bufferView":16,
 			"componentType":5126,
 			"count":54,
 			"max":[
@@ -926,25 +958,25 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":21,
+			"bufferView":17,
 			"componentType":5126,
 			"count":54,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":22,
+			"bufferView":18,
 			"componentType":5126,
 			"count":54,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":23,
+			"bufferView":19,
 			"componentType":5123,
 			"count":144,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":24,
+			"bufferView":20,
 			"componentType":5126,
 			"count":138,
 			"max":[
@@ -960,25 +992,25 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":25,
+			"bufferView":21,
 			"componentType":5126,
 			"count":138,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":26,
+			"bufferView":22,
 			"componentType":5126,
 			"count":138,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":27,
+			"bufferView":23,
 			"componentType":5123,
 			"count":390,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":28,
+			"bufferView":24,
 			"componentType":5126,
 			"count":1840,
 			"max":[
@@ -994,25 +1026,25 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":29,
+			"bufferView":25,
 			"componentType":5126,
 			"count":1840,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":30,
+			"bufferView":26,
 			"componentType":5126,
 			"count":1840,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":31,
+			"bufferView":27,
 			"componentType":5123,
 			"count":5115,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":32,
+			"bufferView":28,
 			"componentType":5126,
 			"count":3086,
 			"max":[
@@ -1028,25 +1060,25 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":33,
+			"bufferView":29,
 			"componentType":5126,
 			"count":3086,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":34,
+			"bufferView":30,
 			"componentType":5126,
 			"count":3086,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":35,
+			"bufferView":31,
 			"componentType":5123,
 			"count":8679,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":36,
+			"bufferView":32,
 			"componentType":5126,
 			"count":6,
 			"max":[
@@ -1062,25 +1094,25 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":37,
+			"bufferView":33,
 			"componentType":5126,
 			"count":6,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":38,
+			"bufferView":34,
 			"componentType":5126,
 			"count":6,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":39,
+			"bufferView":35,
 			"componentType":5123,
 			"count":6,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":40,
+			"bufferView":36,
 			"componentType":5126,
 			"count":93,
 			"max":[
@@ -1096,25 +1128,25 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":41,
+			"bufferView":37,
 			"componentType":5126,
 			"count":93,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":42,
+			"bufferView":38,
 			"componentType":5126,
 			"count":93,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":43,
+			"bufferView":39,
 			"componentType":5123,
 			"count":156,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":44,
+			"bufferView":40,
 			"componentType":5126,
 			"count":48,
 			"max":[
@@ -1130,25 +1162,25 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":45,
+			"bufferView":41,
 			"componentType":5126,
 			"count":48,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":46,
+			"bufferView":42,
 			"componentType":5126,
 			"count":48,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":47,
+			"bufferView":43,
 			"componentType":5123,
 			"count":132,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":48,
+			"bufferView":44,
 			"componentType":5126,
 			"count":263,
 			"max":[
@@ -1164,59 +1196,161 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":49,
+			"bufferView":45,
 			"componentType":5126,
 			"count":263,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":50,
+			"bufferView":46,
 			"componentType":5126,
 			"count":263,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":51,
+			"bufferView":47,
 			"componentType":5123,
 			"count":606,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":52,
+			"bufferView":48,
 			"componentType":5126,
-			"count":3588,
+			"count":787,
 			"max":[
-				488.4074401855469,
-				267.3963317871094,
+				37.9556884765625,
+				33.849609375,
 				29.508129119873047
 			],
 			"min":[
-				-40.11433410644531,
+				-40.11432647705078,
 				-4.499581336975098,
-				-48.13423538208008
+				-48.13422393798828
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":49,
+			"componentType":5126,
+			"count":787,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":50,
+			"componentType":5126,
+			"count":787,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":51,
+			"componentType":5123,
+			"count":2400,
+			"type":"SCALAR"
+		},
+		{
+			"bufferView":52,
+			"componentType":5126,
+			"count":715,
+			"max":[
+				488.4073791503906,
+				33.849609375,
+				29.508129119873047
+			],
+			"min":[
+				410.3373718261719,
+				-4.499581336975098,
+				-48.13422393798828
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":53,
 			"componentType":5126,
-			"count":3588,
+			"count":715,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":54,
 			"componentType":5126,
-			"count":3588,
+			"count":715,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":55,
 			"componentType":5123,
-			"count":10920,
+			"count":2184,
 			"type":"SCALAR"
 		},
 		{
 			"bufferView":56,
+			"componentType":5126,
+			"count":775,
+			"max":[
+				488.4074401855469,
+				267.3963317871094,
+				29.50812530517578
+			],
+			"min":[
+				410.33740234375,
+				229.04714965820312,
+				-48.13423538208008
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":57,
+			"componentType":5126,
+			"count":775,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":58,
+			"componentType":5126,
+			"count":775,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":59,
+			"componentType":5123,
+			"count":2364,
+			"type":"SCALAR"
+		},
+		{
+			"bufferView":60,
+			"componentType":5126,
+			"count":727,
+			"max":[
+				37.9556884765625,
+				267.3963317871094,
+				29.50812530517578
+			],
+			"min":[
+				-40.11433410644531,
+				229.04714965820312,
+				-48.13423538208008
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":61,
+			"componentType":5126,
+			"count":727,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":62,
+			"componentType":5126,
+			"count":727,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":63,
+			"componentType":5123,
+			"count":2232,
+			"type":"SCALAR"
+		},
+		{
+			"bufferView":64,
 			"componentType":5126,
 			"count":1573,
 			"max":[
@@ -1232,19 +1366,19 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":57,
+			"bufferView":65,
 			"componentType":5126,
 			"count":1573,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":58,
+			"bufferView":66,
 			"componentType":5126,
 			"count":1573,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":59,
+			"bufferView":67,
 			"componentType":5123,
 			"count":3360,
 			"type":"SCALAR"
@@ -1301,314 +1435,362 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":1464,
+			"byteLength":1104,
 			"byteOffset":99508,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1464,
-			"byteOffset":100972,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":976,
-			"byteOffset":102436,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":720,
-			"byteOffset":103412,
-			"target":34963
-		},
-		{
-			"buffer":0,
 			"byteLength":1104,
-			"byteOffset":104132,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":1104,
-			"byteOffset":105236,
+			"byteOffset":100612,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":736,
-			"byteOffset":106340,
+			"byteOffset":101716,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":576,
-			"byteOffset":107076,
+			"byteOffset":102452,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":3492,
-			"byteOffset":107652,
+			"byteOffset":103028,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":3492,
-			"byteOffset":111144,
+			"byteOffset":106520,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":2328,
-			"byteOffset":114636,
+			"byteOffset":110012,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":1800,
-			"byteOffset":116964,
+			"byteOffset":112340,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":648,
-			"byteOffset":118764,
+			"byteOffset":114140,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":648,
-			"byteOffset":119412,
+			"byteOffset":114788,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":432,
-			"byteOffset":120060,
+			"byteOffset":115436,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":288,
-			"byteOffset":120492,
+			"byteOffset":115868,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":1656,
-			"byteOffset":120780,
+			"byteOffset":116156,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":1656,
-			"byteOffset":122436,
+			"byteOffset":117812,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":1104,
-			"byteOffset":124092,
+			"byteOffset":119468,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":780,
-			"byteOffset":125196,
+			"byteOffset":120572,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":22080,
-			"byteOffset":125976,
+			"byteOffset":121352,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":22080,
-			"byteOffset":148056,
+			"byteOffset":143432,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":14720,
-			"byteOffset":170136,
+			"byteOffset":165512,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":10230,
-			"byteOffset":184856,
+			"byteOffset":180232,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":37032,
-			"byteOffset":195088,
+			"byteOffset":190464,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":37032,
-			"byteOffset":232120,
+			"byteOffset":227496,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":24688,
-			"byteOffset":269152,
+			"byteOffset":264528,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":17358,
-			"byteOffset":293840,
+			"byteOffset":289216,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":72,
-			"byteOffset":311200,
+			"byteOffset":306576,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":72,
-			"byteOffset":311272,
+			"byteOffset":306648,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":48,
-			"byteOffset":311344,
+			"byteOffset":306720,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":12,
-			"byteOffset":311392,
+			"byteOffset":306768,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":1116,
-			"byteOffset":311404,
+			"byteOffset":306780,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":1116,
-			"byteOffset":312520,
+			"byteOffset":307896,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":744,
-			"byteOffset":313636,
+			"byteOffset":309012,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":312,
-			"byteOffset":314380,
+			"byteOffset":309756,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":576,
-			"byteOffset":314692,
+			"byteOffset":310068,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":576,
-			"byteOffset":315268,
+			"byteOffset":310644,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":384,
-			"byteOffset":315844,
+			"byteOffset":311220,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":264,
-			"byteOffset":316228,
+			"byteOffset":311604,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":3156,
-			"byteOffset":316492,
+			"byteOffset":311868,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":3156,
-			"byteOffset":319648,
+			"byteOffset":315024,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":2104,
-			"byteOffset":322804,
+			"byteOffset":318180,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":1212,
-			"byteOffset":324908,
+			"byteOffset":320284,
 			"target":34963
 		},
 		{
 			"buffer":0,
-			"byteLength":43056,
-			"byteOffset":326120,
+			"byteLength":9444,
+			"byteOffset":321496,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":43056,
-			"byteOffset":369176,
+			"byteLength":9444,
+			"byteOffset":330940,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":28704,
-			"byteOffset":412232,
+			"byteLength":6296,
+			"byteOffset":340384,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":21840,
-			"byteOffset":440936,
+			"byteLength":4800,
+			"byteOffset":346680,
+			"target":34963
+		},
+		{
+			"buffer":0,
+			"byteLength":8580,
+			"byteOffset":351480,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":8580,
+			"byteOffset":360060,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":5720,
+			"byteOffset":368640,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":4368,
+			"byteOffset":374360,
+			"target":34963
+		},
+		{
+			"buffer":0,
+			"byteLength":9300,
+			"byteOffset":378728,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":9300,
+			"byteOffset":388028,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":6200,
+			"byteOffset":397328,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":4728,
+			"byteOffset":403528,
+			"target":34963
+		},
+		{
+			"buffer":0,
+			"byteLength":8724,
+			"byteOffset":408256,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":8724,
+			"byteOffset":416980,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":5816,
+			"byteOffset":425704,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":4464,
+			"byteOffset":431520,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":18876,
-			"byteOffset":462776,
+			"byteOffset":435984,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":18876,
-			"byteOffset":481652,
+			"byteOffset":454860,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":12584,
-			"byteOffset":500528,
+			"byteOffset":473736,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":6720,
-			"byteOffset":513112,
+			"byteOffset":486320,
 			"target":34963
 		}
 	],
@@ -1620,7 +1802,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":519832,
+			"byteLength":493040,
 			"uri":"sedan.bin"
 		}
 	]

@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
 import { ContainerScene } from "./Scene.elements";
 import { cleanUpScene, initScene, loadGroups } from "./Script";
-//import { models } from "../Menu/carParts";
-import { FloatPoint, FloatLabel } from "../Menu/Parts/Styles/Sedan";
+
+
+
 
 const Scene = () => {
   const mountRef = useRef(null);
@@ -18,9 +19,6 @@ const Scene = () => {
   return (
     <>
       <ContainerScene className='SceneContainer' ref={mountRef}></ContainerScene>
-      <FloatPoint>
-        <FloatLabel></FloatLabel>
-      </FloatPoint>
     </>
 
   );

@@ -5,6 +5,13 @@ export const Sedan = {
         group: "modelCar",
         rute: "./model/Modelo01/sedan.gltf"
     },
+    rutes:{
+        ruteT: "./model/Modelo01/top.gltf",
+        ruteF: "./model/Modelo01/front.gltf",
+        ruteB: "./model/Modelo01/back.gltf",
+        ruteR: "./model/Modelo01/right.gltf",
+        ruteL: "./model/Modelo01/left.gltf"
+    },
     damageTop: [
         { name: 'P1', group: 'top', rute: '', value: 0 },
         { name: 'P2', group: 'top', rute: '', value: 0 },
@@ -35,8 +42,8 @@ export const Sedan = {
         { name: 'P5', group: 'back', rute: '', value: 0 }
     ],
     damageLeft: [
-        { name: 'P1', group: 'left', rute: './model/Modelo01/points/p1.gltf', value: 10 },
-        { name: 'P2', group: 'left', rute: './model/Modelo01/points/p2.gltf', value: 20 },
+        { name: 'P1', group: 'left', rute: '', value: 10 },
+        { name: 'P2', group: 'left', rute: '', value: 20 },
         { name: 'P3', group: 'left', rute: '', value: 0 },
         { name: 'P4', group: 'left', rute: '', value: 0 },
         { name: 'P5', group: 'left', rute: '', value: 0 },
