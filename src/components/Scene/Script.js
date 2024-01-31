@@ -150,9 +150,9 @@ function onTouch(event) {
 
 
 window.addEventListener('click', onTouch);
-window.addEventListener('touchstart', onTouch);
-window.addEventListener('touchmove', onTouch);
+
 window.addEventListener('touchend', onTouch);
+
 
 
 
