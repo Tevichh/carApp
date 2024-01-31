@@ -83,8 +83,9 @@ function updateColorsByGroup(scene, nombre, grupo) {
       var num = parseInt(document.getElementById('fullAdd').textContent);
       const isCheckbox = child.material.name === "CHECKBOX";
       const isGroupMatch = child.material.name === `${nombre}_${grupo}`;
+      const isRin = child.material.name === `${grupo}_${nombre}`;
 
-      if (isCheckbox || isGroupMatch) {
+      if (isCheckbox || isGroupMatch || isRin) {
         if (!child.userData.colorState) {
           child.userData.colorState = "Paint_1";
         }
@@ -92,6 +93,7 @@ function updateColorsByGroup(scene, nombre, grupo) {
         switch (child.userData.colorState) {
           case "Default":
             child.material.color.set(0x10100F);
+            if(isRin){child.material.color.set(0xA29E94);}
             child.userData.colorState = "Paint_1";
             num -= 30;
             break;
@@ -135,9 +137,10 @@ function onTouch(event) {
     const grupo = lista[0];
     const nombre = lista[1];
 
-    const grupos = ["LEFT", "RIGHT", "FRONT", "BACK", "TOP"];
+    const grupos = ["LEFT", "RIGHT", "FRONT", "BACK", "TOP","Rin"];
 
     if (grupos.includes(grupo)) {
+      console.log(grupo)
       updateColorsByGroup(scene, nombre, grupo);
     }
 
