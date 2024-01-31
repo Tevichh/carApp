@@ -5,6 +5,13 @@ export const HacthBack = {
         group: "modelCar",
         rute: "./model/Modelo02/scene.gltf"
     },
+    rutes:{
+        ruteT: "./model/Modelo02/top.gltf",
+        ruteF: "./model/Modelo02/front.gltf",
+        ruteB: "./model/Modelo02/back.gltf",
+        ruteR: "./model/Modelo02/right.gltf",
+        ruteL: "./model/Modelo02/left.gltf"
+    },
     damageTop: [
         { name: 'P1', group: 'top', rute: '', value: 0 },
         { name: 'P2', group: 'top', rute: '', value: 0 },

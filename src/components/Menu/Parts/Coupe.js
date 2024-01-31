@@ -5,6 +5,13 @@ export const Coupe = {
         group: "modelCar",
         rute: "./model/Modelo05/coupe.gltf"
     },
+    rutes:{
+        ruteT: "./model/Modelo05/top.gltf",
+        ruteF: "./model/Modelo05/front.gltf",
+        ruteB: "./model/Modelo05/back.gltf",
+        ruteR: "./model/Modelo05/right.gltf",
+        ruteL: "./model/Modelo05/left.gltf"
+    },
     damageTop: [
         { name: 'P1', group: 'top', rute: '', value: 0 },
         { name: 'P2', group: 'top', rute: '', value: 0 },

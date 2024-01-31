@@ -89,62 +89,8 @@ const gltfLoaders = new GLTFLoader(loadingManager)
 
 //INTERACCION modelos
 
-/*
-function onPointerClick(event) {
-  const mouseX = event.clientX;
-  const mouseY = event.clientY;
-
-  const mouseNormalizedX = (mouseX / window.innerWidth) * 2 - 1;
-  const mouseNormalizedY = -(mouseY / window.innerHeight) * 2 + 1;
-
-  const raycaster = new THREE.Raycaster();
-  raycaster.setFromCamera(new THREE.Vector2(mouseNormalizedX, mouseNormalizedY), camera);
-  const intersects = raycaster.intersectObjects(
-    scene.children.filter(obj => !obj.userData.intangible)
-  );
-
-  if (intersects.length) {
-    const parent = intersects[0].object;
-    const lista = parent.name.split("_");
-    const grupo = lista[0];
-    const nombre = lista[1];
-
-    if (grupo === 'LEFT') {
-      scene.traverse((child) => {
-        if (child instanceof THREE.Mesh) {
-          if (child.material.name === "CHECKBOX" || child.material.name === nombre) {
-            if(!child.userData.colorState){ child.userData.colorState = "Paint_1"}
-            switch (child.userData.colorState) {
-              case "Default":
-                child.material.color.set(0x10100F);
-                child.userData.colorState = "Paint_1";
-                break;
-              case "Paint_1":
-                child.material.color.set(0xFF0000);
-                child.userData.colorState = "Paint_2";
-                break;
-              case "Paint_2":
-                child.material.color.set(0x00FF00);
-                child.userData.colorState = "Default";
-                break;
-              default:
-                break;
-            }
-          }
-        }
-      });
-    }
-
-    if (num < 0) {
-      document.getElementById('fullAdd').innerHTML = '0';
-    }
-  }
-}
-
-window.addEventListener('click', onPointerClick);
-*/
 function onTouch(event) {
-  // Obtén el evento táctil si está presente, de lo contrario, usa el evento de clic
+ 
   const touch = event.touches ? event.touches[0] : null;
 
   // Obtén las coordenadas del evento (táctil o clic)
@@ -155,7 +101,7 @@ function onTouch(event) {
   const normalizedX = (clientX / window.innerWidth) * 2 - 1;
   const normalizedY = -(clientY / window.innerHeight) * 2 + 1;
 
-  // Crea y configura el raycaster
+  
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(new THREE.Vector2(normalizedX, normalizedY), camera);
 
@@ -196,21 +142,14 @@ function onTouch(event) {
         }
       });
     }
-
-    // Agrega aquí cualquier otra lógica específica para dispositivos móviles
-    // ...
-
-    // Ejemplo: Actualiza el contenido de 'fullAdd' si 'num' es menor que 0
     if (num < 0) {
       document.getElementById('fullAdd').innerHTML = '0';
     }
   }
 }
 
-// Agrega el evento de clic para PC
-window.addEventListener('click', onTouch);
 
-// Agrega eventos táctiles para dispositivos móviles
+window.addEventListener('click', onTouch);
 window.addEventListener('touchstart', onTouch);
 window.addEventListener('touchmove', onTouch);
 window.addEventListener('touchend', onTouch);
@@ -258,7 +197,7 @@ window.addEventListener('mousemove', cursorPointer);
 
 
 var num = 0;
-var parent;
+
 
 
 //Animate the scene

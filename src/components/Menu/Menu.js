@@ -71,7 +71,7 @@ const Menu = () => {
     return (
         <div className='MenuContainer'>
             <label id='state'>{rotar}</label>
-            <div className='menu'>
+            <div className='menu' id='menu'>
                 <div className='MenuWrapper'>
                     <div className='MenuOptions'>
                         <div className='Calculator'>
