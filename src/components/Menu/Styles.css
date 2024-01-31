@@ -180,6 +180,7 @@ input[type="checkbox"]:focus {
 @media (max-width: 1076px) {
   .menu {
     position: relative;
+    bottom: 0;
   }
 }
 
