@@ -96,12 +96,12 @@ function updateColorsByGroup(scene, nombre, grupo) {
             num -= 30;
             break;
           case "Paint_1":
-            child.material.color.set(0xFF0000);
+            child.material.color.set(0x181800);
             child.userData.colorState = "Paint_2";
             num += 20;
             break;
           case "Paint_2":
-            child.material.color.set(0x00FF00);
+            child.material.color.set(0x272700);
             child.userData.colorState = "Default";
             num -= 20;
             num += 30;
