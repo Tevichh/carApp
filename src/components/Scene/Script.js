@@ -80,6 +80,7 @@ const gltfLoaders = new GLTFLoader(loadingManager);
 function updateColorsByGroup(scene, nombre, grupo) {
   scene.traverse((child) => {
     if (child instanceof THREE.Mesh) {
+      var num = parseInt(document.getElementById('fullAdd').textContent);
       const isCheckbox = child.material.name === "CHECKBOX";
       const isGroupMatch = child.material.name === `${nombre}_${grupo}`;
 
@@ -92,18 +93,24 @@ function updateColorsByGroup(scene, nombre, grupo) {
           case "Default":
             child.material.color.set(0x10100F);
             child.userData.colorState = "Paint_1";
+            num -= 30;
             break;
           case "Paint_1":
             child.material.color.set(0xFF0000);
             child.userData.colorState = "Paint_2";
+            num += 20;
             break;
           case "Paint_2":
             child.material.color.set(0x00FF00);
             child.userData.colorState = "Default";
+            num -= 20;
+            num += 30;
             break;
           default:
             break;
         }
+        document.getElementById('fullAdd').innerHTML = num;
+
       }
     }
   });
