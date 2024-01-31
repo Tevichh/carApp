@@ -1,6 +1,7 @@
 body {
   -webkit-tap-highlight-color: transparent;
   tap-highlight-color: transparent;
+  margin: 0;
 }
 .menu {
   width: 100%;
