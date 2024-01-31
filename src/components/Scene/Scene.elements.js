@@ -7,5 +7,4 @@ export const ContainerScene = styled.div`
   -webkit-tap-highlight-color: transparent;
   tap-highlight-color: transparent;
 
-
 `;

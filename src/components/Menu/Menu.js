@@ -1,73 +1,62 @@
-import React, { useState } from 'react'
-import "./Styles.css"
-import { models } from "./carParts.js"
-import { removeModels, gsapAnimation, orbitControls } from '../Scene/Script.js'
-import { frontLL, frontRL, backLL, backRL } from '../Scene/Script.js'
+import React, { useState } from 'react';
+import "./Styles.css";
+import { models } from "./carParts.js";
+import { removeModels, gsapAnimation, orbitControls } from '../Scene/Script.js';
+import { frontLL, frontRL, backLL, backRL } from '../Scene/Script.js';
 
 const animations = {
-
-    original: {
-        cam: { x: 7.3, y: 2.1, z: 4.7 },
-        pos: { x: 0, y: 0, z: 0 }
-    },
-    top: {
-        cam: { x: 0.367, y: 8.9, z: 0 },
-        pos: { x: 0, y: -30, z: 0 }
-    },
-    front: {
-        cam: { x: 0, y: 1, z: 10 },
-        pos: { x: 0, y: 0.2, z: 0 }
-    },
-    back: {
-        cam: { x: 0, y: 1, z: -10 },
-        pos: { x: 0, y: 0.2, z: 0 }
-    },
-    left: {
-        cam: { x: 7.2, y: 2, z: 0 },
-        pos: { x: 0, y: 0, z: 0 }
-    },
-    right: {
-        cam: { x: -7.2, y: 2, z: 0 },
-        pos: { x: 0, y: 0, z: 0 }
-    }
-}
+    original: { cam: { x: 7.3, y: 2.1, z: 4.7 }, pos: { x: 0, y: 0, z: 0 } },
+    top: { cam: { x: 0.367, y: 8.9, z: 0 }, pos: { x: 0, y: -30, z: 0 } },
+    front: { cam: { x: 0, y: 1, z: 10 }, pos: { x: 0, y: 0.2, z: 0 } },
+    back: { cam: { x: 0, y: 1, z: -10 }, pos: { x: 0, y: 0.2, z: 0 } },
+    left: { cam: { x: 7.2, y: 2, z: 0 }, pos: { x: 0, y: 0, z: 0 } },
+    right: { cam: { x: -7.2, y: 2, z: 0 }, pos: { x: 0, y: 0, z: 0 } }
+};
 
 const stopControls = () => {
     orbitControls.enableZoom = false;
     orbitControls.enablePan = false;
     orbitControls.enableRotate = false;
     orbitControls.autoRotate = false;
-}
+};
 
 const allowControls = () => {
     orbitControls.enableZoom = false;
     orbitControls.enablePan = false;
     orbitControls.enableRotate = true;
     orbitControls.autoRotate = false;
-}
+};
 
-const defaulLight = () => {
+const defaultLight = () => {
+    ['frontR', 'frontL', 'backR', 'backL'].forEach(id => {
+        const element = document.getElementById(id);
+        element.disabled = false;
+        element.checked = true;
+    });
 
-    document.getElementById('frontR').disabled = false;
-    document.getElementById('frontL').disabled = false;
-    document.getElementById('backR').disabled = false;
-    document.getElementById('backL').disabled = false;
-
-    document.getElementById('frontR').checked = true;
-    document.getElementById('frontL').checked = true;
-    document.getElementById('backR').checked = true;
-    document.getElementById('backL').checked = true;
-
-    frontLL.isLight = true;
-    frontRL.isLight = true;
-    backLL.isLight = true;
-    backRL.isLight = true;
-
-}
+    [frontLL, frontRL, backLL, backRL].forEach(light => light.isLight = true);
+};
 
 const Menu = () => {
-    const [rotar, setRotar] = useState('stop')
-    const [currentModel, setCurrentModel] = useState()
+    const [rotar, setRotar] = useState('stop');
+    const [currentModel, setCurrentModel] = useState();
+
+    const handleModelChange = (e) => {
+        if (e.target.value !== "SELECCIONA") {
+            e.target.options[0].disabled = true;
+            const model = models.find(model => model.name === e.target.value);
+            setCurrentModel(model);
+
+            removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR');
+            ['ruteL', 'ruteR', 'ruteF', 'ruteB', 'ruteT'].forEach(rute => {
+                removeModels(model.rutes[rute], rute === 'ruteL' ? 'left' : rute === 'ruteR' ? 'right' : rute === 'ruteF' ? 'front' : rute === 'ruteB' ? 'back' : 'top', model.scale, 'CHECK');
+            });
+
+            document.getElementById('fullAdd').innerHTML = 0;
+            defaultLight();
+        }
+    };
+
     return (
         <div className='MenuContainer'>
             <label id='state'>{rotar}</label>
@@ -81,30 +70,11 @@ const Menu = () => {
                         </div>
                     </div>
 
-
                     <div className='MenuOptions'>
                         <h1>CAR MODEL</h1>
                         <ul className='MenuOptionsList'>
                             <li>
-                                <select className='models' id='model'
-                                    onChange={(e) => {
-                                        if (e.target.value !== "SELECCIONA") {
-                                            e.target.options[0].disabled = true
-                                            const model = models.find(
-                                                (model) => model.name === e.target.value
-                                            )
-                                            setCurrentModel(model)
-                                            //console.log(model);
-                                            removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR')
-
-                                            removeModels(model.rutes.ruteL, "left", model.scale, "CHECK")
-
-
-                                            document.getElementById('fullAdd').innerHTML = 0;
-                                            defaulLight()
-                                        }
-
-                                    }}>
+                                <select className='models' id='model' onChange={handleModelChange}>
                                     <option id="selctNull">SELECCIONA</option>
                                     {models.map((model, id) => (
                                         <option key={id} value={model.name}>
@@ -116,173 +86,140 @@ const Menu = () => {
                         </ul>
 
                         <button className='movimiento' onClick={() => {
-                            setRotar('stop')
-                            allowControls()
-                            gsapAnimation(animations.original.cam, animations.original.pos)
-                        }}
-                        >LIBERAR MOV</button>
+                            setRotar('stop');
+                            allowControls();
+                            gsapAnimation(animations.original.cam, animations.original.pos);
+                        }}>LIBERAR MOV</button>
                     </div>
 
                     <div className='VistasCamara'>
                         <button name='rotar' id='rotateButton' onClick={() => {
-                            setRotar('rotando')
-                            stopControls()
-                            gsapAnimation(animations.original.cam, animations.original.pos)
+                            setRotar('rotando');
+                            stopControls();
+                            gsapAnimation(animations.original.cam, animations.original.pos);
                         }}>ROTAR</button>
 
                         <button name='superior' onClick={() => {
-                            setRotar('stop')
+                            setRotar('stop');
                             gsapAnimation(
                                 animations.top.cam,
                                 animations.top.pos
-                            )
-
-                            stopControls()
-                        }}
-                        >V.SUPERIOR</button>
+                            );
+                            stopControls();
+                        }}>V.SUPERIOR</button>
 
                         <button name='frontal' onClick={() => {
-                            setRotar('stop')
+                            setRotar('stop');
                             gsapAnimation(
                                 animations.front.cam,
                                 animations.front.pos
-                            )
-
-                            stopControls()
-                        }}
-                        >V.FRONTAL</button>
+                            );
+                            stopControls();
+                        }}>V.FRONTAL</button>
 
                         <button name='trasera' onClick={() => {
-                            setRotar('stop')
+                            setRotar('stop');
                             gsapAnimation(
                                 animations.back.cam,
                                 animations.back.pos
-                            )
-
-                            stopControls()
-                        }}
-                        >V.TRASERA</button>
+                            );
+                            stopControls();
+                        }}>V.TRASERA</button>
 
                         <button name='izquierda' onClick={() => {
-                            setRotar('stop')
+                            setRotar('stop');
                             gsapAnimation(
                                 animations.left.cam,
                                 animations.left.pos
-                            )
-
-                            stopControls()
-                        }}
-                        >V.L.IZQUIERDA</button>
+                            );
+                            stopControls();
+                        }}>V.L.IZQUIERDA</button>
 
                         <button name='derecha' onClick={() => {
-                            setRotar('stop')
+                            setRotar('stop');
                             gsapAnimation(
                                 animations.right.cam,
                                 animations.right.pos
-                            )
-
-                            stopControls()
-                        }}
-                        >V.L.DERECHA</button>
+                            );
+                            stopControls();
+                        }}>V.L.DERECHA</button>
                     </div>
 
                     <div className='Lights'>
-
                         <form action="">
-                            <label class="form-control">
+                            <label className="form-control">
                                 <input type="checkbox" name="frontR" id="frontR" defaultChecked disabled
                                     onChange={(e) => {
                                         var num = parseInt(document.getElementById('fullAdd').textContent);
 
                                         if (e.target.checked === false) {
-
                                             document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
-                                            frontRL.isLight = false
-                                        }
-
-                                        if (e.target.checked === true) {
-
+                                            frontRL.isLight = false;
+                                        } else if (e.target.checked === true) {
                                             document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
-                                            frontRL.isLight = true
+                                            frontRL.isLight = true;
                                         }
-                                    }
-                                    } />
+                                    }}
+                                />
                                 Luz Frontal Derecha
                             </label>
 
-                            <label class="form-control">
+                            <label className="form-control">
                                 <input type="checkbox" name="frontL" id='frontL' defaultChecked disabled
                                     onChange={(e) => {
                                         var num = parseInt(document.getElementById('fullAdd').textContent);
 
                                         if (e.target.checked === false) {
-
                                             document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
-                                            frontLL.isLight = false
-                                        }
-
-                                        if (e.target.checked === true) {
-
+                                            frontLL.isLight = false;
+                                        } else if (e.target.checked === true) {
                                             document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
-                                            frontLL.isLight = true
+                                            frontLL.isLight = true;
                                         }
-                                    }
-                                    } />
+                                    }}
+                                />
                                 Luz Frontal Izquierda
                             </label>
 
-                            <label class="form-control">
+                            <label className="form-control">
                                 <input type="checkbox" name="backR" id='backR' defaultChecked disabled
                                     onChange={(e) => {
                                         var num = parseInt(document.getElementById('fullAdd').textContent);
 
                                         if (e.target.checked === false) {
-
                                             document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
-                                            backRL.isLight = false
-                                        }
-
-                                        if (e.target.checked === true) {
-
+                                            backRL.isLight = false;
+                                        } else if (e.target.checked === true) {
                                             document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
-                                            backRL.isLight = true
+                                            backRL.isLight = true;
                                         }
-                                    }
-                                    } />
+                                    }}
+                                />
                                 Luz Trasera Derecha
                             </label>
 
-                            <label class="form-control">
+                            <label className="form-control">
                                 <input type="checkbox" name="backL" id='backL' defaultChecked disabled
                                     onChange={(e) => {
                                         var num = parseInt(document.getElementById('fullAdd').textContent);
 
                                         if (e.target.checked === false) {
-
                                             document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
-
-                                            backLL.isLight = false
-                                        }
-
-                                        if (e.target.checked === true) {
-
+                                            backLL.isLight = false;
+                                        } else if (e.target.checked === true) {
                                             document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
-                                            backLL.isLight = true
+                                            backLL.isLight = true;
                                         }
-                                    }
-                                    } />
+                                    }}
+                                />
                                 Luz Trasera Izquierda
                             </label>
                         </form>
-
                     </div>
                 </div>
-
             </div>
-        </div >
+        </div>
+    );
+};
 
-    )
-}
-
-
-export default Menu
+export default Menu;
