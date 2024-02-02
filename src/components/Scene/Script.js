@@ -2,10 +2,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { gsap } from "gsap";
+import { models } from "../Menu/carParts";
 
 // Global variables
 let currentRef = null;
 var num = 0;
+var copyModel = {};
 
 // Animation GSAP
 const timeline = new gsap.timeline({ defaults: { duration: 1 } });
@@ -57,6 +59,42 @@ const resize = () => {
 };
 window.addEventListener("resize", resize);
 
+
+//Dom Events
+document.addEventListener('DOMContentLoaded', function () {
+
+
+  const containerClickHandler = (event) => {
+    var target = event.target;
+
+    //Send Cost
+    if (target.id === "SEND") {
+      console.log(copyModel);
+    }
+  }
+
+  //Update Models
+  const containerSelect = (event) => {
+
+    var target = event.target;
+
+    if (target.id === "modelSelect") {
+      var modelName = document.getElementById("modelSelect").value;
+      console.log(modelName)
+      var model = models.find(model => model.name === modelName);
+      copyModel = model;
+    }
+
+  }
+
+  document.body.addEventListener('click', containerClickHandler);
+  document.getElementById('modelSelect').addEventListener('change', containerSelect);
+});
+
+
+
+
+
 // Loader
 var progressBarContainer = document.querySelector('.progress-bar-container');
 const loadingManager = new THREE.LoadingManager(
@@ -76,43 +114,161 @@ const loadingManager = new THREE.LoadingManager(
 
 const gltfLoaders = new GLTFLoader(loadingManager);
 
-// Change Colors
-function updateColorsByGroup(scene, nombre, grupo) {
+//Change parts
+function partsChange(child, num, name, grupo) {
+
+  var valor1 = 0, valor2 = 0;
+  if (grupo === "LEFT") {
+    valor1 = copyModel.damageLeft[name].value1;
+    valor2 = copyModel.damageLeft[name].value2;
+  } else if (grupo === "RIGHT") {
+    valor1 = copyModel.damageRight[name].value1;
+    valor2 = copyModel.damageRight[name].value2;
+  } else if (grupo === "TOP") {
+    valor1 = copyModel.damageTop[name].value1;
+    valor2 = copyModel.damageTop[name].value2;
+  } else if (grupo === "BACK") {
+    valor1 = copyModel.damageBack[name].value1;
+    valor2 = copyModel.damageBack[name].value2;
+  } else if (grupo === "FRONT") {
+    valor1 = copyModel.damageFront[name].value1;
+    valor2 = copyModel.damageFront[name].value2;
+  }
+
+  function statePart(grupo) {
+    if (grupo === "LEFT") {
+      copyModel.damageLeft[name].state = child.userData.colorState;
+
+    } else if (grupo === "RIGHT") {
+      copyModel.damageRight[name].state = child.userData.colorState;
+
+    } else if (grupo === "TOP") {
+      copyModel.damageTop[name].state = child.userData.colorState;
+
+    } else if (grupo === "BACK") {
+      copyModel.damageBack[name].state = child.userData.colorState;
+
+    } else if (grupo === "FRONT") {
+      copyModel.damageFront[name].state = child.userData.colorState;
+
+    }
+  }
+
+
+  if (!child.userData.colorState) {
+    child.userData.colorState = "Paint_1";
+  }
+  switch (child.userData.colorState) {
+    case "Default":
+      child.material.color.set(0x10100F);
+      statePart(grupo)
+      child.userData.colorState = "Paint_1";
+      num -= valor2;
+      break;
+    case "Paint_1":
+      child.material.color.set(0x181800);
+      statePart(grupo)
+      child.userData.colorState = "Paint_2";
+      num += valor1;
+      break;
+    case "Paint_2":
+      child.material.color.set(0x272700);
+      statePart(grupo)
+      child.userData.colorState = "Default";
+      num -= valor1;
+      num += valor2;
+      break;
+    default:
+      break;
+  }
+
+
+  document.getElementById('fullAdd').innerHTML = num;
+}
+
+
+
+function rinChange(child, num, name) {
+  var valor = copyModel.Rin[name].value;
+  if (!child.userData.colorState) {
+    child.userData.colorState = "Damage";
+  }
+  console.log(name)
+  switch (child.userData.colorState) {
+    case "Default":
+      child.material.color.set(0xA29E94);
+      num -= valor
+      copyModel.Rin[name].state = child.userData.colorState;
+
+      child.userData.colorState = "Damage";
+
+      break;
+    case "Damage":
+      child.material.color.set(0x181800);
+      copyModel.Rin[name].state = child.userData.colorState;
+      num += valor;
+      child.userData.colorState = "Default";
+
+      break;
+    default:
+      break;
+  }
+  document.getElementById('fullAdd').innerHTML = num;
+}
+
+function lightChange(child, num, name) {
+  var valor = copyModel.light[name].value;
+  if (!child.userData.colorState) {
+    child.userData.colorState = "Damage";
+  }
+  console.log(name)
+  switch (child.userData.colorState) {
+    case "Default":
+      if(name === "FR" || name === "FL"){
+        child.material.color.set(0x000000);
+      }else{
+        child.material.color.set(0x290503);
+      }
+      
+      num -= valor
+      copyModel.light[name].state = child.userData.colorState;
+
+      child.userData.colorState = "Damage";
+
+      break;
+    case "Damage":
+      if(name === "FR" || name === "FL"){
+        child.material.color.set(0xFFFFFF);
+      }else{
+        child.material.color.set(0xFF3F2F);
+      }
+      copyModel.light[name].state = child.userData.colorState;
+      num += valor;
+      child.userData.colorState = "Default";
+
+      break;
+    default:
+      break;
+  }
+  document.getElementById('fullAdd').innerHTML = num;
+}
+
+
+function updateColorsByGroup(scene, nombre, grupo, name) {
   scene.traverse((child) => {
     if (child instanceof THREE.Mesh) {
       var num = parseInt(document.getElementById('fullAdd').textContent);
       const isCheckbox = child.material.name === "CHECKBOX";
       const isGroupMatch = child.material.name === `${nombre}_${grupo}`;
       const isRin = child.material.name === `${grupo}_${nombre}`;
+      const isLight = child.material.name === `${grupo}_${nombre}`;
 
-      if (isCheckbox || isGroupMatch || isRin) {
-        if (!child.userData.colorState) {
-          child.userData.colorState = "Paint_1";
-        }
-
-        switch (child.userData.colorState) {
-          case "Default":
-            child.material.color.set(0x10100F);
-            if(isRin){child.material.color.set(0xA29E94);}
-            child.userData.colorState = "Paint_1";
-            num -= 30;
-            break;
-          case "Paint_1":
-            child.material.color.set(0x181800);
-            child.userData.colorState = "Paint_2";
-            num += 20;
-            break;
-          case "Paint_2":
-            child.material.color.set(0x272700);
-            child.userData.colorState = "Default";
-            num -= 20;
-            num += 30;
-            break;
-          default:
-            break;
-        }
-        document.getElementById('fullAdd').innerHTML = num;
-
+      if (isCheckbox || isGroupMatch) {
+        partsChange(child, num, name, grupo)
+      } else if (isRin && grupo === "Rin") {
+        rinChange(child, num, name)
+      }else if (isLight && grupo === "LIGHT") {
+        lightChange(child, num, name)
       }
     }
   });
@@ -137,11 +293,11 @@ function onTouch(event) {
     const grupo = lista[0];
     const nombre = lista[1];
 
-    const grupos = ["LEFT", "RIGHT", "FRONT", "BACK", "TOP","Rin"];
+    const grupos = ["LEFT", "RIGHT", "FRONT", "BACK", "TOP", "Rin", "LIGHT"];
 
     if (grupos.includes(grupo)) {
-      console.log(grupo)
-      updateColorsByGroup(scene, nombre, grupo);
+      //console.log(grupo)
+      updateColorsByGroup(scene, nombre, grupo, nombre);
     }
 
     if (num < 0) {
@@ -207,22 +363,6 @@ scene.add(light2);
 const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.2);
 scene.add(ambientLight);
 
-// Car Lights
-export const frontRL = new THREE.SpotLight(0xff8000, 30, 3.3, 0.29);
-frontRL.position.set(0.9, 1.2, 4.5);
-scene.add(frontRL);
-
-export const frontLL = new THREE.SpotLight(0xff8000, 30, 3.3, 0.29);
-frontLL.position.set(-0.9, 1.2, 4.5);
-scene.add(frontLL);
-
-export const backRL = new THREE.SpotLight(0xff8000, 30, 3.3, 0.29);
-backRL.position.set(0.9, 1.2, -4.5);
-scene.add(backRL);
-
-export const backLL = new THREE.SpotLight(0xff8000, 30, 3.3, 0.29);
-backLL.position.set(-0.9, 1.2, -4.5);
-scene.add(backLL);
 
 // Environment Map
 const envMap = new THREE.CubeTextureLoader().load([

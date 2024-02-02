@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "./Styles.css";
 import { models } from "./carParts.js";
 import { removeModels, gsapAnimation, orbitControls } from '../Scene/Script.js';
-import { frontLL, frontRL, backLL, backRL } from '../Scene/Script.js';
+//import { frontLL, frontRL, backLL, backRL } from '../Scene/Script.js';
 
 const animations = {
     original: { cam: { x: 7.3, y: 2.1, z: 4.7 }, pos: { x: 0, y: 0, z: 0 } },
@@ -27,25 +27,13 @@ const allowControls = () => {
     orbitControls.autoRotate = false;
 };
 
-const defaultLight = () => {
-    ['frontR', 'frontL', 'backR', 'backL'].forEach(id => {
-        const element = document.getElementById(id);
-        element.disabled = false;
-        element.checked = true;
-    });
-
-    [frontLL, frontRL, backLL, backRL].forEach(light => light.isLight = true);
-};
-
 const Menu = () => {
     const [rotar, setRotar] = useState('stop');
-    const [currentModel, setCurrentModel] = useState();
 
     const handleModelChange = (e) => {
         if (e.target.value !== "SELECCIONA") {
             e.target.options[0].disabled = true;
             const model = models.find(model => model.name === e.target.value);
-            setCurrentModel(model);
 
             removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR');
             ['ruteL', 'ruteR', 'ruteF', 'ruteB', 'ruteT'].forEach(rute => {
@@ -53,7 +41,6 @@ const Menu = () => {
             });
 
             document.getElementById('fullAdd').innerHTML = 0;
-            defaultLight();
         }
     };
 
@@ -68,13 +55,14 @@ const Menu = () => {
                             <label>TOTAL: </label>
                             <label id='fullAdd'>0</label>
                         </div>
+                        <button id='SEND'>SEND</button>
                     </div>
 
                     <div className='MenuOptions'>
                         <h1>CAR MODEL</h1>
                         <ul className='MenuOptionsList'>
                             <li>
-                                <select className='models' id='model' onChange={handleModelChange}>
+                                <select className='models' id='modelSelect' onChange={handleModelChange}>
                                     <option id="selctNull">SELECCIONA</option>
                                     {models.map((model, id) => (
                                         <option key={id} value={model.name}>
@@ -143,78 +131,6 @@ const Menu = () => {
                             );
                             stopControls();
                         }}>V.L.DERECHA</button>
-                    </div>
-
-                    <div className='Lights'>
-                        <form action="">
-                            <label className="form-control">
-                                <input type="checkbox" name="frontR" id="frontR" defaultChecked disabled
-                                    onChange={(e) => {
-                                        var num = parseInt(document.getElementById('fullAdd').textContent);
-
-                                        if (e.target.checked === false) {
-                                            document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
-                                            frontRL.isLight = false;
-                                        } else if (e.target.checked === true) {
-                                            document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
-                                            frontRL.isLight = true;
-                                        }
-                                    }}
-                                />
-                                Luz Frontal Derecha
-                            </label>
-
-                            <label className="form-control">
-                                <input type="checkbox" name="frontL" id='frontL' defaultChecked disabled
-                                    onChange={(e) => {
-                                        var num = parseInt(document.getElementById('fullAdd').textContent);
-
-                                        if (e.target.checked === false) {
-                                            document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
-                                            frontLL.isLight = false;
-                                        } else if (e.target.checked === true) {
-                                            document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
-                                            frontLL.isLight = true;
-                                        }
-                                    }}
-                                />
-                                Luz Frontal Izquierda
-                            </label>
-
-                            <label className="form-control">
-                                <input type="checkbox" name="backR" id='backR' defaultChecked disabled
-                                    onChange={(e) => {
-                                        var num = parseInt(document.getElementById('fullAdd').textContent);
-
-                                        if (e.target.checked === false) {
-                                            document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
-                                            backRL.isLight = false;
-                                        } else if (e.target.checked === true) {
-                                            document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
-                                            backRL.isLight = true;
-                                        }
-                                    }}
-                                />
-                                Luz Trasera Derecha
-                            </label>
-
-                            <label className="form-control">
-                                <input type="checkbox" name="backL" id='backL' defaultChecked disabled
-                                    onChange={(e) => {
-                                        var num = parseInt(document.getElementById('fullAdd').textContent);
-
-                                        if (e.target.checked === false) {
-                                            document.getElementById('fullAdd').innerHTML = num + currentModel.light.backRightValue.value;
-                                            backLL.isLight = false;
-                                        } else if (e.target.checked === true) {
-                                            document.getElementById('fullAdd').innerHTML = (num - currentModel.light.backRightValue.value) > 0 ? num - currentModel.light.backRightValue.value : 0;
-                                            backLL.isLight = true;
-                                        }
-                                    }}
-                                />
-                                Luz Trasera Izquierda
-                            </label>
-                        </form>
                     </div>
                 </div>
             </div>

@@ -24,13 +24,14 @@ body {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1.2em;
+  gap: 2em;
 } 
 
 .MenuOptions h1 {
   color: #50727A;
   font-size: 2em;
   font-family: sans-serif;
+  margin-bottom: 0.3em;
 }
 
 .MenuOptionsList {
@@ -49,8 +50,6 @@ body {
 
 .MenuOptionsList select {
   width: 8.5em;
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
   padding: 0.5rem 1rem;
   outline: none;
   border-radius: 10px;
@@ -60,9 +59,8 @@ body {
 
 .Calculator {
   background-color: #ffffff;
-  height: 7em;
+  height: 6em;
   width: 18em;
-  margin-top: 1em;
 }
 .Calculator label{
   color: #123123;
@@ -76,11 +74,26 @@ body {
   font-family: sans-serif;
 }
 
+#SEND{
+  width: 18em;
+  margin: 0;
+  border-radius: 5%;
+  
+}
+
+.MenuOptions{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: center;
+}
+
 .VistasCamara {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   text-align: center;
+  gap: 0.5em;
 }
 
 #fullAdd {
@@ -110,67 +123,6 @@ button:focus {
   transform: translateY(-0.25em);
 }
 
-
-form {
-  display: grid;
-  margin: auto;
-  margin-right: 10px;
-}
-
-.form-control {
-  font-family: system-ui, sans-serif;
-  font-weight: bold;
-  line-height: 1.1;
-  font-size: 1em;
-  display: grid;
-  grid-template-columns: 1em auto;
-  gap: 0.8em;
-  color: #50727A;
-  margin-left: -15px;
-}
-
-.form-control+.form-control {
-  margin-top: 10px;
-
-}
-
-
-input[type="checkbox"] {
-
-  -webkit-appearance: none;
-  font: inherit;
-  font-size: 1.2em;
-  color: currentColor;
-  width: 1.15em;
-  height: 1.15em;
-  border: 0.15em solid currentColor;
-  border-radius: 0.15em;
-  transform: translateY(-0.075em);
-  display: grid;
-  place-content: center;
-  cursor: pointer;
-}
-
-input[type="checkbox"]::before {
-  content: "";
-  width: 0.65em;
-  height: 0.65em;
-  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-  transform: scale(0);
-  transform-origin: bottom left;
-  transition: 120ms transform ease-in-out;
-  box-shadow: inset 1em 1em var(--form-control-color);
-  background-color: #98eff9;
-}
-
-input[type="checkbox"]:checked::before {
-  transform: scale(1);
-}
-
-input[type="checkbox"]:focus {
-  outline: max(2px, 0.15em) solid currentColor;
-  outline-offset: max(2px, 0.15em);
-}
 
 @media (min-width: 1250px) {
   button{
