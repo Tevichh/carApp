@@ -27,6 +27,8 @@ const allowControls = () => {
     orbitControls.autoRotate = false;
 };
 
+
+
 const Menu = () => {
     const [rotar, setRotar] = useState('stop');
 
@@ -40,7 +42,7 @@ const Menu = () => {
                 removeModels(model.rutes[rute], rute === 'ruteL' ? 'left' : rute === 'ruteR' ? 'right' : rute === 'ruteF' ? 'front' : rute === 'ruteB' ? 'back' : 'top', model.scale, 'CHECK');
             });
 
-            document.getElementById('fullAdd').innerHTML = 0;
+            document.getElementById('fullAdd').innerHTML = model.cotizacion;
         }
     };
 

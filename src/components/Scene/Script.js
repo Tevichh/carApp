@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(modelName)
       var model = models.find(model => model.name === modelName);
       copyModel = model;
+
     }
 
   }
@@ -101,6 +102,53 @@ const loadingManager = new THREE.LoadingManager(
   () => {
     progressBarContainer = document.querySelector('.progress-bar-container');
     progressBarContainer.style.display = 'none';
+    scene.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        const childDivided = child.name.split("_");
+        const part = childDivided[0];
+
+        if (copyModel[`damage${part}`] && childDivided[1] in copyModel[`damage${part}`]) {
+          const damageState = copyModel[`damage${part}`][childDivided[1]].state;
+
+          if (damageState === "Paint_2") {
+            child.material.color.set(0x272700);
+          } else if (damageState === "Paint_1") {
+            child.material.color.set(0x181800);
+          }
+        }
+
+        else if (part === "Rin") {
+          switch (copyModel[part][childDivided[1]].state) {
+            case "Default":
+              child.material.color.set(0xA29E94);
+              break;
+            case "Damage":
+              child.material.color.set(0x181800);
+
+              break;
+            default:
+              break;
+          }
+        }
+
+        else if (part === "LIGHT") {
+          switch (copyModel.light[childDivided[1]].state) {
+            case "Default":
+              child.material.color.set(childDivided[1]=== "FR" || childDivided[1] === "FL" ? 0x000000 : 0x290503);
+              break;
+            case "Damage":
+              child.material.color.set(childDivided[1] === "FR" || childDivided[1] === "FL" ? 0xFFFFFF : 0xFF3F2F);
+              break;
+            default:
+              break;
+          }
+        }
+
+
+      }
+    });
+
+
   },
   (_, itemsToLoad, itemsLoaded) => {
     progressBarContainer = document.querySelector('.progress-bar-container');
@@ -116,142 +164,90 @@ const gltfLoaders = new GLTFLoader(loadingManager);
 
 //Change parts
 function partsChange(child, num, name, grupo) {
+  const damageGroup = copyModel[`damage${grupo}`][name];
+  const { value1, value2, state } = damageGroup;
 
-  var valor1 = 0, valor2 = 0;
-  if (grupo === "LEFT") {
-    valor1 = copyModel.damageLeft[name].value1;
-    valor2 = copyModel.damageLeft[name].value2;
-  } else if (grupo === "RIGHT") {
-    valor1 = copyModel.damageRight[name].value1;
-    valor2 = copyModel.damageRight[name].value2;
-  } else if (grupo === "TOP") {
-    valor1 = copyModel.damageTop[name].value1;
-    valor2 = copyModel.damageTop[name].value2;
-  } else if (grupo === "BACK") {
-    valor1 = copyModel.damageBack[name].value1;
-    valor2 = copyModel.damageBack[name].value2;
-  } else if (grupo === "FRONT") {
-    valor1 = copyModel.damageFront[name].value1;
-    valor2 = copyModel.damageFront[name].value2;
-  }
+  const nextStates = {
+    Default: "Paint_1",
+    Paint_1: "Paint_2",
+    Paint_2: "Default"
+  };
+
+  child.userData.colorState = state === "Default" ? "Paint_1" : nextStates[state];
 
   function statePart(grupo) {
-    if (grupo === "LEFT") {
-      copyModel.damageLeft[name].state = child.userData.colorState;
-
-    } else if (grupo === "RIGHT") {
-      copyModel.damageRight[name].state = child.userData.colorState;
-
-    } else if (grupo === "TOP") {
-      copyModel.damageTop[name].state = child.userData.colorState;
-
-    } else if (grupo === "BACK") {
-      copyModel.damageBack[name].state = child.userData.colorState;
-
-    } else if (grupo === "FRONT") {
-      copyModel.damageFront[name].state = child.userData.colorState;
-
-    }
+    copyModel[`damage${grupo}`][name].state = child.userData.colorState;
   }
 
-
-  if (!child.userData.colorState) {
-    child.userData.colorState = "Paint_1";
-  }
   switch (child.userData.colorState) {
     case "Default":
       child.material.color.set(0x10100F);
-      statePart(grupo)
-      child.userData.colorState = "Paint_1";
-      num -= valor2;
+      num -= value2;
       break;
     case "Paint_1":
       child.material.color.set(0x181800);
-      statePart(grupo)
-      child.userData.colorState = "Paint_2";
-      num += valor1;
+      num += value1;
       break;
     case "Paint_2":
       child.material.color.set(0x272700);
-      statePart(grupo)
-      child.userData.colorState = "Default";
-      num -= valor1;
-      num += valor2;
+      num -= value1;
+      num += value2;
       break;
     default:
       break;
   }
 
-
+  statePart(grupo);
   document.getElementById('fullAdd').innerHTML = num;
 }
 
 
 
 function rinChange(child, num, name) {
-  var valor = copyModel.Rin[name].value;
-  if (!child.userData.colorState) {
-    child.userData.colorState = "Damage";
-  }
-  console.log(name)
+  const { value } = copyModel.Rin[name];
+
+  child.userData.colorState = copyModel.Rin[name].state === "Default" ? "Damage" : "Default";
+
   switch (child.userData.colorState) {
     case "Default":
       child.material.color.set(0xA29E94);
-      num -= valor
-      copyModel.Rin[name].state = child.userData.colorState;
-
-      child.userData.colorState = "Damage";
-
+      num -= value;
       break;
     case "Damage":
       child.material.color.set(0x181800);
-      copyModel.Rin[name].state = child.userData.colorState;
-      num += valor;
-      child.userData.colorState = "Default";
-
+      num += value;
       break;
     default:
       break;
   }
+
+  copyModel.Rin[name].state = child.userData.colorState;
   document.getElementById('fullAdd').innerHTML = num;
 }
+
 
 function lightChange(child, num, name) {
-  var valor = copyModel.light[name].value;
-  if (!child.userData.colorState) {
-    child.userData.colorState = "Damage";
-  }
-  console.log(name)
+  const { value } = copyModel.light[name];
+
+  child.userData.colorState = copyModel.light[name].state === "Default" ? "Damage" : "Default";
+
   switch (child.userData.colorState) {
     case "Default":
-      if(name === "FR" || name === "FL"){
-        child.material.color.set(0x000000);
-      }else{
-        child.material.color.set(0x290503);
-      }
-      
-      num -= valor
-      copyModel.light[name].state = child.userData.colorState;
-
-      child.userData.colorState = "Damage";
-
+      child.material.color.set(name === "FR" || name === "FL" ? 0x000000 : 0x290503);
+      num -= value;
       break;
     case "Damage":
-      if(name === "FR" || name === "FL"){
-        child.material.color.set(0xFFFFFF);
-      }else{
-        child.material.color.set(0xFF3F2F);
-      }
-      copyModel.light[name].state = child.userData.colorState;
-      num += valor;
-      child.userData.colorState = "Default";
-
+      child.material.color.set(name === "FR" || name === "FL" ? 0xFFFFFF : 0xFF3F2F);
+      num += value;
       break;
     default:
       break;
   }
+
+  copyModel.light[name].state = child.userData.colorState;
   document.getElementById('fullAdd').innerHTML = num;
 }
+
 
 
 function updateColorsByGroup(scene, nombre, grupo, name) {
@@ -267,7 +263,7 @@ function updateColorsByGroup(scene, nombre, grupo, name) {
         partsChange(child, num, name, grupo)
       } else if (isRin && grupo === "Rin") {
         rinChange(child, num, name)
-      }else if (isLight && grupo === "LIGHT") {
+      } else if (isLight && grupo === "LIGHT") {
         lightChange(child, num, name)
       }
     }
