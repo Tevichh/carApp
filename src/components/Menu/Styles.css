@@ -12,7 +12,9 @@ body {
 #state{
   display: none;
 }
-
+.Modal{
+  color: #123123;
+}
 .MenuWrapper {
   background-color: #192028;
   width: 100%;
@@ -123,6 +125,10 @@ button:focus {
   transform: translateY(-0.25em);
 }
 
+.modalLabel{
+  font-size: 1.2em;
+  color: #000000;
+}
 
 @media (min-width: 1250px) {
   button{
@@ -136,5 +142,4 @@ button:focus {
     bottom: 0;
   }
 }
-
 

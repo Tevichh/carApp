@@ -103,7 +103,7 @@ export let Sedan = {
         FL: { name: 'FL', value: 0, state: "Default" },
         FR: { name: 'FR', value: 0, state: "Default" },
         BL: { name: 'BL', value: 0, state: "Default" },
-        BR: { name: 'BR', value: 0, state: "Default" },
+        BR: { name: 'BR', value: 40, state: "Default" },
     },
     cotizacion: 0
 };

@@ -105,5 +105,5 @@ export let Sedan = {
         BL: { name: 'BL', value: 30, state: "Default" },
         BR: { name: 'BR', value: 40, state: "Default" },
     },
-    cotizacion: 0
+    cotizacion: 10
 };

@@ -73,25 +73,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  //Update Models
-  const containerSelect = (event) => {
-
-    var target = event.target;
-
-    if (target.id === "modelSelect") {
-      var modelName = document.getElementById("modelSelect").value;
-      console.log(modelName)
-      var model = models.find(model => model.name === modelName);
-      copyModel = model;
-
-    }
-
-  }
 
   document.body.addEventListener('click', containerClickHandler);
-  document.getElementById('modelSelect').addEventListener('change', containerSelect);
 });
 
+
+export const loadProducts = async (name) => {
+  console.log(name);
+  const model = models.find(model => model.name === name);
+  copyModel = model;
+};
 
 
 
@@ -134,7 +125,7 @@ const loadingManager = new THREE.LoadingManager(
         else if (part === "LIGHT") {
           switch (copyModel.light[childDivided[1]].state) {
             case "Default":
-              child.material.color.set(childDivided[1]=== "FR" || childDivided[1] === "FL" ? 0x000000 : 0x290503);
+              child.material.color.set(childDivided[1] === "FR" || childDivided[1] === "FL" ? 0x000000 : 0x290503);
               break;
             case "Damage":
               child.material.color.set(childDivided[1] === "FR" || childDivided[1] === "FL" ? 0xFFFFFF : 0xFF3F2F);
