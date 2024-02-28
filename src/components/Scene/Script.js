@@ -3,6 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { gsap } from "gsap";
 import { models } from "../Menu/carParts";
+import { carColor } from "../Menu/carColor"
 
 // Global variables
 let currentRef = null;
@@ -78,11 +79,19 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-export const loadProducts = async (name) => {
-  console.log(name);
+export const loadProducts = async (name, color, capa) => {
+  console.log(name, color, capa);
   const model = models.find(model => model.name === name);
   copyModel = model;
-};
+
+  const colorModel = Object.entries(carColor).find(([colorName, _]) => colorName === color);
+
+  console.log(colorModel)
+
+  copyModel.color = colorModel[1]
+
+
+}
 
 
 
@@ -98,6 +107,7 @@ const loadingManager = new THREE.LoadingManager(
         const childDivided = child.name.split("_");
         const part = childDivided[0];
 
+
         if (copyModel[`damage${part}`] && childDivided[1] in copyModel[`damage${part}`]) {
           const damageState = copyModel[`damage${part}`][childDivided[1]].state;
 
@@ -105,6 +115,8 @@ const loadingManager = new THREE.LoadingManager(
             child.material.color.set(0x272700);
           } else if (damageState === "Paint_1") {
             child.material.color.set(0x181800);
+          } else {
+            child.material.color.set(copyModel.color)
           }
         }
 
@@ -172,7 +184,7 @@ function partsChange(child, num, name, grupo) {
 
   switch (child.userData.colorState) {
     case "Default":
-      child.material.color.set(0x10100F);
+      child.material.color.set(copyModel.color);
       num -= value2;
       break;
     case "Paint_1":
@@ -283,7 +295,7 @@ function onTouch(event) {
     const grupos = ["LEFT", "RIGHT", "FRONT", "BACK", "TOP", "Rin", "LIGHT"];
 
     if (grupos.includes(grupo)) {
-      //console.log(grupo)
+      console.log(grupo, nombre)
       updateColorsByGroup(scene, nombre, grupo, nombre);
     }
 

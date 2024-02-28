@@ -1,6 +1,7 @@
 export let Sedan = {
     name: "SEDAN",
     scale: 0.08,
+    color: 0x000000,
     modelCar: {
         group: "modelCar",
         rute: "./model/Modelo01/sedan.gltf",

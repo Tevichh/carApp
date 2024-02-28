@@ -24,12 +24,15 @@ export function OptionsCar() {
 
   const [show, setShow] = useState(false);
   const [btnName, setBtnName] = useState("SELECCIONA")
+  document.body.style.cursor = 'not-allowed';
 
   const handleSave = () => {
     let modalModel = document.getElementById("modelModal").value
+    let colorModel = document.getElementById("colorModal").value
+    let capaModel = document.getElementById("capaModal").value
     setBtnName(modalModel)
     handleModelChange(modalModel)
-    loadProducts(modalModel)
+    loadProducts(modalModel, colorModel, capaModel)
     setShow(false);
   }
 
@@ -57,21 +60,21 @@ export function OptionsCar() {
             </Form.Select>
             <br />
             <Form.Label className='modalLabel'>COLOR</Form.Label>
-            <Form.Select>
-              <option>Amarillo</option>
-              <option>Azul</option>
-              <option>Blanco</option>
-              <option>Negro</option>
-              <option>Rojo</option>
-              <option>Verde</option>
+            <Form.Select id="colorModal">
+              <option>AMARILLO</option>
+              <option>AZUL</option>
+              <option>BLANCO</option>
+              <option>NEGRO</option>
+              <option>ROJO</option>
+              <option>VERDE</option>
             </Form.Select>
             <br />
             <Form.Label className='modalLabel'>CAPA</Form.Label>
-            <Form.Select>
-              <option value="1">MONOCAPA</option>
-              <option value="2">BICAPA</option>
-              <option value="3">TRICAPA</option>
-              <option value="4">CUATRICAPA</option>
+            <Form.Select id="capaModal">
+              <option>MONOCAPA</option>
+              <option>BICAPA</option>
+              <option>TRICAPA</option>
+              <option>CUATRICAPA</option>
             </Form.Select>
           </Form>
         </Modal.Body>
