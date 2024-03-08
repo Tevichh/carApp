@@ -9,19 +9,22 @@ import { carColor } from "../Menu/carColor"
 let currentRef = null;
 var num = 0;
 var copyModel = {};
+var clickControl = false;
 
 // Animation GSAP
 const timeline = new gsap.timeline({ defaults: { duration: 1 } });
 
 // CAR PARTS
-const carParts = {
+export const carParts = {
   modelCar: new THREE.Group(),
-  top: new THREE.Group(),
+  /*top: new THREE.Group(),
   front: new THREE.Group(),
   back: new THREE.Group(),
   left: new THREE.Group(),
-  right: new THREE.Group()
+  right: new THREE.Group()*/
 };
+
+
 
 // Scene, camera, renderer
 const scene = new THREE.Scene();
@@ -90,10 +93,15 @@ export const loadProducts = async (name, color, capa) => {
 
   copyModel.color = colorModel[1]
 
-
 }
 
-
+export const allowClick = async (allow) => {
+  if (allow) {
+    clickControl = true;
+  } else {
+    clickControl = false;
+  }
+}
 
 
 // Loader
@@ -169,6 +177,8 @@ const gltfLoaders = new GLTFLoader(loadingManager);
 function partsChange(child, num, name, grupo) {
   const damageGroup = copyModel[`damage${grupo}`][name];
   const { value1, value2, state } = damageGroup;
+  console.log(grupo)
+
 
   const nextStates = {
     Default: "Paint_1",
@@ -275,32 +285,41 @@ function updateColorsByGroup(scene, nombre, grupo, name) {
 
 // Interaction with Models
 function onTouch(event) {
-  const touch = event.touches ? event.touches[0] : null;
-  const clientX = touch ? touch.clientX : event.clientX;
-  const clientY = touch ? touch.clientY : event.clientY;
-  const normalizedX = (clientX / window.innerWidth) * 2 - 1;
-  const normalizedY = -(clientY / window.innerHeight) * 2 + 1;
+  if (clickControl) {
+    const touch = event.touches ? event.touches[0] : null;
+    const clientX = touch ? touch.clientX : event.clientX;
+    const clientY = touch ? touch.clientY : event.clientY;
+    const normalizedX = (clientX / window.innerWidth) * 2 - 1;
+    const normalizedY = -(clientY / window.innerHeight) * 2 + 1;
 
-  const raycaster = new THREE.Raycaster();
-  raycaster.setFromCamera(new THREE.Vector2(normalizedX, normalizedY), camera);
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(new THREE.Vector2(normalizedX, normalizedY), camera);
 
-  const intersects = raycaster.intersectObjects(scene.children.filter(obj => !obj.userData.intangible));
+    const intersects = raycaster.intersectObjects(scene.children.filter(obj => !obj.userData.intangible));
 
-  if (intersects.length) {
-    const parent = intersects[0].object;
-    const lista = parent.name.split("_");
-    const grupo = lista[0];
-    const nombre = lista[1];
+    if (intersects.length) {
+      const parent = intersects[0].object;
+      const lista = parent.name.split("_");
+      const grupo = lista[0];
+      const nombre = lista[1];
 
-    const grupos = ["LEFT", "RIGHT", "FRONT", "BACK", "TOP", "Rin", "LIGHT"];
+      const grupos = ["LEFT", "RIGHT", "FRONT", "BACK", "TOP", "Rin", "LIGHT"];
 
-    if (grupos.includes(grupo)) {
-      console.log(grupo, nombre)
-      updateColorsByGroup(scene, nombre, grupo, nombre);
-    }
+      if (grupos.includes(grupo)) {
+        console.log(grupo, nombre)
+        //updateColorsByGroup(scene, nombre, grupo, nombre);
+        if (grupo === "LEFT" && nombre === "P1") {
+          updateColorsByGroup(scene, nombre, grupo, nombre);
+          updateColorsByGroup(scene, "P5", grupo, "P5");
 
-    if (num < 0) {
-      document.getElementById('fullAdd').innerHTML = '0';
+        } else {
+          updateColorsByGroup(scene, nombre, grupo, nombre);
+        }
+      }
+
+      if (num < 0) {
+        document.getElementById('fullAdd').innerHTML = '0';
+      }
     }
   }
 }

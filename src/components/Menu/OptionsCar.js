@@ -1,20 +1,28 @@
 import { useState } from 'react';
+import * as THREE from "three";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { models } from "./carParts.js";
-import { removeModels, loadProducts } from '../Scene/Script.js';
+import { removeModels, loadProducts, allowClick, carParts } from '../Scene/Script.js';
 
 const handleModelChange = (modelModal) => {
 
   if (modelModal !== "SELECCIONA") {
     const model = models.find(model => model.name === modelModal);
 
+    const partes = model.partes;
+
+    for (let x in partes) {
+      console.log(x)
+      carParts[partes[x]] = new THREE.Group();
+    }
+
     removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR');
-    ['ruteL', 'ruteR', 'ruteF', 'ruteB', 'ruteT'].forEach(rute => {
+    /*['ruteL', 'ruteR', 'ruteF', 'ruteB', 'ruteT'].forEach(rute => {
       removeModels(model.rutes[rute], rute === 'ruteL' ? 'left' : rute === 'ruteR' ? 'right' : rute === 'ruteF' ? 'front' : rute === 'ruteB' ? 'back' : 'top', model.scale, 'CHECK');
-    });
+    });*/
 
     document.getElementById('fullAdd').innerHTML = model.cotizacion;
   }
@@ -30,15 +38,22 @@ export function OptionsCar() {
     let modalModel = document.getElementById("modelModal").value
     let colorModel = document.getElementById("colorModal").value
     let capaModel = document.getElementById("capaModal").value
-    setBtnName(modalModel)
-    handleModelChange(modalModel)
-    loadProducts(modalModel, colorModel, capaModel)
+    setBtnName(modalModel);
+    handleModelChange(modalModel);
+    loadProducts(modalModel, colorModel, capaModel);
+    allowClick(true);
     setShow(false);
+
   }
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  const handleClose = () => {
+    allowClick(true);
+    setShow(false);
+  };
+  const handleShow = () => {
+    allowClick(false);
+    setShow(true);
+  }
   return (
     <>
       <Button variant='light' onClick={handleShow}>
