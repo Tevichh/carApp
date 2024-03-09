@@ -70,22 +70,22 @@ document.addEventListener('DOMContentLoaded', function () {
     if (target.id === "SEND") {
       console.log(copyModel);
       
-      const requestBody = copyModel;
-
+      /*const requestBody = copyModel;
+      
       const response = await fetch('https://api.example.com/endpoint', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(requestBody)
-      });
+      }); 
 
       const responseData = await response.json();
       if (responseData.status) {
         window.location.href = responseData.href;
       }else{
         alert("OCURRIO UN ERROR");
-      }
+      }*/
     }
   }
 
@@ -127,6 +127,7 @@ const loadingManager = new THREE.LoadingManager(
 
 
         const partes = copyModel.partes;
+        console.log(childDivided)
 
         if (partes.includes(part) && part !== "Rin" && part !== "LIGHT") {
           const damageState = copyModel[part][point].state;
