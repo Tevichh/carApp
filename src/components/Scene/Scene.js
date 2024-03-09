@@ -12,7 +12,7 @@ const Scene = () => {
   useEffect(() => {
     initScene(mountRef);
     loadGroups()
-    //loadModels(models[0].modelCar.rute, models[0].modelCar.group, models[0].scale)
+
     return () => {
       cleanUpScene();
     };

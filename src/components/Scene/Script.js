@@ -17,11 +17,6 @@ const timeline = new gsap.timeline({ defaults: { duration: 1 } });
 // CAR PARTS
 export const carParts = {
   modelCar: new THREE.Group(),
-  /*top: new THREE.Group(),
-  front: new THREE.Group(),
-  back: new THREE.Group(),
-  left: new THREE.Group(),
-  right: new THREE.Group()*/
 };
 
 
@@ -68,12 +63,29 @@ window.addEventListener("resize", resize);
 document.addEventListener('DOMContentLoaded', function () {
 
 
-  const containerClickHandler = (event) => {
+  const containerClickHandler = async (event) => {
     var target = event.target;
 
     //Send Cost
     if (target.id === "SEND") {
       console.log(copyModel);
+      
+      const requestBody = copyModel;
+
+      const response = await fetch('https://api.example.com/endpoint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      const responseData = await response.json();
+      if (responseData.status) {
+        window.location.href = responseData.href;
+      }else{
+        alert("OCURRIO UN ERROR");
+      }
     }
   }
 
@@ -88,9 +100,6 @@ export const loadProducts = async (name, color, capa) => {
   copyModel = model;
 
   const colorModel = Object.entries(carColor).find(([colorName, _]) => colorName === color);
-
-  console.log(colorModel)
-
   copyModel.color = colorModel[1]
 
 }
@@ -114,19 +123,28 @@ const loadingManager = new THREE.LoadingManager(
       if (child instanceof THREE.Mesh) {
         const childDivided = child.name.split("_");
         const part = childDivided[0];
+        const point = childDivided[1]
 
 
-        if (copyModel[`damage${part}`] && childDivided[1] in copyModel[`damage${part}`]) {
-          const damageState = copyModel[`damage${part}`][childDivided[1]].state;
+        const partes = copyModel.partes;
 
-          if (damageState === "Paint_2") {
-            child.material.color.set(0x272700);
-          } else if (damageState === "Paint_1") {
-            child.material.color.set(0x181800);
-          } else {
-            child.material.color.set(copyModel.color)
+        if (partes.includes(part) && part !== "Rin" && part !== "LIGHT") {
+          const damageState = copyModel[part][point].state;
+          switch (damageState) {
+            case "Default":
+              child.material.color.set(copyModel.color);
+              break;
+            case "Paint_1":
+              child.material.color.set(0x181800);
+              break;
+            case "Paint_2":
+              child.material.color.set(0x272700);
+              break;
+            default:
+              break;
           }
         }
+
 
         else if (part === "Rin") {
           switch (copyModel[part][childDivided[1]].state) {
@@ -174,84 +192,62 @@ const loadingManager = new THREE.LoadingManager(
 const gltfLoaders = new GLTFLoader(loadingManager);
 
 //Change parts
-function partsChange(child, num, name, grupo) {
-  const damageGroup = copyModel[`damage${grupo}`][name];
-  const { value1, value2, state } = damageGroup;
-  console.log(grupo)
+function partsChange(child, name, grupo) {
 
+  const option = copyModel[grupo][name].state
+  const damageState = option === "Default" ? "Paint_1" : option === "Paint_1" ? "Paint_2" : "Default";
 
-  const nextStates = {
-    Default: "Paint_1",
-    Paint_1: "Paint_2",
-    Paint_2: "Default"
-  };
-
-  child.userData.colorState = state === "Default" ? "Paint_1" : nextStates[state];
-
-  function statePart(grupo) {
-    copyModel[`damage${grupo}`][name].state = child.userData.colorState;
-  }
-
-  switch (child.userData.colorState) {
+  switch (damageState) {
     case "Default":
       child.material.color.set(copyModel.color);
-      num -= value2;
       break;
     case "Paint_1":
       child.material.color.set(0x181800);
-      num += value1;
       break;
     case "Paint_2":
       child.material.color.set(0x272700);
-      num -= value1;
-      num += value2;
       break;
     default:
       break;
   }
 
-  statePart(grupo);
-  document.getElementById('fullAdd').innerHTML = num;
+  copyModel[grupo][name].state = damageState;
+
 }
 
 
 
-function rinChange(child, num, name) {
-  const { value } = copyModel.Rin[name];
+
+function rinChange(child, name) {
 
   child.userData.colorState = copyModel.Rin[name].state === "Default" ? "Damage" : "Default";
+  console.log(name)
 
   switch (child.userData.colorState) {
     case "Default":
       child.material.color.set(0xA29E94);
-      num -= value;
       break;
     case "Damage":
       child.material.color.set(0x181800);
-      num += value;
       break;
     default:
       break;
   }
 
   copyModel.Rin[name].state = child.userData.colorState;
-  document.getElementById('fullAdd').innerHTML = num;
 }
 
 
-function lightChange(child, num, name) {
-  const { value } = copyModel.light[name];
+function lightChange(child, name) {
 
   child.userData.colorState = copyModel.light[name].state === "Default" ? "Damage" : "Default";
 
   switch (child.userData.colorState) {
     case "Default":
       child.material.color.set(name === "FR" || name === "FL" ? 0x000000 : 0x290503);
-      num -= value;
       break;
     case "Damage":
       child.material.color.set(name === "FR" || name === "FL" ? 0xFFFFFF : 0xFF3F2F);
-      num += value;
       break;
     default:
       break;
@@ -263,21 +259,19 @@ function lightChange(child, num, name) {
 
 
 
-function updateColorsByGroup(scene, nombre, grupo, name) {
+function updateColorsByGroup(scene, nombre, grupo) {
   scene.traverse((child) => {
     if (child instanceof THREE.Mesh) {
-      var num = parseInt(document.getElementById('fullAdd').textContent);
-      const isCheckbox = child.material.name === "CHECKBOX";
       const isGroupMatch = child.material.name === `${nombre}_${grupo}`;
       const isRin = child.material.name === `${grupo}_${nombre}`;
       const isLight = child.material.name === `${grupo}_${nombre}`;
 
-      if (isCheckbox || isGroupMatch) {
-        partsChange(child, num, name, grupo)
+      if (isGroupMatch) {
+        partsChange(child, nombre, grupo)
       } else if (isRin && grupo === "Rin") {
-        rinChange(child, num, name)
+        rinChange(child, nombre)
       } else if (isLight && grupo === "LIGHT") {
-        lightChange(child, num, name)
+        lightChange(child, nombre)
       }
     }
   });
@@ -303,23 +297,31 @@ function onTouch(event) {
       const grupo = lista[0];
       const nombre = lista[1];
 
-      const grupos = ["LEFT", "RIGHT", "FRONT", "BACK", "TOP", "Rin", "LIGHT"];
+      const grupos = copyModel.partes;
 
       if (grupos.includes(grupo)) {
-        console.log(grupo, nombre)
-        //updateColorsByGroup(scene, nombre, grupo, nombre);
-        if (grupo === "LEFT" && nombre === "P1") {
-          updateColorsByGroup(scene, nombre, grupo, nombre);
-          updateColorsByGroup(scene, "P5", grupo, "P5");
+        if (grupo === "Rin" || grupo === "LIGHT") {
+          updateColorsByGroup(scene, nombre, grupo);
+        }
 
-        } else {
-          updateColorsByGroup(scene, nombre, grupo, nombre);
+        else if (nombre === "P1") {
+          const preState = copyModel[grupo][nombre].state;
+          for (let x in copyModel[grupo]) {
+
+            if (x !== "P1" && copyModel[grupo][nombre].state !== "Default") {
+              copyModel[grupo][x].allow = false;
+              copyModel[grupo][x].state = preState;
+            } else {
+              copyModel[grupo][x].allow = true;
+            }
+
+            updateColorsByGroup(scene, copyModel[grupo][x].name, grupo);
+          }
+        } else if (copyModel[grupo][nombre].allow) {
+          updateColorsByGroup(scene, nombre, grupo);
         }
       }
 
-      if (num < 0) {
-        document.getElementById('fullAdd').innerHTML = '0';
-      }
     }
   }
 }
@@ -329,26 +331,7 @@ window.addEventListener('touchend', onTouch);
 
 // Pointer
 function cursorPointer(event) {
-  const mouseX = event.clientX;
-  const mouseY = event.clientY;
-
-  const mouseNormalizedX = (mouseX / window.innerWidth) * 2 - 1;
-  const mouseNormalizedY = -(mouseY / window.innerHeight) * 2 + 1;
-
-  const raycaster = new THREE.Raycaster();
-  raycaster.setFromCamera(new THREE.Vector2(mouseNormalizedX, mouseNormalizedY), camera);
-
-  const intersects = raycaster.intersectObjects(scene.children, true);
-
   document.body.style.cursor = 'auto';
-
-  for (const intersect of intersects) {
-    const validMaterials = ["BOXCHECKMARK", "CHECKMARK", "Rin_FR", "Rin_FL", "Rin_BL", "Rin_BR"];
-    if (validMaterials.includes(intersect.object.material.name)) {
-      document.body.style.cursor = 'pointer';
-      return;
-    }
-  }
 }
 
 window.addEventListener('mousemove', cursorPointer);
@@ -409,12 +392,11 @@ export const cleanUpScene = () => {
 // Load groups
 export const loadGroups = () => {
   scene.add(carParts.modelCar);
-  scene.add(carParts.top);
-  scene.add(carParts.front);
-  scene.add(carParts.back);
-  scene.add(carParts.left);
-  scene.add(carParts.right);
+  for (let x in copyModel.partes) {
+    console.log(x)
+  }
 };
+
 
 // Load Models
 export const loadModels = (rute, group, scale, name, value) => {

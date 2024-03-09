@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import "./Styles.css";
 import { gsapAnimation, orbitControls } from '../Scene/Script.js';
-//import { frontLL, frontRL, backLL, backRL } from '../Scene/Script.js';
 import { OptionsCar } from './OptionsCar.js';
 
 const animations = {
