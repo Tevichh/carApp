@@ -46,9 +46,11 @@ scene.add(grid);
 // OrbitControls
 export const orbitControls = new OrbitControls(camera, renderer.domElement);
 orbitControls.enableDamping = true;
-orbitControls.enableZoom = false;
+orbitControls.enableZoom = true;
 orbitControls.enablePan = false;
 orbitControls.maxPolarAngle = THREE.MathUtils.degToRad(80);
+orbitControls.maxDistance = 10;
+orbitControls.minDistance = 3;
 
 // Resize canvas
 const resize = () => {
@@ -69,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //Send Cost
     if (target.id === "SEND") {
       console.log(copyModel);
-      
+
       /*const requestBody = copyModel;
       
       const response = await fetch('https://api.example.com/endpoint', {
@@ -127,10 +129,21 @@ const loadingManager = new THREE.LoadingManager(
 
 
         const partes = copyModel.partes;
-        console.log(childDivided)
+        //console.log(childDivided)
 
         if (partes.includes(part) && part !== "Rin" && part !== "LIGHT") {
           const damageState = copyModel[part][point].state;
+
+          if (point === "P1" && damageState !== "Default") {
+            for (let xPoint in copyModel[part]) {
+              if (xPoint !== "P1") {
+                copyModel[part][xPoint].state = copyModel[part][point].state;
+                copyModel[part][xPoint].allow = false;
+              }
+
+            }
+          }
+
           switch (damageState) {
             case "Default":
               child.material.color.set(copyModel.color);
@@ -337,6 +350,15 @@ function cursorPointer(event) {
 
 window.addEventListener('mousemove', cursorPointer);
 
+function arraysIguales(arr1, arr2) {
+  if (arr1.length !== arr2.length) return false;
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) return false;
+  }
+  return true;
+}
+
+let partesListaAnterior = []
 // Animate the scene
 const animate = () => {
   var stateElement = document.getElementById('state');
@@ -345,6 +367,25 @@ const animate = () => {
   if (state === 'rotando') {
     orbitControls.autoRotate = true;
   }
+
+  let partesLista = [];
+  if (copyModel.partes) {
+    for (let parte of copyModel.partes) {
+      for (let p in copyModel[parte]) {
+        if (copyModel[parte][p].state !== "Default") {
+          partesLista.push(`${copyModel[parte][p].group}_${copyModel[parte][p].name}_${copyModel[parte][p].state}`);
+        }
+      }
+    }
+  }
+
+  // Comparar y imprimir cambios en la lista
+  if (!arraysIguales(partesLista, partesListaAnterior)) {
+    console.log("Lista de partes actualizada:");
+    partesLista.forEach(parte => console.log(parte));
+    partesListaAnterior = partesLista.slice(); // Copiar la lista para evitar modificar la original
+  }
+
 
   orbitControls.update();
   renderer.render(scene, camera);

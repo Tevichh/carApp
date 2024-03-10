@@ -9,7 +9,7 @@ export let Sedan = {
         rute: "./model/Modelo01/sedan.gltf",
     },
     RIGHTDOORF: {
-        P1: { name: "P1", state: "Default", group: "RIGHTDOORF", allow: true },
+        P1: { name: "P1", state: "Paint_2", group: "RIGHTDOORF", allow: true },
         P2: { name: "P2", state: "Default", group: "RIGHTDOORF", allow: true },
         P3: { name: "P3", state: "Default", group: "RIGHTDOORF", allow: true },
         P4: { name: "P4", state: "Default", group: "RIGHTDOORF", allow: true },
@@ -122,16 +122,16 @@ export let Sedan = {
         P3: { name: "P3", state: "Default", group: "WINDOWFRAMER", allow: true }
     },
     light: {
-        FL: { name: 'FL', state: "Default" },
-        FR: { name: 'FR', state: "Default" },
-        BL: { name: 'BL', state: "Default" },
-        BR: { name: 'BR', state: "Default" },
+        FL: { name: 'FL', group: "LIGHT", state: "Default" },
+        FR: { name: 'FR', group: "LIGHT", state: "Default" },
+        BL: { name: 'BL', group: "LIGHT", state: "Default" },
+        BR: { name: 'BR', group: "LIGHT", state: "Default" },
     },
     Rin: {
-        FL: { name: 'FL', state: "Default" },
-        FR: { name: 'FR', state: "Default" },
-        BL: { name: 'BL', state: "Default" },
-        BR: { name: 'BR', state: "Default" },
+        FL: { name: 'FL', group: "Rin", state: "Default" },
+        FR: { name: 'FR', group: "Rin", state: "Default" },
+        BL: { name: 'BL', group: "Rin", state: "Default" },
+        BR: { name: 'BR', group: "Rin", state: "Default" },
     },
     MIRRORL: {
         P1: { name: "P1", state: "Default", group: "MIRRORL", allow: true },

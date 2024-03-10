@@ -20,7 +20,7 @@ const stopControls = () => {
 };
 
 const allowControls = () => {
-    orbitControls.enableZoom = false;
+    orbitControls.enableZoom = true;
     orbitControls.enablePan = false;
     orbitControls.enableRotate = true;
     orbitControls.autoRotate = false;
