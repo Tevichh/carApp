@@ -9,7 +9,7 @@ export let Sedan = {
         rute: "./model/Modelo01/sedan.gltf",
     },
     RIGHTDOORF: {
-        P1: { name: "P1", state: "Paint_2", group: "RIGHTDOORF", allow: true },
+        P1: { name: "P1", state: "Default", group: "RIGHTDOORF", allow: true },
         P2: { name: "P2", state: "Default", group: "RIGHTDOORF", allow: true },
         P3: { name: "P3", state: "Default", group: "RIGHTDOORF", allow: true },
         P4: { name: "P4", state: "Default", group: "RIGHTDOORF", allow: true },
