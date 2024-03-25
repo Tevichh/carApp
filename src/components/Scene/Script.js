@@ -11,6 +11,17 @@ var num = 0;
 var copyModel = {};
 var clickControl = false;
 
+//Options var
+const opPartDefault = 0;
+const opPartFirtsDmg = 1;
+const opPartSencondDmg = 2;
+
+const opRinDefault = 0;
+const opRinDmg = 1;
+
+const opLightDefault = 0;
+const opLightDmg = 1;
+
 // Animation GSAP
 const timeline = new gsap.timeline({ defaults: { duration: 1 } });
 
@@ -71,23 +82,50 @@ document.addEventListener('DOMContentLoaded', function () {
     //Send Cost
     if (target.id === "SEND") {
       console.log(copyModel);
+      //console.log(copyModel.BUMPERB.P1.state)
+      var query = window.location.search.substring(1);
+      var cc = query.split("=");
+      var id = cc[1];
+      if (cc.length <= 1) {
+        alert("Falta query parameter");
+      } else {
+        alert(id);
+        let data = 'ID=' + id + '&ESTADO=1&MODELO=' + copyModel.name;
 
-      /*const requestBody = copyModel;
-      
-      const response = await fetch('https://api.example.com/endpoint', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestBody)
-      }); 
+        for (let part of copyModel.partes) {
+          for (let prop in copyModel[part]) {
+            if (typeof copyModel[part][prop] === 'object' && 'state' in copyModel[part][prop]) {
+              data += `&${part}_${prop}=${copyModel[part][prop].state}`;
+            }
+          }
+        }
 
-      const responseData = await response.json();
-      if (responseData.status) {
-        window.location.href = responseData.href;
-      }else{
-        alert("OCURRIO UN ERROR");
-      }*/
+        console.log(data);
+
+
+        //var ref = "22";
+
+        console.log(data)
+
+        /*fetch('https://itpa-sigtac.com/webgo/controlador/actualizarCotizacion.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: data
+        }).then(function (response) {
+          if (response.ok) {
+            alert('Actualización exitosa');
+          } else {
+            alert('Hubo un error al actualizar');
+          }
+        }).catch(function (error) {
+          console.error('Error en la solicitud:', error);
+        });*/
+
+      }
+
+
     }
   }
 
@@ -134,7 +172,7 @@ const loadingManager = new THREE.LoadingManager(
         if (partes.includes(part) && part !== "Rin" && part !== "LIGHT") {
           const damageState = copyModel[part][point].state;
 
-          if (point === "P1" && damageState !== "Default") {
+          if (point === "P1" && damageState !== opPartDefault) {
             for (let xPoint in copyModel[part]) {
               if (xPoint !== "P1") {
                 copyModel[part][xPoint].state = copyModel[part][point].state;
@@ -145,13 +183,13 @@ const loadingManager = new THREE.LoadingManager(
           }
 
           switch (damageState) {
-            case "Default":
+            case opPartDefault:
               child.material.color.set(copyModel.color);
               break;
-            case "Paint_1":
+            case opPartFirtsDmg:
               child.material.color.set(0x181800);
               break;
-            case "Paint_2":
+            case opPartSencondDmg:
               child.material.color.set(0x272700);
               break;
             default:
@@ -162,10 +200,10 @@ const loadingManager = new THREE.LoadingManager(
 
         else if (part === "Rin") {
           switch (copyModel[part][childDivided[1]].state) {
-            case "Default":
+            case opRinDefault:
               child.material.color.set(0xA29E94);
               break;
-            case "Damage":
+            case opRinDmg:
               child.material.color.set(0x181800);
 
               break;
@@ -176,10 +214,10 @@ const loadingManager = new THREE.LoadingManager(
 
         else if (part === "LIGHT") {
           switch (copyModel.light[childDivided[1]].state) {
-            case "Default":
+            case opLightDefault:
               child.material.color.set(childDivided[1] === "FR" || childDivided[1] === "FL" ? 0x000000 : 0x290503);
               break;
-            case "Damage":
+            case opLightDmg:
               child.material.color.set(childDivided[1] === "FR" || childDivided[1] === "FL" ? 0xFFFFFF : 0xFF3F2F);
               break;
             default:
@@ -209,16 +247,16 @@ const gltfLoaders = new GLTFLoader(loadingManager);
 function partsChange(child, name, grupo) {
 
   const option = copyModel[grupo][name].state
-  const damageState = option === "Default" ? "Paint_1" : option === "Paint_1" ? "Paint_2" : "Default";
+  const damageState = option === opPartDefault ? opPartFirtsDmg : option === opPartFirtsDmg ? opPartSencondDmg : opPartDefault;
 
   switch (damageState) {
-    case "Default":
+    case opPartDefault:
       child.material.color.set(copyModel.color);
       break;
-    case "Paint_1":
+    case opPartFirtsDmg:
       child.material.color.set(0x181800);
       break;
-    case "Paint_2":
+    case opPartSencondDmg:
       child.material.color.set(0x272700);
       break;
     default:
@@ -234,14 +272,14 @@ function partsChange(child, name, grupo) {
 
 function rinChange(child, name) {
 
-  child.userData.colorState = copyModel.Rin[name].state === "Default" ? "Damage" : "Default";
+  child.userData.colorState = copyModel.Rin[name].state === opRinDefault ? opRinDmg : opRinDefault;
   console.log(name)
 
   switch (child.userData.colorState) {
-    case "Default":
+    case opRinDefault:
       child.material.color.set(0xA29E94);
       break;
-    case "Damage":
+    case opRinDmg:
       child.material.color.set(0x181800);
       break;
     default:
@@ -254,13 +292,13 @@ function rinChange(child, name) {
 
 function lightChange(child, name) {
 
-  child.userData.colorState = copyModel.light[name].state === "Default" ? "Damage" : "Default";
+  child.userData.colorState = copyModel.light[name].state === opLightDefault ? opLightDmg : opLightDefault;
 
   switch (child.userData.colorState) {
-    case "Default":
+    case opLightDefault:
       child.material.color.set(name === "FR" || name === "FL" ? 0x000000 : 0x290503);
       break;
-    case "Damage":
+    case opLightDmg:
       child.material.color.set(name === "FR" || name === "FL" ? 0xFFFFFF : 0xFF3F2F);
       break;
     default:
@@ -322,7 +360,7 @@ function onTouch(event) {
           const preState = copyModel[grupo][nombre].state;
           for (let x in copyModel[grupo]) {
 
-            if (x !== "P1" && copyModel[grupo][nombre].state !== "Default") {
+            if (x !== "P1" && copyModel[grupo][nombre].state !== opPartDefault) {
               copyModel[grupo][x].allow = false;
               copyModel[grupo][x].state = preState;
             } else {
@@ -330,6 +368,14 @@ function onTouch(event) {
             }
 
             updateColorsByGroup(scene, copyModel[grupo][x].name, grupo);
+
+            if (x !== "P1") {
+              copyModel[grupo][x].state = opPartDefault;
+              if (copyModel[grupo][nombre].state === opPartDefault) {
+                copyModel[grupo][x].state = opPartSencondDmg;
+                updateColorsByGroup(scene, copyModel[grupo][x].name, grupo);
+              }
+            }
           }
         } else if (copyModel[grupo][nombre].allow) {
           updateColorsByGroup(scene, nombre, grupo);
@@ -372,7 +418,7 @@ const animate = () => {
   if (copyModel.partes) {
     for (let parte of copyModel.partes) {
       for (let p in copyModel[parte]) {
-        if (copyModel[parte][p].state !== "Default") {
+        if (copyModel[parte][p].state !== opPartDefault) {
           partesLista.push(`${copyModel[parte][p].group}_${copyModel[parte][p].name}_${copyModel[parte][p].state}`);
         }
       }

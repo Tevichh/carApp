@@ -39,9 +39,9 @@ export function OptionsCar() {
   const handleClose = () => {
     allowClick(true);
     setShow(false);
-    const searchParams = new URLSearchParams(window.location.search);
+    /*const searchParams = new URLSearchParams(window.location.search);
     const parametro = searchParams.get('cc');
-    console.log(parametro);
+    console.log(parametro);*/
   };
   const handleShow = () => {
     allowClick(false);
