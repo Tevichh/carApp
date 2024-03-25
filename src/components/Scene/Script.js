@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var target = event.target;
 
     //Send Cost
-    if (target.id === "SEND") {
+    if (target.id === "SEND" && copyModel.name) {
       console.log(copyModel);
       //console.log(copyModel.BUMPERB.P1.state)
       var query = window.location.search.substring(1);
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         console.log(data)
 
-        /*fetch('https://itpa-sigtac.com/webgo/controlador/actualizarCotizacion.php', {
+        fetch('https://itpa-sigtac.com/webgo/controlador/actualizarCotizacion.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         }).catch(function (error) {
           console.error('Error en la solicitud:', error);
-        });*/
+        });
 
       }
 
