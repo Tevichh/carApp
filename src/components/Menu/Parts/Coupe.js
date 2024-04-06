@@ -6,22 +6,36 @@ export let Coupe = {
         group: "modelCar",
         rute: "./model/Modelo05/scene.gltf"
     },
-    partes: ["LEFTDOOR", "RIGHTDOOR", "ROOF", "HOOD", "TRUNK", "LIGHT", "Rin", "WINDOWFRAMEL", "WINDOWFRAMER", "BUMPERF", "BUMPERB", "MIRRORL", "MIRRORR",
+    partes: ["LEFTDOORF", "RIGHTDOORF", "ROOF", "HOOD", "TRUNK", "LIGHT", "Rin", "WINDOWFRAMEL", "WINDOWFRAMER", "BUMPERF", "BUMPERB", "MIRRORL", "MIRRORR",
         "FENDERRF", "FENDERRB", "FENDERLF", "FENDERLB", "RUNBOARDL", "RUNBOARDR"],
-    RIGHTDOOR: {
-        P1: { name: "P1", state: 0, group: "RIGHTDOOR", allow: true },
-        P2: { name: "P2", state: 0, group: "RIGHTDOOR", allow: true },
-        P3: { name: "P3", state: 0, group: "RIGHTDOOR", allow: true },
-        P4: { name: "P4", state: 0, group: "RIGHTDOOR", allow: true },
-        P5: { name: "P5", state: 0, group: "RIGHTDOOR", allow: true }
-    },
-    LEFTDOOR: {
-        P1: { name: "P1", state: 0, group: "LEFTDOOR", allow: true },
-        P2: { name: "P2", state: 0, group: "LEFTDOOR", allow: true },
-        P3: { name: "P3", state: 0, group: "LEFTDOOR", allow: true },
-        P4: { name: "P4", state: 0, group: "LEFTDOOR", allow: true },
-        P5: { name: "P5", state: 0, group: "LEFTDOOR", allow: true }
-    },
+        RIGHTDOORF: {
+            P1: { name: "P1", state: 0 , group: "RIGHTDOORF", allow: true },
+            P2: { name: "P2", state: 0, group: "RIGHTDOORF", allow: true },
+            P3: { name: "P3", state: 0, group: "RIGHTDOORF", allow: true },
+            P4: { name: "P4", state: 0, group: "RIGHTDOORF", allow: true },
+            P5: { name: "P5", state: 0, group: "RIGHTDOORF", allow: true }
+        },
+        RIGHTDOORB: {
+            P1: { name: "P1", state: 0, group: "RIGHTDOORB", allow: true },
+            P2: { name: "P2", state: 0, group: "RIGHTDOORB", allow: true },
+            P3: { name: "P3", state: 0, group: "RIGHTDOORB", allow: true },
+            P4: { name: "P4", state: 0, group: "RIGHTDOORB", allow: true },
+            P5: { name: "P5", state: 0, group: "RIGHTDOORB", allow: true }
+        },
+        LEFTDOORF: {
+            P1: { name: "P1", state: 0, group: "LEFTDOORF", allow: true },
+            P2: { name: "P2", state: 0, group: "LEFTDOORF", allow: true },
+            P3: { name: "P3", state: 0, group: "LEFTDOORF", allow: true },
+            P4: { name: "P4", state: 0, group: "LEFTDOORF", allow: true },
+            P5: { name: "P5", state: 0, group: "LEFTDOORF", allow: true }
+        },
+        LEFTDOORB: {
+            P1: { name: "P1", state: 0, group: "LEFTDOORB", allow: true },
+            P2: { name: "P2", state: 0, group: "LEFTDOORB", allow: true },
+            P3: { name: "P3", state: 0, group: "LEFTDOORB", allow: true },
+            P4: { name: "P4", state: 0, group: "LEFTDOORB", allow: true },
+            P5: { name: "P5", state: 0, group: "LEFTDOORB", allow: true }
+        },
     ROOF: {
         P1: { name: "P1", state: 0, group: "ROOF", allow: true },
         P2: { name: "P2", state: 0, group: "ROOF", allow: true },
