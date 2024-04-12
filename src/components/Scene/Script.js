@@ -5,6 +5,8 @@ import { gsap } from "gsap";
 import { models } from "../Menu/carParts";
 import { carColor } from "../Menu/carColor"
 
+
+
 // Global variables
 let currentRef = null;
 var num = 0;
@@ -72,6 +74,57 @@ const resize = () => {
 window.addEventListener("resize", resize);
 
 
+//DATA BASE
+function lista() {
+  var id = "3";
+  fetch("https://itpa-sigtac.com/webgo/controlador/consultarCotizacion.php", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'ID=' + id
+  }).then(function (resp) {
+    return resp.text();
+  }).then(function (data) {
+    var valores = eval(data);
+
+    //console.log('Respuesta:', valores[6]);
+    let parts = valores[6];
+    const rechazo = ["MODELO", "ID", "ITEM", "ESTADO"]
+
+    const nameModelo = parts["MODELO"]
+
+    let posicion = Object.keys(models).findIndex(key => models[key].name === nameModelo);
+
+    console.log(models[posicion])
+
+    for (const key in parts) {
+
+      let keys = key.split("_");
+      let mPart = keys[0];
+      let mPoint = keys[1]
+      let mValue = parts[key];
+
+      if (!rechazo.includes(mPart)) {
+
+        //console.log(mPart);
+        if (mValue !== "0") {
+          console.log(mPart + "-" + mPoint + ": " + mValue);
+          models[posicion][mPart][mPoint].state = (parseInt(mValue) < 3 && parseInt(mValue) > 0) ? parseInt(mValue) : 0;
+        }
+
+      }
+
+    }
+
+
+  }).catch(function (error) {
+    console.error('Error:', error);
+  });
+}
+
+lista();
+
 //Dom Events
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -82,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //Send Cost
     if (target.id === "SEND" && copyModel.name) {
       console.log(copyModel);
-      //console.log(copyModel.BUMPERB.P1.state)
       var query = window.location.search.substring(1);
       var cc = query.split("=");
       var id = cc[1];
@@ -90,15 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
         alert("Falta query parameter");
       } else {
         alert(id);
-        /*let data = 'ID=' + id + '&ESTADO=1&MODELO=' + copyModel.name;
 
-        for (let part of copyModel.partes) {
-          for (let prop in copyModel[part]) {
-            if (typeof copyModel[part][prop] === 'object' && 'state' in copyModel[part][prop]) {
-              data += `&${part}_${prop}=${copyModel[part][prop].state}`;
-            }
-          }
-        }*/
         let data = 'ID=' + id + '&ESTADO=1&MODELO=' + copyModel.name
           + '&BUMPERB_P1=' + copyModel.BUMPERB.P1.state
           + '&BUMPERB_P2=' + copyModel.BUMPERB.P2.state
@@ -191,9 +235,6 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(data);
 
 
-        //var ref = "22";
-
-
         fetch('https://itpa-sigtac.com/webgo/controlador/actualizarCotizacion.php', {
           method: 'POST',
           headers: {
@@ -220,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.body.addEventListener('click', containerClickHandler);
 });
 
-
+//LOAD MODEL
 export const loadProducts = async (name, color, capa) => {
   console.log(name, color, capa);
   const model = models.find(model => model.name === name);
@@ -228,6 +269,8 @@ export const loadProducts = async (name, color, capa) => {
 
   const colorModel = Object.entries(carColor).find(([colorName, _]) => colorName === color);
   copyModel.color = colorModel[1]
+
+  //copyModel.BUMPERF.P1.state = valores[6].BUMPERFP1;
 
 }
 
@@ -282,6 +325,8 @@ const loadingManager = new THREE.LoadingManager(
             default:
               break;
           }
+
+
         }
 
 
@@ -514,9 +559,10 @@ const animate = () => {
 
   // Comparar y imprimir cambios en la lista
   if (!arraysIguales(partesLista, partesListaAnterior)) {
-    console.log("Lista de partes actualizada:");
-    partesLista.forEach(parte => console.log(parte));
+    /* console.log("Lista de partes actualizada:");
+    partesLista.forEach(parte => console.log(parte)); */
     partesListaAnterior = partesLista.slice(); // Copiar la lista para evitar modificar la original
+
   }
 
 
