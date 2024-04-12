@@ -189,10 +189,10 @@ document.addEventListener('DOMContentLoaded', function () {
           + '&LEFTDOORF_P3=' + copyModel.LEFTDOORF.P3.state
           + '&LEFTDOORF_P4=' + copyModel.LEFTDOORF.P4.state
           + '&LEFTDOORF_P5=' + copyModel.LEFTDOORF.P5.state
-          + '&LIGHT_BL=' + copyModel.light.BL.state
-          + '&LIGHT_BR=' + copyModel.light.BR.state
-          + '&LIGHT_FL=' + copyModel.light.FL.state
-          + '&LIGHT_FR=' + copyModel.light.FR.state
+          + '&LIGHT_BL=' + copyModel.LIGHT.BL.state
+          + '&LIGHT_BR=' + copyModel.LIGHT.BR.state
+          + '&LIGHT_FL=' + copyModel.LIGHT.FL.state
+          + '&LIGHT_FR=' + copyModel.LIGHT.FR.state
           + '&MIRRORL_P1=' + copyModel.MIRRORL.P1.state
           + '&MIRRORR_P1=' + copyModel.MIRRORR.P1.state
           + '&RIGHTDOORB_P1=' + copyModel.RIGHTDOORB.P1.state
@@ -205,10 +205,10 @@ document.addEventListener('DOMContentLoaded', function () {
           + '&RIGHTDOORF_P3=' + copyModel.RIGHTDOORF.P3.state
           + '&RIGHTDOORF_P4=' + copyModel.RIGHTDOORF.P4.state
           + '&RIGHTDOORF_P5=' + copyModel.RIGHTDOORF.P5.state
-          + '&RIN_BL=' + copyModel.Rin.BL.state
-          + '&RIN_BR=' + copyModel.Rin.BR.state
-          + '&RIN_FL=' + copyModel.Rin.FL.state
-          + '&RIN_FR=' + copyModel.Rin.FR.state
+          + '&RIN_BL=' + copyModel.RIN.BL.state
+          + '&RIN_BR=' + copyModel.RIN.BR.state
+          + '&RIN_FL=' + copyModel.RIN.FL.state
+          + '&RIN_FR=' + copyModel.RIN.FR.state
           + '&ROOF_P1=' + copyModel.ROOF.P1.state
           + '&ROOF_P2=' + copyModel.ROOF.P2.state
           + '&ROOF_P3=' + copyModel.ROOF.P3.state
@@ -297,9 +297,9 @@ const loadingManager = new THREE.LoadingManager(
 
 
         const partes = copyModel.partes;
-        //console.log(childDivided)
+        /* console.log(part) */
 
-        if (partes.includes(part) && part !== "Rin" && part !== "LIGHT") {
+        if (partes.includes(part) && part !== "RIN" && part !== "LIGHT") {
           const damageState = copyModel[part][point].state;
 
           if (point === "P1" && damageState !== opPartDefault) {
@@ -330,7 +330,7 @@ const loadingManager = new THREE.LoadingManager(
         }
 
 
-        else if (part === "Rin") {
+        else if (part === "RIN") {
           switch (copyModel[part][childDivided[1]].state) {
             case opRinDefault:
               child.material.color.set(0xA29E94);
@@ -345,7 +345,7 @@ const loadingManager = new THREE.LoadingManager(
         }
 
         else if (part === "LIGHT") {
-          switch (copyModel.light[childDivided[1]].state) {
+          switch (copyModel.LIGHT[childDivided[1]].state) {
             case opLightDefault:
               child.material.color.set(childDivided[1] === "FR" || childDivided[1] === "FL" ? 0x000000 : 0x290503);
               break;
@@ -404,8 +404,7 @@ function partsChange(child, name, grupo) {
 
 function rinChange(child, name) {
 
-  child.userData.colorState = copyModel.Rin[name].state === opRinDefault ? opRinDmg : opRinDefault;
-  console.log(name)
+  child.userData.colorState = copyModel.RIN[name].state === opRinDefault ? opRinDmg : opRinDefault;
 
   switch (child.userData.colorState) {
     case opRinDefault:
@@ -418,13 +417,13 @@ function rinChange(child, name) {
       break;
   }
 
-  copyModel.Rin[name].state = child.userData.colorState;
+  copyModel.RIN[name].state = child.userData.colorState;
 }
 
 
 function lightChange(child, name) {
 
-  child.userData.colorState = copyModel.light[name].state === opLightDefault ? opLightDmg : opLightDefault;
+  child.userData.colorState = copyModel.LIGHT[name].state === opLightDefault ? opLightDmg : opLightDefault;
 
   switch (child.userData.colorState) {
     case opLightDefault:
@@ -437,7 +436,7 @@ function lightChange(child, name) {
       break;
   }
 
-  copyModel.light[name].state = child.userData.colorState;
+  copyModel.LIGHT[name].state = child.userData.colorState;
   document.getElementById('fullAdd').innerHTML = num;
 }
 
@@ -452,7 +451,7 @@ function updateColorsByGroup(scene, nombre, grupo) {
 
       if (isGroupMatch) {
         partsChange(child, nombre, grupo)
-      } else if (isRin && grupo === "Rin") {
+      } else if (isRin && grupo === "RIN") {
         rinChange(child, nombre)
       } else if (isLight && grupo === "LIGHT") {
         lightChange(child, nombre)
@@ -484,7 +483,7 @@ function onTouch(event) {
       const grupos = copyModel.partes;
 
       if (grupos.includes(grupo)) {
-        if (grupo === "Rin" || grupo === "LIGHT") {
+        if (grupo === "RIN" || grupo === "LIGHT") {
           updateColorsByGroup(scene, nombre, grupo);
         }
 
@@ -561,7 +560,7 @@ const animate = () => {
   if (!arraysIguales(partesLista, partesListaAnterior)) {
     /* console.log("Lista de partes actualizada:");
     partesLista.forEach(parte => console.log(parte)); */
-    partesListaAnterior = partesLista.slice(); // Copiar la lista para evitar modificar la original
+    partesListaAnterior = partesLista.slice(); 
 
   }
 

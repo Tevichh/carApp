@@ -6,7 +6,7 @@ export let Coupe = {
         group: "modelCar",
         rute: "./model/Modelo05/scene.gltf"
     },
-    partes: ["LEFTDOORF", "RIGHTDOORF", "ROOF", "HOOD", "TRUNK", "LIGHT", "Rin", "WINDOWFRAMEL", "WINDOWFRAMER", "BUMPERF", "BUMPERB", "MIRRORL", "MIRRORR",
+    partes: ["LEFTDOORF", "RIGHTDOORF", "ROOF", "HOOD", "TRUNK", "LIGHT", "RIN", "WINDOWFRAMEL", "WINDOWFRAMER", "BUMPERF", "BUMPERB", "MIRRORL", "MIRRORR",
         "FENDERRF", "FENDERRB", "FENDERLF", "FENDERLB", "RUNBOARDL", "RUNBOARDR"],
         RIGHTDOORF: {
             P1: { name: "P1", state: 0 , group: "RIGHTDOORF", allow: true },
@@ -111,17 +111,17 @@ export let Coupe = {
         P2: { name: "P2", state: 0, group: "RUNBOARDR", allow: true },
         P3: { name: "P3", state: 0, group: "RUNBOARDR", allow: true }
     },
-    light: {
-        FL: { name: 'FL', state: 0 },
-        FR: { name: 'FR', state: 0 },
-        BL: { name: 'BL', state: 0 },
-        BR: { name: 'BR', state: 0 },
+    LIGHT: {
+        FL: { name: 'FL', group: "LIGHT", state: 0 },
+        FR: { name: 'FR', group: "LIGHT", state: 0 },
+        BL: { name: 'BL', group: "LIGHT", state: 0 },
+        BR: { name: 'BR', group: "LIGHT", state: 0 },
     },
-    Rin: {
-        FL: { name: 'FL', state: 0 },
-        FR: { name: 'FR', state: 0 },
-        BL: { name: 'BL', state: 0 },
-        BR: { name: 'BR', state: 0 },
+    RIN: {
+        FL: { name: 'FL', group: "RIN", state: 0 },
+        FR: { name: 'FR', group: "RIN", state: 0 },
+        BL: { name: 'BL', group: "RIN", state: 0 },
+        BR: { name: 'BR', group: "RIN", state: 0 },
     },
     WINDOWFRAMEL: {
         P1: { name: "P1", state: 0, group: "WINDOWFRAMEL", allow: true },

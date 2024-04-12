@@ -2,7 +2,7 @@ export let Sedan = {
     name: "SEDAN",
     scale: 0.08,
     color: 0x000000,
-    partes: ["LEFTDOORF", "LEFTDOORB", "RIGHTDOORF", "RIGHTDOORB", "ROOF", "HOOD", "TRUNK", "LIGHT", "Rin", "WINDOWFRAMEL",
+    partes: ["LEFTDOORF", "LEFTDOORB", "RIGHTDOORF", "RIGHTDOORB", "ROOF", "HOOD", "TRUNK", "LIGHT", "RIN", "WINDOWFRAMEL",
         "WINDOWFRAMER", "BUMPERF", "BUMPERB", "FENDERRF", "FENDERRB", "FENDERLF", "FENDERLB", "MIRRORL", "MIRRORR", "RUNBOARDL", "RUNBOARDR"],
     modelCar: {
         group: "modelCar",
@@ -121,17 +121,17 @@ export let Sedan = {
         P2: { name: "P2", state: 0, group: "WINDOWFRAMER", allow: true },
         P3: { name: "P3", state: 0, group: "WINDOWFRAMER", allow: true }
     },
-    light: {
+    LIGHT: {
         FL: { name: 'FL', group: "LIGHT", state: 0 },
         FR: { name: 'FR', group: "LIGHT", state: 0 },
         BL: { name: 'BL', group: "LIGHT", state: 0 },
         BR: { name: 'BR', group: "LIGHT", state: 0 },
     },
-    Rin: {
-        FL: { name: 'FL', group: "Rin", state: 0 },
-        FR: { name: 'FR', group: "Rin", state: 0 },
-        BL: { name: 'BL', group: "Rin", state: 0 },
-        BR: { name: 'BR', group: "Rin", state: 0 },
+    RIN: {
+        FL: { name: 'FL', group: "RIN", state: 0 },
+        FR: { name: 'FR', group: "RIN", state: 0 },
+        BL: { name: 'BL', group: "RIN", state: 0 },
+        BR: { name: 'BR', group: "RIN", state: 0 },
     },
     MIRRORL: {
         P1: { name: "P1", state: 0, group: "MIRRORL", allow: true },

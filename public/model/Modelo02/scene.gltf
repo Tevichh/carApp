@@ -583,7 +583,7 @@
 		},
 		{
 			"mesh":38,
-			"name":"Rin_BL"
+			"name":"RIN_BL"
 		},
 		{
 			"children":[
@@ -657,7 +657,7 @@
 		},
 		{
 			"mesh":42,
-			"name":"Rin_FL"
+			"name":"RIN_FL"
 		},
 		{
 			"children":[
@@ -694,7 +694,7 @@
 		},
 		{
 			"mesh":44,
-			"name":"Rin_FR"
+			"name":"RIN_FR"
 		},
 		{
 			"children":[
@@ -1829,7 +1829,7 @@
 		},
 		{
 			"doubleSided":true,
-			"name":"Rin_BL",
+			"name":"RIN_BL",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
 					0.800000011920929,
@@ -1842,7 +1842,7 @@
 		},
 		{
 			"doubleSided":true,
-			"name":"Rin_BR",
+			"name":"RIN_BR",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
 					0.800000011920929,
@@ -1855,7 +1855,7 @@
 		},
 		{
 			"doubleSided":true,
-			"name":"Rin_FL",
+			"name":"RIN_FL",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
 					0.800000011920929,
@@ -1868,7 +1868,7 @@
 		},
 		{
 			"doubleSided":true,
-			"name":"Rin_FR",
+			"name":"RIN_FR",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
 					0.800000011920929,
@@ -2595,7 +2595,7 @@
 			]
 		},
 		{
-			"name":"Rin_BL",
+			"name":"RIN_BL",
 			"primitives":[
 				{
 					"attributes":{
@@ -2623,7 +2623,7 @@
 			]
 		},
 		{
-			"name":"Rin_BR",
+			"name":"RIN_BR",
 			"primitives":[
 				{
 					"attributes":{
@@ -2651,7 +2651,7 @@
 			]
 		},
 		{
-			"name":"Rin_FL",
+			"name":"RIN_FL",
 			"primitives":[
 				{
 					"attributes":{
@@ -2679,7 +2679,7 @@
 			]
 		},
 		{
-			"name":"Rin_FR",
+			"name":"RIN_FR",
 			"primitives":[
 				{
 					"attributes":{
