@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./Styles.css";
 import { gsapAnimation, orbitControls } from '../Scene/Script.js';
 import { OptionsCar } from './OptionsCar.js';
+import { Cotizacion } from './Cotizacion.js';
 
 const animations = {
     original: { cam: { x: 7.3, y: 2.1, z: 4.7 }, pos: { x: 0, y: 0, z: 0 } },
@@ -39,8 +40,10 @@ const Menu = () => {
                     <div className='MenuOptions'>
                         <div className='Calculator'>
                             <h2>COTIZACIÓN</h2>
-                            <label>TOTAL: </label>
-                            <label id='fullAdd'>0</label>
+                            {/*<label>TOTAL: </label>
+                            <label id='fullAdd'>0</label>*/}
+                            <Cotizacion></Cotizacion>
+                            
                         </div>
                         <button id='SEND'>SEND</button>
                     </div>

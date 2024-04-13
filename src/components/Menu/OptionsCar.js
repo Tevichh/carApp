@@ -14,7 +14,7 @@ const handleModelChange = (modelModal) => {
     removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR');
 
 
-    document.getElementById('fullAdd').innerHTML = model.cotizacion;
+    //document.getElementById('fullAdd').innerHTML = model.cotizacion;
   }
 };
 

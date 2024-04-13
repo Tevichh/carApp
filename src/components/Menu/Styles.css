@@ -63,6 +63,9 @@ body {
   background-color: #ffffff;
   height: 6em;
   width: 18em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .Calculator label{
   color: #123123;

@@ -9,9 +9,10 @@ import { carColor } from "../Menu/carColor"
 
 // Global variables
 let currentRef = null;
-var num = 0;
+//var num = 0;
 var copyModel = {};
 var clickControl = false;
+
 
 //Options var
 const opPartDefault = 0;
@@ -269,10 +270,19 @@ export const loadProducts = async (name, color, capa) => {
 
   const colorModel = Object.entries(carColor).find(([colorName, _]) => colorName === color);
   copyModel.color = colorModel[1]
+  
+
+
+  
 
   //copyModel.BUMPERF.P1.state = valores[6].BUMPERFP1;
 
 }
+
+export const enviarCotizacion = () => {
+  return copyModel;
+}
+
 
 export const allowClick = async (allow) => {
   if (allow) {
@@ -437,7 +447,7 @@ function lightChange(child, name) {
   }
 
   copyModel.LIGHT[name].state = child.userData.colorState;
-  document.getElementById('fullAdd').innerHTML = num;
+  //document.getElementById('fullAdd').innerHTML = num;
 }
 
 
@@ -560,7 +570,7 @@ const animate = () => {
   if (!arraysIguales(partesLista, partesListaAnterior)) {
     /* console.log("Lista de partes actualizada:");
     partesLista.forEach(parte => console.log(parte)); */
-    partesListaAnterior = partesLista.slice(); 
+    partesListaAnterior = partesLista.slice();
 
   }
 
