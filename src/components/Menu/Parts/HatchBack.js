@@ -126,19 +126,21 @@ export const HacthBack = {
     FR: { name: 'FR', group: "LIGHT", state: 0 },
     BL: { name: 'BL', group: "LIGHT", state: 0 },
     BR: { name: 'BR', group: "LIGHT", state: 0 },
-},
-RIN: {
+  },
+  RIN: {
     FL: { name: 'FL', group: "RIN", state: 0 },
     FR: { name: 'FR', group: "RIN", state: 0 },
     BL: { name: 'BL', group: "RIN", state: 0 },
     BR: { name: 'BR', group: "RIN", state: 0 },
-},
+  },
   MIRRORL: {
     P1: { name: "P1", state: 0, group: "MIRRORL", allow: true },
   },
   MIRRORR: {
     P1: { name: "P1", state: 0, group: "MIRRORR", allow: true },
   },
+  horas: 0,
+  gramos: 0,
   cotizacion: 0
 
 };

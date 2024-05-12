@@ -6,7 +6,7 @@ import { Cotizacion } from './Cotizacion.js';
 
 const animations = {
     original: { cam: { x: 7.3, y: 2.1, z: 4.7 }, pos: { x: 0, y: 0, z: 0 } },
-    top: { cam: { x: 0.367, y: 8.9, z: 0 }, pos: { x: 0, y: -30, z: 0 } },
+    top: { cam: { x: 0.367, y: 8.9, z: 0 }, pos: { x: 0, y: 0, z: 0 } },
     front: { cam: { x: 0, y: 1, z: 10 }, pos: { x: 0, y: 0.2, z: 0 } },
     back: { cam: { x: 0, y: 1, z: -10 }, pos: { x: 0, y: 0.2, z: 0 } },
     left: { cam: { x: 7.2, y: 2, z: 0 }, pos: { x: 0, y: 0, z: 0 } },

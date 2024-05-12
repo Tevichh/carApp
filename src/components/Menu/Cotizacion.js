@@ -37,15 +37,15 @@ export const Cotizacion = () => {
                 <Modal.Body>
                     <Card >
                         <Card.Body>
-                            <Card.Title>CARACTERISTICAS DEL MODELO</Card.Title>
+                            <Card.Title>CARACTERÍSTICAS DEL MODELO</Card.Title>
                             <Card.Text>
                                 {datosCotizacion? datosCotizacion.name : ''}
                             </Card.Text>
                         </Card.Body>
                         <ListGroup className="list-group-flush">
-                            <ListGroup.Item>GRAMOS UTILIZADOS: {"100"} Gr</ListGroup.Item>
-                            <ListGroup.Item>HORAS UTILIZADAS: {"3"} H</ListGroup.Item>
-                            <ListGroup.Item>PRECIO TOTAL: {10000}</ListGroup.Item>
+                            <ListGroup.Item>GRAMOS UTILIZADOS: {datosCotizacion? datosCotizacion.gramos : 0} Gr</ListGroup.Item>
+                            <ListGroup.Item>HORAS UTILIZADAS: {datosCotizacion? datosCotizacion.horas : 0} H</ListGroup.Item>
+                            <ListGroup.Item>PRECIO TOTAL: {datosCotizacion? datosCotizacion.Cotizacion : 0}</ListGroup.Item>
                         </ListGroup>
                     </Card>
                 </Modal.Body>

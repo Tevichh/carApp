@@ -1,9 +1,9 @@
 export let Convertible = {
     name: "CONVERTIBLE",
-    scale: 0.03,
+    scale: 0.35,
     modelCar: {
         group: "modelCar",
-        rute: "" 
+        rute: "./model/Modelo06/scene.gltf" 
     },
     damageTop: {
         P1: { name: 'P1', group: 'top', value1: 0, value2: 0, state: "Default" },
@@ -81,5 +81,7 @@ export let Convertible = {
         BL: { name: 'BL', value: 0, state: "Default" },
         BR: { name: 'BR', value: 0, state: "Default" },
     },
+    horas: 0,
+    gramos: 0,
     cotizacion: 0
 };

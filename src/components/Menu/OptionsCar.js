@@ -87,12 +87,11 @@ export function OptionsCar() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSave}>
-            Save Changes
-          </Button>
+          <a href='#root'>
+            <Button  variant="secondary" onClick={handleClose}>Close</Button>
+          </a>
+          <a href='#root'>
+            <Button variant="primary"  onClick={handleSave}>Save Changes</Button></a>
         </Modal.Footer>
       </Modal>
     </>

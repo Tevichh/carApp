@@ -1,15 +1,15 @@
 export let Sedan = {
     name: "SEDAN",
-    scale: 0.08,
+    scale: 1.2,
     color: 0x000000,
     partes: ["LEFTDOORF", "LEFTDOORB", "RIGHTDOORF", "RIGHTDOORB", "ROOF", "HOOD", "TRUNK", "LIGHT", "RIN", "WINDOWFRAMEL",
         "WINDOWFRAMER", "BUMPERF", "BUMPERB", "FENDERRF", "FENDERRB", "FENDERLF", "FENDERLB", "MIRRORL", "MIRRORR", "RUNBOARDL", "RUNBOARDR"],
     modelCar: {
         group: "modelCar",
-        rute: "./model/Modelo01/sedan.gltf",
+        rute: "./model/Modelo01/scene.gltf",
     },
     RIGHTDOORF: {
-        P1: { name: "P1", state: 0 , group: "RIGHTDOORF", allow: true },
+        P1: { name: "P1", state: 0, group: "RIGHTDOORF", allow: true },
         P2: { name: "P2", state: 0, group: "RIGHTDOORF", allow: true },
         P3: { name: "P3", state: 0, group: "RIGHTDOORF", allow: true },
         P4: { name: "P4", state: 0, group: "RIGHTDOORF", allow: true },
@@ -139,5 +139,7 @@ export let Sedan = {
     MIRRORR: {
         P1: { name: "P1", state: 0, group: "MIRRORR", allow: true },
     },
+    horas: 0,
+    gramos: 0,
     cotizacion: 0
 };

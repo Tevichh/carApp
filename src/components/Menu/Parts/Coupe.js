@@ -139,6 +139,7 @@ export let Coupe = {
     MIRRORR: {
         P1: { name: "P1", state: 0, group: "MIRRORR", allow: true },
     },
-
+    horas: 0,
+    gramos: 0,
     cotizacion: 0
 };

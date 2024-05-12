@@ -11,6 +11,12 @@ import { carColor } from "../Menu/carColor"
 let currentRef = null;
 //var num = 0;
 var copyModel = {};
+var sedanData;
+var hatchbackaData;
+var pickupData;
+var camionetaData;
+var coupeData;
+var convertibleData;
 var clickControl = false;
 
 
@@ -24,6 +30,10 @@ const opRinDmg = 1;
 
 const opLightDefault = 0;
 const opLightDmg = 1;
+
+//COLORS
+const color1 = 0x181800;
+const color2 = 0x272700;
 
 // Animation GSAP
 const timeline = new gsap.timeline({ defaults: { duration: 1 } });
@@ -77,7 +87,7 @@ window.addEventListener("resize", resize);
 
 //DATA BASE
 function lista() {
-  var id = "3";
+  var id = prompt();
   fetch("https://itpa-sigtac.com/webgo/controlador/consultarCotizacion.php", {
     method: 'POST',
     headers: {
@@ -89,7 +99,15 @@ function lista() {
   }).then(function (data) {
     var valores = eval(data);
 
-    //console.log('Respuesta:', valores[6]);
+    sedanData = valores[0]
+    hatchbackaData = valores[1]
+    pickupData = valores[2]
+    camionetaData = valores[3]
+    coupeData = valores[4]
+    convertibleData = valores[5]
+
+    console.log('Respuesta2:', valores[6]);
+    console.log('modelo:', valores[prompt()]);
     let parts = valores[6];
     const rechazo = ["MODELO", "ID", "ITEM", "ESTADO"]
 
@@ -97,7 +115,7 @@ function lista() {
 
     let posicion = Object.keys(models).findIndex(key => models[key].name === nameModelo);
 
-    console.log(models[posicion])
+    /* console.log("nombre del modelo es ", models[posicion]) */
 
     for (const key in parts) {
 
@@ -270,10 +288,10 @@ export const loadProducts = async (name, color, capa) => {
 
   const colorModel = Object.entries(carColor).find(([colorName, _]) => colorName === color);
   copyModel.color = colorModel[1]
-  
 
 
-  
+
+
 
   //copyModel.BUMPERF.P1.state = valores[6].BUMPERFP1;
 
@@ -327,10 +345,10 @@ const loadingManager = new THREE.LoadingManager(
               child.material.color.set(copyModel.color);
               break;
             case opPartFirtsDmg:
-              child.material.color.set(0x181800);
+              child.material.color.set(color1);
               break;
             case opPartSencondDmg:
-              child.material.color.set(0x272700);
+              child.material.color.set(color2);
               break;
             default:
               break;
@@ -346,7 +364,7 @@ const loadingManager = new THREE.LoadingManager(
               child.material.color.set(0xA29E94);
               break;
             case opRinDmg:
-              child.material.color.set(0x181800);
+              child.material.color.set(color1);
 
               break;
             default:
@@ -370,6 +388,25 @@ const loadingManager = new THREE.LoadingManager(
 
       }
     });
+
+    let partesLista = [];
+    if (copyModel.partes) {
+      for (let parte of copyModel.partes) {
+        for (let p in copyModel[parte]) {
+          if (copyModel[parte][p].state !== opPartDefault) {
+            if (p === "P1") {
+              copyModel[parte]["P2"].state = 0;
+              copyModel[parte]["P3"].state = 0;
+              copyModel[parte]["P4"].state = 0;
+              copyModel[parte]["P5"].state = 0;
+            }
+            partesLista.push(`${copyModel[parte][p].group}_${copyModel[parte][p].name}_${copyModel[parte][p].state}`);
+          }
+        }
+      }
+    }
+
+    //console.log(partesLista)
 
 
   },
@@ -396,10 +433,10 @@ function partsChange(child, name, grupo) {
       child.material.color.set(copyModel.color);
       break;
     case opPartFirtsDmg:
-      child.material.color.set(0x181800);
+      child.material.color.set(color1);
       break;
     case opPartSencondDmg:
-      child.material.color.set(0x272700);
+      child.material.color.set(color2);
       break;
     default:
       break;
@@ -421,7 +458,7 @@ function rinChange(child, name) {
       child.material.color.set(0xA29E94);
       break;
     case opRinDmg:
-      child.material.color.set(0x181800);
+      child.material.color.set(color1);
       break;
     default:
       break;
@@ -491,6 +528,8 @@ function onTouch(event) {
       const nombre = lista[1];
 
       const grupos = copyModel.partes;
+
+      //alert(grupo)
 
       if (grupos.includes(grupo)) {
         if (grupo === "RIN" || grupo === "LIGHT") {
@@ -568,8 +607,8 @@ const animate = () => {
 
   // Comparar y imprimir cambios en la lista
   if (!arraysIguales(partesLista, partesListaAnterior)) {
-    /* console.log("Lista de partes actualizada:");
-    partesLista.forEach(parte => console.log(parte)); */
+    console.log("Lista de partes actualizada:");
+    partesLista.forEach(parte => console.log(parte));
     partesListaAnterior = partesLista.slice();
 
   }

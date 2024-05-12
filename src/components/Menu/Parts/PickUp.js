@@ -99,6 +99,8 @@ export let PickUp = {
         BL: { name: 'BL', value: 0, state: 0 },
         BR: { name: 'BR', value: 0, state: 0 },
     },
+    horas: 0,
+    gramos: 0,
     cotizacion: 0
 };
 

@@ -20,7 +20,7 @@ const Scene = () => {
   return (
     <>
       <ContainerScene className='SceneContainer' ref={mountRef}></ContainerScene>
-      <Arrow href="#menu">↓</Arrow>
+      <Arrow href="#menu" id='panel'>↓</Arrow>
     </>
 
   );
