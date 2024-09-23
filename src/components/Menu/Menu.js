@@ -43,7 +43,7 @@ const Menu = () => {
                             {/*<label>TOTAL: </label>
                             <label id='fullAdd'>0</label>*/}
                             <Cotizacion></Cotizacion>
-                            
+
                         </div>
                         <button id='SEND'>SEND</button>
                     </div>

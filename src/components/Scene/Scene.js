@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { ContainerScene } from "./Scene.elements";
 import { cleanUpScene, initScene, loadGroups } from "./Script";
 import { Arrow } from "../Menu/Arrow";
+import { ArrowUp } from "../Menu/ArrowUp";
 
 
 
@@ -20,7 +21,9 @@ const Scene = () => {
   return (
     <>
       <ContainerScene className='SceneContainer' ref={mountRef}></ContainerScene>
-      <Arrow href="#menu" id='panel'>↓</Arrow>
+      <Arrow href="#menu" id='panel'>⭣</Arrow>
+      <ArrowUp href="#root" id='panel'>⭡</ArrowUp>
+
     </>
 
   );

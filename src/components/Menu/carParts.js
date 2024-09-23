@@ -5,7 +5,7 @@ import { HacthBack } from './Parts/HatchBack'
 import { Camioneta } from './Parts/Camioneta'
 import { Convertible } from './Parts/Convertible'
 
-export const models = [
+/* export const models = [
 
     Sedan,
     HacthBack,
@@ -13,14 +13,14 @@ export const models = [
     Camioneta,
     Coupe,
     Convertible
-    
 
-]
-/* export const models = [
+
+] */
+export const models = [
 
     Sedan,
     HacthBack,
+    PickUp,
     Coupe
-    
+
 ]
- */

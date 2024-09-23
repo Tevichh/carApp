@@ -11,7 +11,7 @@ const handleModelChange = (modelModal) => {
 
   if (modelModal !== "SELECCIONA") {
     const model = models.find(model => model.name === modelModal);
-    removeModels(model.modelCar.rute, model.modelCar.group, model.scale, 'CAR');
+    removeModels(model.modelCar.rute, model.modelCar.group, model.scale);
 
 
     //document.getElementById('fullAdd').innerHTML = model.cotizacion;
@@ -88,10 +88,10 @@ export function OptionsCar() {
         </Modal.Body>
         <Modal.Footer>
           <a href='#root'>
-            <Button  variant="secondary" onClick={handleClose}>Close</Button>
+            <Button variant="secondary" onClick={handleClose}>Close</Button>
           </a>
           <a href='#root'>
-            <Button variant="primary"  onClick={handleSave}>Save Changes</Button></a>
+            <Button variant="primary" onClick={handleSave}>Save Changes</Button></a>
         </Modal.Footer>
       </Modal>
     </>

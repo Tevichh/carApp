@@ -11,12 +11,9 @@ import { carColor } from "../Menu/carColor"
 let currentRef = null;
 //var num = 0;
 var copyModel = {};
-var sedanData;
-var hatchbackaData;
-var pickupData;
-var camionetaData;
-var coupeData;
-var convertibleData;
+var infoDataModel = {};
+let partesListaInfo = [];
+
 var clickControl = false;
 
 
@@ -32,7 +29,7 @@ const opLightDefault = 0;
 const opLightDmg = 1;
 
 //COLORS
-const color1 = 0x181800;
+const color1 = 0x404000;
 const color2 = 0x272700;
 
 // Animation GSAP
@@ -87,7 +84,7 @@ window.addEventListener("resize", resize);
 
 //DATA BASE
 function lista() {
-  var id = prompt();
+  var id = "3";
   fetch("https://itpa-sigtac.com/webgo/controlador/consultarCotizacion.php", {
     method: 'POST',
     headers: {
@@ -99,15 +96,13 @@ function lista() {
   }).then(function (data) {
     var valores = eval(data);
 
-    sedanData = valores[0]
-    hatchbackaData = valores[1]
-    pickupData = valores[2]
-    camionetaData = valores[3]
-    coupeData = valores[4]
-    convertibleData = valores[5]
+    infoDataModel["SEDAN"] = valores[0]
+    infoDataModel["HATCHBACK"] = valores[1]
+    infoDataModel["PICKUP"] = valores[2]
+    infoDataModel["CAMIONETA"] = valores[3]
+    infoDataModel["COUPE"] = valores[4]
+    infoDataModel["CONVERTIBLE"] = valores[5]
 
-    console.log('Respuesta2:', valores[6]);
-    console.log('modelo:', valores[prompt()]);
     let parts = valores[6];
     const rechazo = ["MODELO", "ID", "ITEM", "ESTADO"]
 
@@ -124,11 +119,11 @@ function lista() {
       let mPoint = keys[1]
       let mValue = parts[key];
 
-      if (!rechazo.includes(mPart)) {
+      if (!rechazo.includes(mPart) && mPoint) {
 
         //console.log(mPart);
         if (mValue !== "0") {
-          console.log(mPart + "-" + mPoint + ": " + mValue);
+          /* console.log(mPart + "-" + mPoint + ": " + mValue); */
           models[posicion][mPart][mPoint].state = (parseInt(mValue) < 3 && parseInt(mValue) > 0) ? parseInt(mValue) : 0;
         }
 
@@ -249,7 +244,11 @@ document.addEventListener('DOMContentLoaded', function () {
           + '&WINDOWFRAMEL_P3=' + copyModel.WINDOWFRAMEL.P3.state
           + '&WINDOWFRAMER_P1=' + copyModel.WINDOWFRAMER.P1.state
           + '&WINDOWFRAMER_P2=' + copyModel.WINDOWFRAMER.P2.state
-          + '&WINDOWFRAMER_P3=' + copyModel.WINDOWFRAMER.P3.state;
+          + '&WINDOWFRAMER_P3=' + copyModel.WINDOWFRAMER.P3.state
+          + '&Color=' + copyModel.color
+          + '&Capa=' + copyModel.Capa
+          + '&Gramos=' + copyModel.gramos
+          + '&Horas=' + copyModel.horas;
 
         console.log(data);
 
@@ -288,6 +287,9 @@ export const loadProducts = async (name, color, capa) => {
 
   const colorModel = Object.entries(carColor).find(([colorName, _]) => colorName === color);
   copyModel.color = colorModel[1]
+  copyModel["Capa"] = capa;
+
+  console.log(copyModel);
 
 
 
@@ -298,7 +300,7 @@ export const loadProducts = async (name, color, capa) => {
 }
 
 export const enviarCotizacion = () => {
-  return copyModel;
+  return [copyModel, infoDataModel, partesListaInfo];
 }
 
 
@@ -401,6 +403,7 @@ const loadingManager = new THREE.LoadingManager(
               copyModel[parte]["P5"].state = 0;
             }
             partesLista.push(`${copyModel[parte][p].group}_${copyModel[parte][p].name}_${copyModel[parte][p].state}`);
+            partesListaInfo = partesLista;
           }
         }
       }
@@ -607,8 +610,9 @@ const animate = () => {
 
   // Comparar y imprimir cambios en la lista
   if (!arraysIguales(partesLista, partesListaAnterior)) {
-    console.log("Lista de partes actualizada:");
-    partesLista.forEach(parte => console.log(parte));
+    /* console.log("Lista de partes actualizada:");
+    partesLista.forEach(parte => console.log(parte)); */
+    partesListaInfo = partesLista;
     partesListaAnterior = partesLista.slice();
 
   }
@@ -668,12 +672,12 @@ export const loadGroups = () => {
 
 
 // Load Models
-export const loadModels = (rute, group, scale, name, value) => {
+export const loadModels = (rute, group, scale) => {
   gltfLoaders.load(rute, (gltf) => {
     while (gltf.scene.children.length) {
       const model = gltf.scene.children[0];
-      model.name = name;
-      model.value = value;
+      /* model.name = name;
+      model.value = value; */
       carParts[group].add(model);
       carParts[group].scale.set(scale, scale, scale);
     }
@@ -681,7 +685,7 @@ export const loadModels = (rute, group, scale, name, value) => {
 };
 
 // Remove Models
-export const removeModels = (rute, group, scale, name, value) => {
+export const removeModels = (rute, group, scale) => {
   const oldModels = new THREE.Group();
 
   while (carParts[group].children.length) {
@@ -693,7 +697,7 @@ export const removeModels = (rute, group, scale, name, value) => {
     carParts[group].remove(carParts[group].children[0]);
   }
 
-  loadModels(rute, group, scale, name, value);
+  loadModels(rute, group, scale);
 
   // Free up memory
   oldModels.traverse((child) => {
@@ -723,4 +727,12 @@ export const gsapAnimation = (camPos, targetPost) => {
       "-=1.0"
     );
 };
+
+
+// Capturamos el evento de la rueda del mouse
+window.addEventListener("wheel", function (event) {
+  // Prevenimos el comportamiento predeterminado (desplazamiento)
+  event.preventDefault();
+}, { passive: false });
+
 
