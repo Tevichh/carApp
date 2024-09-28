@@ -3,18 +3,22 @@ body {
   tap-highlight-color: transparent;
   margin: 0;
 }
+
 .menu {
   width: 100%;
   position: absolute;
   bottom: 1rem;
   background-color: #192028;
 }
-#state{
+
+#state {
   display: none;
 }
-.Modal{
+
+.Modal {
   color: #123123;
 }
+
 .MenuWrapper {
   background-color: #192028;
   width: 100%;
@@ -27,7 +31,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 2em;
-} 
+}
 
 .MenuOptions h1 {
   color: #50727A;
@@ -47,7 +51,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+
 }
 
 .MenuOptionsList select {
@@ -67,11 +71,13 @@ body {
   flex-direction: column;
   align-items: center;
 }
-.Calculator label{
+
+.Calculator label {
   color: #123123;
   font-size: 1.2em;
   font-family: sans-serif;
 }
+
 .Calculator h2 {
   text-align: center;
   color: #123123;
@@ -79,14 +85,14 @@ body {
   font-family: sans-serif;
 }
 
-#SEND{
+#SEND {
   width: 18em;
   margin: 0;
   border-radius: 5%;
-  
+
 }
 
-.MenuOptions{
+.MenuOptions {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
@@ -122,19 +128,32 @@ button {
 
 }
 
+.regresar {
+  text-decoration: none;
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  z-index: 1000;
+  background-image: url("./img/back.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 25px;
+}
+
+
 button:hover,
 button:focus {
   box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
   transform: translateY(-0.25em);
 }
 
-.modalLabel{
+.modalLabel {
   font-size: 1.2em;
   color: #000000;
 }
 
 @media (min-width: 1250px) {
-  button{
+  button {
     width: 12em;
   }
 }
@@ -145,4 +164,3 @@ button:focus {
     bottom: 0;
   }
 }
-

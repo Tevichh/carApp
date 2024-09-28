@@ -9,6 +9,17 @@ import { carColor } from "../Menu/carColor"
 
 // Global variables
 let currentRef = null;
+
+var query = window.location.search.substring(1);
+var cc = query.split("=");
+var id = cc[1];
+
+while (!id) {
+  id = prompt("Parámtros insufucientes...Ingresar placa:")
+}
+
+
+
 //var num = 0;
 var copyModel = {};
 var infoDataModel = {};
@@ -84,7 +95,7 @@ window.addEventListener("resize", resize);
 
 //DATA BASE
 function lista() {
-  var id = "3";
+  /* var id = "3"; */
   fetch("https://itpa-sigtac.com/webgo/controlador/consultarCotizacion.php", {
     method: 'POST',
     headers: {
@@ -94,7 +105,7 @@ function lista() {
   }).then(function (resp) {
     return resp.text();
   }).then(function (data) {
-    var valores = eval(data);
+    var valores = JSON.parse(data);
 
     infoDataModel["SEDAN"] = valores[0]
     infoDataModel["HATCHBACK"] = valores[1]
@@ -109,8 +120,6 @@ function lista() {
     const nameModelo = parts["MODELO"]
 
     let posicion = Object.keys(models).findIndex(key => models[key].name === nameModelo);
-
-    /* console.log("nombre del modelo es ", models[posicion]) */
 
     for (const key in parts) {
 
@@ -134,6 +143,8 @@ function lista() {
 
   }).catch(function (error) {
     console.error('Error:', error);
+    alert("Parámetros invalidos...");
+    window.location.href = window.location.origin + window.location.pathname;
   });
 }
 
@@ -149,127 +160,125 @@ document.addEventListener('DOMContentLoaded', function () {
     //Send Cost
     if (target.id === "SEND" && copyModel.name) {
       console.log(copyModel);
-      var query = window.location.search.substring(1);
-      var cc = query.split("=");
-      var id = cc[1];
-      if (cc.length <= 1) {
+
+      /* if (id.length <= 1) {
         alert("Falta query parameter");
-      } else {
-        alert(id);
+      } */
+      alert(id);
 
-        let data = 'ID=' + id + '&ESTADO=1&MODELO=' + copyModel.name
-          + '&BUMPERB_P1=' + copyModel.BUMPERB.P1.state
-          + '&BUMPERB_P2=' + copyModel.BUMPERB.P2.state
-          + '&BUMPERB_P3=' + copyModel.BUMPERB.P3.state
-          + '&BUMPERB_P4=' + copyModel.BUMPERB.P4.state
-          + '&BUMPERB_P5=' + copyModel.BUMPERB.P5.state
-          + '&BUMPERF_P1=' + copyModel.BUMPERF.P1.state
-          + '&BUMPERF_P2=' + copyModel.BUMPERF.P2.state
-          + '&BUMPERF_P3=' + copyModel.BUMPERF.P3.state
-          + '&BUMPERF_P4=' + copyModel.BUMPERF.P4.state
-          + '&BUMPERF_P5=' + copyModel.BUMPERF.P5.state
-          + '&FENDERLB_P1=' + copyModel.FENDERLB.P1.state
-          + '&FENDERLB_P2=' + copyModel.FENDERLB.P2.state
-          + '&FENDERLB_P3=' + copyModel.FENDERLB.P3.state
-          + '&FENDERLB_P4=' + copyModel.FENDERLB.P4.state
-          + '&FENDERLB_P5=' + copyModel.FENDERLB.P5.state
-          + '&FENDERLF_P1=' + copyModel.FENDERLF.P1.state
-          + '&FENDERLF_P2=' + copyModel.FENDERLF.P2.state
-          + '&FENDERLF_P3=' + copyModel.FENDERLF.P3.state
-          + '&FENDERLF_P4=' + copyModel.FENDERLF.P4.state
-          + '&FENDERLF_P5=' + copyModel.FENDERLF.P5.state
-          + '&FENDERRB_P1=' + copyModel.FENDERRB.P1.state
-          + '&FENDERRB_P2=' + copyModel.FENDERRB.P2.state
-          + '&FENDERRB_P3=' + copyModel.FENDERRB.P3.state
-          + '&FENDERRB_P4=' + copyModel.FENDERRB.P4.state
-          + '&FENDERRB_P5=' + copyModel.FENDERRB.P5.state
-          + '&FENDERRF_P1=' + copyModel.FENDERRF.P1.state
-          + '&FENDERRF_P2=' + copyModel.FENDERRF.P2.state
-          + '&FENDERRF_P3=' + copyModel.FENDERRF.P3.state
-          + '&FENDERRF_P4=' + copyModel.FENDERRF.P4.state
-          + '&FENDERRF_P5=' + copyModel.FENDERRF.P5.state
-          + '&HOOD_P1=' + copyModel.HOOD.P1.state
-          + '&HOOD_P2=' + copyModel.HOOD.P2.state
-          + '&HOOD_P3=' + copyModel.HOOD.P3.state
-          + '&HOOD_P4=' + copyModel.HOOD.P4.state
-          + '&HOOD_P5=' + copyModel.HOOD.P5.state
-          + '&LEFTDOORB_P1=' + copyModel.LEFTDOORB.P1.state
-          + '&LEFTDOORB_P2=' + copyModel.LEFTDOORB.P2.state
-          + '&LEFTDOORB_P3=' + copyModel.LEFTDOORB.P3.state
-          + '&LEFTDOORB_P4=' + copyModel.LEFTDOORB.P4.state
-          + '&LEFTDOORB_P5=' + copyModel.LEFTDOORB.P5.state
-          + '&LEFTDOORF_P1=' + copyModel.LEFTDOORF.P1.state
-          + '&LEFTDOORF_P2=' + copyModel.LEFTDOORF.P2.state
-          + '&LEFTDOORF_P3=' + copyModel.LEFTDOORF.P3.state
-          + '&LEFTDOORF_P4=' + copyModel.LEFTDOORF.P4.state
-          + '&LEFTDOORF_P5=' + copyModel.LEFTDOORF.P5.state
-          + '&LIGHT_BL=' + copyModel.LIGHT.BL.state
-          + '&LIGHT_BR=' + copyModel.LIGHT.BR.state
-          + '&LIGHT_FL=' + copyModel.LIGHT.FL.state
-          + '&LIGHT_FR=' + copyModel.LIGHT.FR.state
-          + '&MIRRORL_P1=' + copyModel.MIRRORL.P1.state
-          + '&MIRRORR_P1=' + copyModel.MIRRORR.P1.state
-          + '&RIGHTDOORB_P1=' + copyModel.RIGHTDOORB.P1.state
-          + '&RIGHTDOORB_P2=' + copyModel.RIGHTDOORB.P2.state
-          + '&RIGHTDOORB_P3=' + copyModel.RIGHTDOORB.P3.state
-          + '&RIGHTDOORB_P4=' + copyModel.RIGHTDOORB.P4.state
-          + '&RIGHTDOORB_P5=' + copyModel.RIGHTDOORB.P5.state
-          + '&RIGHTDOORF_P1=' + copyModel.RIGHTDOORF.P1.state
-          + '&RIGHTDOORF_P2=' + copyModel.RIGHTDOORF.P2.state
-          + '&RIGHTDOORF_P3=' + copyModel.RIGHTDOORF.P3.state
-          + '&RIGHTDOORF_P4=' + copyModel.RIGHTDOORF.P4.state
-          + '&RIGHTDOORF_P5=' + copyModel.RIGHTDOORF.P5.state
-          + '&RIN_BL=' + copyModel.RIN.BL.state
-          + '&RIN_BR=' + copyModel.RIN.BR.state
-          + '&RIN_FL=' + copyModel.RIN.FL.state
-          + '&RIN_FR=' + copyModel.RIN.FR.state
-          + '&ROOF_P1=' + copyModel.ROOF.P1.state
-          + '&ROOF_P2=' + copyModel.ROOF.P2.state
-          + '&ROOF_P3=' + copyModel.ROOF.P3.state
-          + '&ROOF_P4=' + copyModel.ROOF.P4.state
-          + '&ROOF_P5=' + copyModel.ROOF.P5.state
-          + '&RUNBOARDL_P1=' + copyModel.RUNBOARDL.P1.state
-          + '&RUNBOARDL_P2=' + copyModel.RUNBOARDL.P2.state
-          + '&RUNBOARDL_P3=' + copyModel.RUNBOARDL.P3.state
-          + '&RUNBOARDR_P1=' + copyModel.RUNBOARDR.P1.state
-          + '&RUNBOARDR_P2=' + copyModel.RUNBOARDR.P2.state
-          + '&RUNBOARDR_P3=' + copyModel.RUNBOARDR.P3.state
-          + '&TRUNK_P1=' + copyModel.TRUNK.P1.state
-          + '&TRUNK_P2=' + copyModel.TRUNK.P2.state
-          + '&TRUNK_P3=' + copyModel.TRUNK.P3.state
-          + '&TRUNK_P4=' + copyModel.TRUNK.P4.state
-          + '&TRUNK_P5=' + copyModel.TRUNK.P5.state
-          + '&WINDOWFRAMEL_P1=' + copyModel.WINDOWFRAMEL.P1.state
-          + '&WINDOWFRAMEL_P2=' + copyModel.WINDOWFRAMEL.P2.state
-          + '&WINDOWFRAMEL_P3=' + copyModel.WINDOWFRAMEL.P3.state
-          + '&WINDOWFRAMER_P1=' + copyModel.WINDOWFRAMER.P1.state
-          + '&WINDOWFRAMER_P2=' + copyModel.WINDOWFRAMER.P2.state
-          + '&WINDOWFRAMER_P3=' + copyModel.WINDOWFRAMER.P3.state
-          + '&Color=' + copyModel.color
-          + '&Capa=' + copyModel.Capa
-          + '&Gramos=' + copyModel.gramos
-          + '&Horas=' + copyModel.horas;
+      let data = 'ID=' + id + '&ESTADO=1&MODELO=' + copyModel.name
+        + '&BUMPERB_P1=' + copyModel.BUMPERB.P1.state
+        + '&BUMPERB_P2=' + copyModel.BUMPERB.P2.state
+        + '&BUMPERB_P3=' + copyModel.BUMPERB.P3.state
+        + '&BUMPERB_P4=' + copyModel.BUMPERB.P4.state
+        + '&BUMPERB_P5=' + copyModel.BUMPERB.P5.state
+        + '&BUMPERF_P1=' + copyModel.BUMPERF.P1.state
+        + '&BUMPERF_P2=' + copyModel.BUMPERF.P2.state
+        + '&BUMPERF_P3=' + copyModel.BUMPERF.P3.state
+        + '&BUMPERF_P4=' + copyModel.BUMPERF.P4.state
+        + '&BUMPERF_P5=' + copyModel.BUMPERF.P5.state
+        + '&FENDERLB_P1=' + copyModel.FENDERLB.P1.state
+        + '&FENDERLB_P2=' + copyModel.FENDERLB.P2.state
+        + '&FENDERLB_P3=' + copyModel.FENDERLB.P3.state
+        + '&FENDERLB_P4=' + copyModel.FENDERLB.P4.state
+        + '&FENDERLB_P5=' + copyModel.FENDERLB.P5.state
+        + '&FENDERLF_P1=' + copyModel.FENDERLF.P1.state
+        + '&FENDERLF_P2=' + copyModel.FENDERLF.P2.state
+        + '&FENDERLF_P3=' + copyModel.FENDERLF.P3.state
+        + '&FENDERLF_P4=' + copyModel.FENDERLF.P4.state
+        + '&FENDERLF_P5=' + copyModel.FENDERLF.P5.state
+        + '&FENDERRB_P1=' + copyModel.FENDERRB.P1.state
+        + '&FENDERRB_P2=' + copyModel.FENDERRB.P2.state
+        + '&FENDERRB_P3=' + copyModel.FENDERRB.P3.state
+        + '&FENDERRB_P4=' + copyModel.FENDERRB.P4.state
+        + '&FENDERRB_P5=' + copyModel.FENDERRB.P5.state
+        + '&FENDERRF_P1=' + copyModel.FENDERRF.P1.state
+        + '&FENDERRF_P2=' + copyModel.FENDERRF.P2.state
+        + '&FENDERRF_P3=' + copyModel.FENDERRF.P3.state
+        + '&FENDERRF_P4=' + copyModel.FENDERRF.P4.state
+        + '&FENDERRF_P5=' + copyModel.FENDERRF.P5.state
+        + '&HOOD_P1=' + copyModel.HOOD.P1.state
+        + '&HOOD_P2=' + copyModel.HOOD.P2.state
+        + '&HOOD_P3=' + copyModel.HOOD.P3.state
+        + '&HOOD_P4=' + copyModel.HOOD.P4.state
+        + '&HOOD_P5=' + copyModel.HOOD.P5.state
+        + '&LEFTDOORB_P1=' + copyModel.LEFTDOORB.P1.state
+        + '&LEFTDOORB_P2=' + copyModel.LEFTDOORB.P2.state
+        + '&LEFTDOORB_P3=' + copyModel.LEFTDOORB.P3.state
+        + '&LEFTDOORB_P4=' + copyModel.LEFTDOORB.P4.state
+        + '&LEFTDOORB_P5=' + copyModel.LEFTDOORB.P5.state
+        + '&LEFTDOORF_P1=' + copyModel.LEFTDOORF.P1.state
+        + '&LEFTDOORF_P2=' + copyModel.LEFTDOORF.P2.state
+        + '&LEFTDOORF_P3=' + copyModel.LEFTDOORF.P3.state
+        + '&LEFTDOORF_P4=' + copyModel.LEFTDOORF.P4.state
+        + '&LEFTDOORF_P5=' + copyModel.LEFTDOORF.P5.state
+        + '&LIGHT_BL=' + copyModel.LIGHT.BL.state
+        + '&LIGHT_BR=' + copyModel.LIGHT.BR.state
+        + '&LIGHT_FL=' + copyModel.LIGHT.FL.state
+        + '&LIGHT_FR=' + copyModel.LIGHT.FR.state
+        + '&MIRRORL_P1=' + copyModel.MIRRORL.P1.state
+        + '&MIRRORR_P1=' + copyModel.MIRRORR.P1.state
+        + '&RIGHTDOORB_P1=' + copyModel.RIGHTDOORB.P1.state
+        + '&RIGHTDOORB_P2=' + copyModel.RIGHTDOORB.P2.state
+        + '&RIGHTDOORB_P3=' + copyModel.RIGHTDOORB.P3.state
+        + '&RIGHTDOORB_P4=' + copyModel.RIGHTDOORB.P4.state
+        + '&RIGHTDOORB_P5=' + copyModel.RIGHTDOORB.P5.state
+        + '&RIGHTDOORF_P1=' + copyModel.RIGHTDOORF.P1.state
+        + '&RIGHTDOORF_P2=' + copyModel.RIGHTDOORF.P2.state
+        + '&RIGHTDOORF_P3=' + copyModel.RIGHTDOORF.P3.state
+        + '&RIGHTDOORF_P4=' + copyModel.RIGHTDOORF.P4.state
+        + '&RIGHTDOORF_P5=' + copyModel.RIGHTDOORF.P5.state
+        + '&RIN_BL=' + copyModel.RIN.BL.state
+        + '&RIN_BR=' + copyModel.RIN.BR.state
+        + '&RIN_FL=' + copyModel.RIN.FL.state
+        + '&RIN_FR=' + copyModel.RIN.FR.state
+        + '&ROOF_P1=' + copyModel.ROOF.P1.state
+        + '&ROOF_P2=' + copyModel.ROOF.P2.state
+        + '&ROOF_P3=' + copyModel.ROOF.P3.state
+        + '&ROOF_P4=' + copyModel.ROOF.P4.state
+        + '&ROOF_P5=' + copyModel.ROOF.P5.state
+        + '&RUNBOARDL_P1=' + copyModel.RUNBOARDL.P1.state
+        + '&RUNBOARDL_P2=' + copyModel.RUNBOARDL.P2.state
+        + '&RUNBOARDL_P3=' + copyModel.RUNBOARDL.P3.state
+        + '&RUNBOARDR_P1=' + copyModel.RUNBOARDR.P1.state
+        + '&RUNBOARDR_P2=' + copyModel.RUNBOARDR.P2.state
+        + '&RUNBOARDR_P3=' + copyModel.RUNBOARDR.P3.state
+        + '&TRUNK_P1=' + copyModel.TRUNK.P1.state
+        + '&TRUNK_P2=' + copyModel.TRUNK.P2.state
+        + '&TRUNK_P3=' + copyModel.TRUNK.P3.state
+        + '&TRUNK_P4=' + copyModel.TRUNK.P4.state
+        + '&TRUNK_P5=' + copyModel.TRUNK.P5.state
+        + '&WINDOWFRAMEL_P1=' + copyModel.WINDOWFRAMEL.P1.state
+        + '&WINDOWFRAMEL_P2=' + copyModel.WINDOWFRAMEL.P2.state
+        + '&WINDOWFRAMEL_P3=' + copyModel.WINDOWFRAMEL.P3.state
+        + '&WINDOWFRAMER_P1=' + copyModel.WINDOWFRAMER.P1.state
+        + '&WINDOWFRAMER_P2=' + copyModel.WINDOWFRAMER.P2.state
+        + '&WINDOWFRAMER_P3=' + copyModel.WINDOWFRAMER.P3.state
+        + '&Color=' + copyModel.color
+        + '&Capa=' + copyModel.Capa
+        + '&Gramos=' + copyModel.gramos
+        + '&Horas=' + copyModel.horas;
 
-        console.log(data);
+      console.log(data);
 
 
-        fetch('https://itpa-sigtac.com/webgo/controlador/actualizarCotizacion.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: data
-        }).then(function (response) {
-          if (response.ok) {
-            alert('Actualización exitosa');
-          } else {
-            alert('Hubo un error al actualizar');
-          }
-        }).catch(function (error) {
-          console.error('Error en la solicitud:', error);
-        });
+      fetch('https://itpa-sigtac.com/webgo/controlador/actualizarCotizacion.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+      }).then(function (response) {
+        if (response.ok) {
+          alert('Actualización exitosa');
+        } else {
+          alert('Hubo un error al actualizar');
+        }
+      }).catch(function (error) {
+        console.error('Error en la solicitud:', error);
+      });
 
-      }
+
 
 
     }

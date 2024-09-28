@@ -33,7 +33,9 @@ const Menu = () => {
     const [rotar, setRotar] = useState('stop');
 
     return (
+
         <div className='MenuContainer'>
+            <a href='https://itpa-sigtac.com/inicioW.php' class="regresar">.</a>
             <label id='state'>{rotar}</label>
             <div className='menu' id='menu'>
                 <div className='MenuWrapper'>
