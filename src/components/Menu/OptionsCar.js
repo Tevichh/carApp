@@ -21,14 +21,14 @@ const handleModelChange = (modelModal) => {
 export function OptionsCar() {
 
   const [show, setShow] = useState(false);
-  const [btnName, setBtnName] = useState("SELECCIONA")
+  //const [btnName, setBtnName] = useState("SELECCIONA")
   document.body.style.cursor = 'not-allowed';
 
   const handleSave = () => {
     let modalModel = document.getElementById("modelModal").value
     let colorModel = document.getElementById("colorModal").value
     let capaModel = document.getElementById("capaModal").value
-    setBtnName(modalModel);
+    //setBtnName(modalModel);
     handleModelChange(modalModel);
     loadProducts(modalModel, colorModel, capaModel);
     allowClick(true);
@@ -49,12 +49,12 @@ export function OptionsCar() {
   }
   return (
     <>
-      <Button variant='light' onClick={handleShow}>
-        {btnName}
-      </Button>
+      <button class="button" onClick={handleShow}>
+        AJUSTES
+      </button>
       <Modal show={show} onHide={handleClose} className='Modal'>
         <Modal.Header closeButton>
-          <Modal.Title>CAR INFO</Modal.Title>
+          <Modal.Title >CAR INFO</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -86,7 +86,7 @@ export function OptionsCar() {
             </Form.Select>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer variant="secondary">
           <a href='#root'>
             <Button variant="secondary" onClick={handleClose}>Close</Button>
           </a>

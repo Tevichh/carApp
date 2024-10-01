@@ -4,6 +4,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { gsap } from "gsap";
 import { models } from "../Menu/carParts";
 import { carColor } from "../Menu/carColor"
+import { cotizar } from "../Menu/Cotizacion";
+//import { cotizar } from "../Menu/Cotizacion";
 
 
 
@@ -298,12 +300,6 @@ export const loadProducts = async (name, color, capa) => {
   copyModel.color = colorModel[1]
   copyModel["Capa"] = capa;
 
-  console.log(copyModel);
-
-
-
-
-
   //copyModel.BUMPERF.P1.state = valores[6].BUMPERFP1;
 
 }
@@ -312,7 +308,9 @@ export const enviarCotizacion = () => {
   return [copyModel, infoDataModel, partesListaInfo];
 }
 
-
+export const actualizarCopyModel = (dataUpdate) => {
+  copyModel = dataUpdate;
+}
 export const allowClick = async (allow) => {
   if (allow) {
     clickControl = true;
@@ -417,8 +415,7 @@ const loadingManager = new THREE.LoadingManager(
         }
       }
     }
-
-    //console.log(partesLista)
+    cotizar()
 
 
   },
@@ -514,7 +511,9 @@ function updateColorsByGroup(scene, nombre, grupo) {
         rinChange(child, nombre)
       } else if (isLight && grupo === "LIGHT") {
         lightChange(child, nombre)
+
       }
+
     }
   });
 }
@@ -572,6 +571,9 @@ function onTouch(event) {
         } else if (copyModel[grupo][nombre].allow) {
           updateColorsByGroup(scene, nombre, grupo);
         }
+
+
+        cotizar()
       }
 
     }

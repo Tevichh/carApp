@@ -40,28 +40,31 @@ const Menu = () => {
             <div className='menu' id='menu'>
                 <div className='MenuWrapper'>
                     <div className='MenuOptions'>
-                        <div className='Calculator'>
-                            <h2>COTIZACIÓN</h2>
+                        <div>
+
                             {/*<label>TOTAL: </label>
                             <label id='fullAdd'>0</label>*/}
                             <Cotizacion></Cotizacion>
 
                         </div>
-                        <button id='SEND'>SEND</button>
+
                     </div>
 
                     <div className='MenuOptions'>
-                        <h1>CAR MODEL</h1>
+                        {/* <h1>CAR MODEL</h1> */}
                         <OptionsCar></OptionsCar>
+                        <button id='SEND'>SEND</button>
 
+
+                    </div>
+
+                    <div className='VistasCamara'>
                         <button className='movimiento' onClick={() => {
                             setRotar('stop');
                             allowControls();
                             gsapAnimation(animations.original.cam, animations.original.pos);
                         }}>LIBERAR MOV</button>
-                    </div>
 
-                    <div className='VistasCamara'>
                         <button name='rotar' id='rotateButton' onClick={() => {
                             setRotar('rotando');
                             stopControls();

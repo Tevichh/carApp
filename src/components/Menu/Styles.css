@@ -15,9 +15,7 @@ body {
   display: none;
 }
 
-.Modal {
-  color: #123123;
-}
+
 
 .MenuWrapper {
   background-color: #192028;
@@ -85,12 +83,12 @@ body {
   font-family: sans-serif;
 }
 
-#SEND {
+/* #SEND {
   width: 18em;
   margin: 0;
   border-radius: 5%;
 
-}
+} */
 
 .MenuOptions {
   display: flex;
@@ -100,11 +98,18 @@ body {
 }
 
 .VistasCamara {
-  display: grid;
+  position: absolute;
+  right: 0;
+  top: -28em;
+  /* display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   text-align: center;
-  gap: 0.5em;
+  gap: 0.5em; */
+}
+
+.VistasCamara button {
+  margin: 10px;
 }
 
 #fullAdd {
@@ -138,6 +143,28 @@ button {
   background-size: contain;
   background-repeat: no-repeat;
   padding: 25px;
+}
+
+.card-menu {
+  background-color: transparent;
+  width: 350px;
+  height: 150px; /* Ajusta la altura según tus necesidades */
+  overflow-y: auto; /* Permite el desplazamiento vertical */
+  overflow-x: hidden; /* Oculta el desplazamiento horizontal, si lo deseas */
+  border: 2px solid #98eff9;
+  border-radius: 15px;
+}
+
+.card-menu ul {
+  background-color: #000000;
+  border-radius: 15px;
+  height: 150px;
+}
+
+.card-menu li {
+  background-color: #000000;
+  color: #98eff9;
+  border: none;
 }
 
 

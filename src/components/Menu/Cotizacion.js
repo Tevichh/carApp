@@ -1,23 +1,26 @@
 import React from 'react'
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import { allowClick, enviarCotizacion } from '../Scene/Script';
+import { actualizarCopyModel, enviarCotizacion } from '../Scene/Script';
 
 function calculoGramoHora(data) {
     const modelo = data[0].name;
     const listaInfo = data[1][modelo];
-    const partesLista = data[2];
+    //const partesLista = data[2];
     let nClick, parte, gramosHorasArray;
     let gramo1, gramo2, hora1, hora2;
     let gramo = [];
     let hora = [];
 
-    if (partesLista.length < 1) {
-        return [0, 0]
+    let partesLista = [];
+    if (data[0].partes) {
+        for (let parte of data[0].partes) {
+            for (let p in data[0][parte]) {
+                if (data[0][parte][p].state !== 0) {
+                    partesLista.push(`${data[0][parte][p].group}_${data[0][parte][p].name}_${data[0][parte][p].state}`);
+                }
+            }
+        }
     }
+    console.log(partesLista)
 
     partesLista.forEach(element => {
         //Separar elementos
@@ -52,56 +55,41 @@ function calculoGramoHora(data) {
 }
 
 
-export const Cotizacion = () => {
-    const [show, setShow] = useState(false);
-    const [datosCotizacion, setDatosCotizacion] = useState()
-    const handleClose = () => {
-        allowClick(true);
-        setShow(false);
-    }
-    const handleShow = () => {
-        allowClick(false);
-        setShow(true);
-        let data = enviarCotizacion();
-        let info = calculoGramoHora(data);
-        data[0].gramos = info[0];
-        data[0].horas = info[1]
-        setDatosCotizacion(data[0]);
+export function cotizar() {
 
-    }
-    return (
-        <>
-            <Button variant='outline-dark' size="sm" onClick={handleShow}>
-                VER DETALLES
-            </Button>
+    let data = enviarCotizacion();
+    console.log("data:", data)
+    let info = calculoGramoHora(data);
 
-            <Modal show={show} onHide={handleClose} style={{
-                marginTop: "3em"
-            }}>
-                <Modal.Header closeButton>
-                    <Modal.Title>COTIZACIÓN</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Card >
-                        <Card.Body>
-                            <Card.Title>CARACTERÍSTICAS DEL MODELO</Card.Title>
-                            <Card.Text>
-                                {datosCotizacion ? datosCotizacion.name : ''}
-                            </Card.Text>
-                        </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item>GRAMOS UTILIZADOS: {datosCotizacion ? datosCotizacion.gramos : 0} Gr</ListGroup.Item>
-                            <ListGroup.Item>HORAS UTILIZADAS: {datosCotizacion ? datosCotizacion.horas : 0} H</ListGroup.Item>
-                            <ListGroup.Item>PRECIO TOTAL: {datosCotizacion ? datosCotizacion.Cotizacion : 0}</ListGroup.Item>
-                        </ListGroup>
-                    </Card>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                </Modal.Footer>
-            </Modal >
-        </>
-    )
+    data[0].gramos = info[0];
+    data[0].horas = info[1]
+    const datosCotizacion = data[0];
+
+    //console.log(datosCotizacion);
+
+    actualizarCopyModel(datosCotizacion)
+
+    document.getElementById("gramosUsados").innerText = `GRAMOS UTILIZADOS: ${datosCotizacion.gramos} Gr`
+    document.getElementById("horasUsadas").innerText = `HORAS UTILIZADAS: ${datosCotizacion.horas} H`
+
+
 }
+
+
+export const Cotizacion = ({ datosCotizacion }) => {
+    return (
+        <div className="mx-2 card-menu">
+
+            <ul className="list-group list-group-flush">
+                <li id='gramosUsados' className="list-group-item">GRAMOS UTILIZADOS: {datosCotizacion ? datosCotizacion.gramos : 0} Gr</li>
+                <li id="horasUsadas" className="list-group-item">HORAS UTILIZADAS: {datosCotizacion ? datosCotizacion.horas : 0} H</li>
+                <li id="precioTotal" className="list-group-item">PRECIO TOTAL: {datosCotizacion ? datosCotizacion.Cotizacion : 0}</li>
+            </ul>
+
+        </div>
+
+    );
+};
+
+
+
