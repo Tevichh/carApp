@@ -51,11 +51,11 @@ const Menu = () => {
                     </div>
 
                     <div className='MenuOptions'>
-                        {/* <h1>CAR MODEL</h1> */}
                         <OptionsCar></OptionsCar>
+                    </div>
+
+                    <div className='MenuOptions'>
                         <button id='SEND'>SEND</button>
-
-
                     </div>
 
                     <div className='VistasCamara'>

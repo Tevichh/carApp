@@ -20,80 +20,64 @@ const handleModelChange = (modelModal) => {
 
 export function OptionsCar() {
 
-  const [show, setShow] = useState(false);
-  //const [btnName, setBtnName] = useState("SELECCIONA")
-  document.body.style.cursor = 'not-allowed';
+  const [selectedModel, setSelectedModel] = useState('');
+  //document.body.style.cursor = 'not-allowed';
 
   const handleSave = () => {
     let modalModel = document.getElementById("modelModal").value
     let colorModel = document.getElementById("colorModal").value
     let capaModel = document.getElementById("capaModal").value
-    //setBtnName(modalModel);
+
     handleModelChange(modalModel);
     loadProducts(modalModel, colorModel, capaModel);
     allowClick(true);
-    setShow(false);
+    setSelectedModel(modalModel);
 
   }
 
-  const handleClose = () => {
-    allowClick(true);
-    setShow(false);
-    /*const searchParams = new URLSearchParams(window.location.search);
-    const parametro = searchParams.get('cc');
-    console.log(parametro);*/
-  };
-  const handleShow = () => {
-    allowClick(false);
-    setShow(true);
-  }
+
   return (
     <>
-      <button class="button" onClick={handleShow}>
-        AJUSTES
-      </button>
-      <Modal show={show} onHide={handleClose} className='Modal'>
-        <Modal.Header closeButton>
-          <Modal.Title >CAR INFO</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Label className='modalLabel'>MODELO</Form.Label>
-            <Form.Select id="modelModal">
-              {models.map((model, id) => (
-                <option key={id} value={model.name}>
-                  {model.name}
-                </option>
-              ))}
-            </Form.Select>
-            <br />
-            <Form.Label className='modalLabel'>COLOR</Form.Label>
-            <Form.Select id="colorModal">
-              <option>AMARILLO</option>
-              <option>AZUL</option>
-              <option>BLANCO</option>
-              <option>NEGRO</option>
-              <option>ROJO</option>
-              <option>VERDE</option>
-            </Form.Select>
-            <br />
-            <Form.Label className='modalLabel'>CAPA</Form.Label>
-            <Form.Select id="capaModal">
-              <option>MONOCAPA</option>
-              <option>BICAPA</option>
-              <option>TRICAPA</option>
-              <option>CUATRICAPA</option>
-            </Form.Select>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer variant="secondary">
-          <a href='#root'>
-            <Button variant="secondary" onClick={handleClose}>Close</Button>
-          </a>
-          <a href='#root'>
-            <Button variant="primary" onClick={handleSave}>Save Changes</Button></a>
-        </Modal.Footer>
-      </Modal>
+      <div className="mx-2 card-menu">
+        <Form>
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-5">
+              <Form.Label className='modalLabel'>MODELO</Form.Label>
+              <Form.Select id="modelModal" onChange={handleSave}>
+                <option value="" disabled={selectedModel !== ''}>SELECCIONA</option>
+                {models.map((model, id) => (
+                  <option key={id} value={model.name}>
+                    {model.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </div>
+
+            <div class="col-md-5">
+              <Form.Label className='modalLabel'>COLOR</Form.Label>
+              <Form.Select id="colorModal">
+                <option>AMARILLO</option>
+                <option>AZUL</option>
+                <option>BLANCO</option>
+                <option>NEGRO</option>
+                <option>ROJO</option>
+                <option>VERDE</option>
+              </Form.Select>
+            </div>
+
+            <div class="col-md-5">
+              <Form.Label className='modalLabel'>CAPA</Form.Label>
+              <Form.Select id="capaModal">
+                <option>MONOCAPA</option>
+                <option>BICAPA</option>
+                <option>TRICAPA</option>
+                <option>CUATRICAPA</option>
+              </Form.Select>
+            </div>
+          </div>
+        </Form>
+      </div>
+
     </>
   );
 }

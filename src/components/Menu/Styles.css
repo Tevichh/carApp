@@ -153,6 +153,8 @@ button {
   overflow-x: hidden; /* Oculta el desplazamiento horizontal, si lo deseas */
   border: 2px solid #98eff9;
   border-radius: 15px;
+  color: #98eff9;
+  background-color: #000000;
 }
 
 .card-menu ul {
@@ -165,6 +167,13 @@ button {
   background-color: #000000;
   color: #98eff9;
   border: none;
+}
+.card-menu form {
+  background-color: #000000;
+}
+.card-menu label{
+  color: #98eff9;
+  font-size: 17px;
 }
 
 
