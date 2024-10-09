@@ -31,9 +31,15 @@ var clickControl = false;
 
 
 //Options var
+//opPartDefault - opPartFirtsDmg - opPartSencondDmg - opPartMediumDmg - opPartHardDmg - opPartChangeDmg - opPartBarnizDmg - opPartDefault
 const opPartDefault = 0;
 const opPartFirtsDmg = 1;
 const opPartSencondDmg = 2;
+const opPartMediumDmg = 3;
+const opPartHardDmg = 4;
+const opPartChangeDmg = 5;
+const opPartBarnizDmg = 6;
+
 
 const opRinDefault = 0;
 const opRinDmg = 1;
@@ -42,8 +48,12 @@ const opLightDefault = 0;
 const opLightDmg = 1;
 
 //COLORS
-const color1 = 0x404000;
-const color2 = 0x272700;
+const color1 = 0x0000ff;
+const color2 = 0x00ff00;
+const color3 = 0xffff00;
+const color4 = 0xdd0000;
+const color5 = 0x101010;
+const color6 = 0x404040;
 
 // Animation GSAP
 const timeline = new gsap.timeline({ defaults: { duration: 1 } });
@@ -359,6 +369,9 @@ const loadingManager = new THREE.LoadingManager(
             case opPartSencondDmg:
               child.material.color.set(color2);
               break;
+            case opPartMediumDmg:
+              child.material.color.set(color3);
+              break
             default:
               break;
           }
@@ -435,7 +448,34 @@ const gltfLoaders = new GLTFLoader(loadingManager);
 function partsChange(child, name, grupo) {
 
   const option = copyModel[grupo][name].state
-  const damageState = option === opPartDefault ? opPartFirtsDmg : option === opPartFirtsDmg ? opPartSencondDmg : opPartDefault;
+  //const damageState = option === opPartDefault ? opPartFirtsDmg : option === opPartFirtsDmg ? opPartSencondDmg : option === opPartSencondDmg ? opPartMediumDmg : opPartDefault;
+
+  const damageState =
+    option === opPartDefault ? opPartFirtsDmg :
+      option === opPartFirtsDmg ? opPartSencondDmg :
+        option === opPartSencondDmg ? opPartMediumDmg :
+          option === opPartMediumDmg ? opPartHardDmg :
+            option === opPartHardDmg ? opPartChangeDmg :
+              option === opPartChangeDmg ? opPartBarnizDmg :
+                opPartDefault;
+
+  /* switch (damageState) {
+    case opPartDefault:
+      child.material.color.set(copyModel.color);
+      break;
+    case opPartFirtsDmg:
+      child.material.color.set(color1);
+      break;
+    case opPartSencondDmg:
+      child.material.color.set(color2);
+      break;
+    case opPartMediumDmg:
+      child.material.color.set(color3);
+      break;
+    default:
+      break;
+  } */
+
 
   switch (damageState) {
     case opPartDefault:
@@ -447,10 +487,21 @@ function partsChange(child, name, grupo) {
     case opPartSencondDmg:
       child.material.color.set(color2);
       break;
+    case opPartMediumDmg:
+      child.material.color.set(color3);
+      break;
+    case opPartHardDmg:
+      child.material.color.set(color4);
+      break;
+    case opPartBarnizDmg:
+      child.material.color.set(color5);
+      break;
+    case opPartChangeDmg:
+      child.material.color.set(color6);
+      break;
     default:
       break;
   }
-
   copyModel[grupo][name].state = damageState;
 
 }
@@ -563,7 +614,7 @@ function onTouch(event) {
             if (x !== "P1") {
               copyModel[grupo][x].state = opPartDefault;
               if (copyModel[grupo][nombre].state === opPartDefault) {
-                copyModel[grupo][x].state = opPartSencondDmg;
+                copyModel[grupo][x].state = opPartBarnizDmg; //CAMBIAR A LA ULTIMA OPCION
                 updateColorsByGroup(scene, copyModel[grupo][x].name, grupo);
               }
             }
