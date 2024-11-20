@@ -131,7 +131,7 @@ function lista() {
     const nameModelo = parts["MODELO"]
 
     let posicion = Object.keys(models).findIndex(key => models[key].name === nameModelo);
-    
+
 
     for (const key in parts) {
 
@@ -159,7 +159,6 @@ function lista() {
     copyModel = modelDefault;
     removeModels(modelDefault.modelCar.rute, modelDefault.modelCar.group, modelDefault.scale);
     allowClick(true);
-    console.log(parts)
 
 
   }).catch(function (error) {
@@ -368,7 +367,7 @@ const loadingManager = new THREE.LoadingManager(
             }
           }
 
-          switch (damageState) {
+          /* switch (damageState) {
             case opPartDefault:
               child.material.color.set(copyModel.color);
               break;
@@ -381,6 +380,31 @@ const loadingManager = new THREE.LoadingManager(
             case opPartMediumDmg:
               child.material.color.set(color3);
               break
+            default:
+              break;
+          } */
+          switch (damageState) {
+            case opPartDefault:
+              child.material.color.set(copyModel.color);
+              break;
+            case opPartFirtsDmg:
+              child.material.color.set(color1);
+              break;
+            case opPartSencondDmg:
+              child.material.color.set(color2);
+              break;
+            case opPartMediumDmg:
+              child.material.color.set(color3);
+              break;
+            case opPartHardDmg:
+              child.material.color.set(color4);
+              break;
+            case opPartBarnizDmg:
+              child.material.color.set(color5);
+              break;
+            case opPartChangeDmg:
+              child.material.color.set(color6);
+              break;
             default:
               break;
           }
@@ -467,23 +491,6 @@ function partsChange(child, name, grupo) {
             option === opPartHardDmg ? opPartChangeDmg :
               option === opPartChangeDmg ? opPartBarnizDmg :
                 opPartDefault;
-
-  /* switch (damageState) {
-    case opPartDefault:
-      child.material.color.set(copyModel.color);
-      break;
-    case opPartFirtsDmg:
-      child.material.color.set(color1);
-      break;
-    case opPartSencondDmg:
-      child.material.color.set(color2);
-      break;
-    case opPartMediumDmg:
-      child.material.color.set(color3);
-      break;
-    default:
-      break;
-  } */
 
 
   switch (damageState) {
