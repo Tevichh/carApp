@@ -21,7 +21,6 @@ while (!id) {
 }
 
 
-
 //var num = 0;
 var copyModel = {};
 var infoDataModel = {};
@@ -132,6 +131,7 @@ function lista() {
     const nameModelo = parts["MODELO"]
 
     let posicion = Object.keys(models).findIndex(key => models[key].name === nameModelo);
+    
 
     for (const key in parts) {
 
@@ -144,13 +144,22 @@ function lista() {
 
         //console.log(mPart);
         if (mValue !== "0") {
-          /* console.log(mPart + "-" + mPoint + ": " + mValue); */
-          models[posicion][mPart][mPoint].state = (parseInt(mValue) < 3 && parseInt(mValue) > 0) ? parseInt(mValue) : 0;
+          //console.log(mPart + "-" + mPoint + ": " + mValue);
+          //models[posicion][mPart][mPoint].state = (parseInt(mValue) < 7 && parseInt(mValue) > 0) ? parseInt(mValue) : 0;
+          models[posicion][mPart][mPoint].state = parseInt(mValue)
         }
 
       }
 
+
     }
+
+    models[posicion].color = parseInt(parts.Color)
+    const modelDefault = models.find(model => model.name === nameModelo);
+    copyModel = modelDefault;
+    removeModels(modelDefault.modelCar.rute, modelDefault.modelCar.group, modelDefault.scale);
+    allowClick(true);
+    console.log(parts)
 
 
   }).catch(function (error) {
