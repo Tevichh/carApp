@@ -1,6 +1,6 @@
 export let Coupe = {
     name: "COUPE",
-    scale: 1,
+    scale: 0.8,
     color: 0x000000,
     modelCar: {
         group: "modelCar",

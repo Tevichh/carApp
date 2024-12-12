@@ -1,6 +1,6 @@
 export let Sedan = {
     name: "SEDAN",
-    scale: 1.2,
+    scale: 1.05,
     color: 0x000000,
     partes: ["LEFTDOORF", "LEFTDOORB", "RIGHTDOORF", "RIGHTDOORB", "ROOF", "HOOD", "TRUNK", "LIGHT", "RIN", "WINDOWFRAMEL",
         "WINDOWFRAMER", "BUMPERF", "BUMPERB", "FENDERRF", "FENDERRB", "FENDERLF", "FENDERLB", "MIRRORL", "MIRRORR", "RUNBOARDL", "RUNBOARDR"],

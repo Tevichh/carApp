@@ -1,6 +1,6 @@
 export let PickUp = {
     name: "PICKUP",
-    scale: 1,
+    scale: 0.75,
     color: 0x000000,
     partes: ["LEFTDOORF", "LEFTDOORB", "RIGHTDOORF", "RIGHTDOORB", "ROOF", "HOOD", "TRUNK", "LIGHT", "RIN", "WINDOWFRAMEL",
         "WINDOWFRAMER", "BUMPERF", "BUMPERB", "FENDERRF", "FENDERRB", "FENDERLF", "FENDERLB", "MIRRORL", "MIRRORR", "RUNBOARDL", "RUNBOARDR"],

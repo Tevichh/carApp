@@ -3,6 +3,7 @@ import "./Styles.css";
 import { gsapAnimation, orbitControls } from '../Scene/Script.js';
 import { OptionsCar } from './OptionsCar.js';
 import { Cotizacion } from './Cotizacion.js';
+import { ModalOptions } from './ModalOptions.js';
 
 const animations = {
     original: { cam: { x: 7.3, y: 2.1, z: 4.7 }, pos: { x: 0, y: 0, z: 0 } },

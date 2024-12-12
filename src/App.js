@@ -1,6 +1,8 @@
 import { Scene } from "./components";
 import Menu from "./components/Menu/Menu";
 import Progress from "./components/Menu/Progress/Progress";
+import ModalOptions from "./components/Menu/ModalOptions";
+
 
 
 function App() {
@@ -9,6 +11,8 @@ function App() {
       <Scene />
       <Menu />
       <Progress />
+      <ModalOptions/>
+
     </>
   );
 }

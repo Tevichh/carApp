@@ -8,7 +8,6 @@ import { cotizar } from "../Menu/Cotizacion";
 //import { cotizar } from "../Menu/Cotizacion";
 
 
-
 // Global variables
 let currentRef = null;
 
@@ -647,8 +646,32 @@ function onTouch(event) {
   }
 }
 
+function infoPiezaModal(event) {
+  if (clickControl) {
+    const touch = event.touches ? event.touches[0] : null;
+    const clientX = touch ? touch.clientX : event.clientX;
+    const clientY = touch ? touch.clientY : event.clientY;
+    const normalizedX = (clientX / window.innerWidth) * 2 - 1;
+    const normalizedY = -(clientY / window.innerHeight) * 2 + 1;
+
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(new THREE.Vector2(normalizedX, normalizedY), camera);
+
+    const intersects = raycaster.intersectObjects(scene.children.filter(obj => !obj.userData.intangible));
+    const parent = intersects[0].object;
+    if (parent.name) {
+      alert(parent.name);
+
+      //AGREGAR CODIGO
+    }
+
+
+
+  }
+}
 window.addEventListener('click', onTouch);
 window.addEventListener('touchend', onTouch);
+window.addEventListener('contextmenu', infoPiezaModal);
 
 // Pointer
 function cursorPointer(event) {
